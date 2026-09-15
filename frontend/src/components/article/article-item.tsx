@@ -61,6 +61,7 @@ export function ArticleItem({
       tabIndex={0}
       onClick={() => onSelectArticle(article.id)}
       onKeyDown={(e) => {
+        if (e.target !== e.currentTarget) return;
         if (e.key === "Enter" || e.key === " ") {
           e.preventDefault();
           onSelectArticle(article.id);
@@ -82,6 +83,7 @@ export function ArticleItem({
           <span className={cn("mr-2 inline-block rounded border px-1.5 py-0.5 align-middle text-[11px] leading-none font-medium", article.content_type === 'brief' ? "border-amber-500/25 bg-amber-500/10 text-amber-700 dark:text-amber-400" : "border-sky-500/25 bg-sky-500/10 text-sky-700 dark:text-sky-400")}>
             {article.content_type === 'brief' ? '短讯' : '新闻'}
           </span>
+          {article.editorial_category==='marketing' && <span className="mr-2 inline-block rounded border px-1.5 py-0.5 align-middle text-[11px] text-muted-foreground">宣传</span>}
           {article.title}
         </h3>
         {summary && <p className="line-clamp-2 text-sm text-muted-foreground">{summary}</p>}
@@ -95,6 +97,12 @@ export function ArticleItem({
             {formatDate(article.pub_date)}
           </span>
         </div>
+        {!!article.related_articles?.length && <details onClick={e=>e.stopPropagation()} className="text-xs text-muted-foreground">
+          <summary className="w-fit cursor-pointer py-1 hover:text-foreground">另有 {article.related_articles.length} 篇报道</summary>
+          <ul className="mt-1 space-y-2 border-l pl-3">
+            {article.related_articles.map(other=><li key={other.id}><button className="text-left text-primary hover:underline" onClick={()=>onSelectArticle(other.id)}>{other.title}</button><span className="ml-2">{other.source}</span></li>)}
+          </ul>
+        </details>}
       </div>
 
       {/* Article Actions */}

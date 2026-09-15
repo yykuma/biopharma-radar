@@ -39,6 +39,8 @@ export interface FeedFetchState {
 export interface Item {
   summary?: string;
   content_type?: 'brief' | 'news';
+  related_articles?: {id:number; title:string; link:string; source:string}[];
+  editorial_category?: string;
   id: number;
   feed_id: number;
   guid: string;
@@ -53,6 +55,8 @@ export interface Item {
 export interface Bookmark {
   summary?: string;
   content_type?: 'brief' | 'news';
+  related_articles?: {id:number; title:string; link:string; source:string}[];
+  editorial_category?: string;
   id: number;
   item_id: number | null;
   link: string;

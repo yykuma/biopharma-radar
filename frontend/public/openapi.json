@@ -2,7 +2,7 @@
   "openapi": "3.0.3",
   "info": {
     "title": "BioPharma Radar",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "description": "Static GET. Download then filter. Unix-second timestamps; partial coverage."
   },
   "servers": [
@@ -265,7 +265,8 @@
             "enum": [
               "company_alias",
               "ticker",
-              "source_scope"
+              "source_scope",
+              "company_registry"
             ],
             "description": "Evidence for market tags. An article may relate to multiple listing markets."
           },
@@ -293,6 +294,46 @@
               "media",
               "company_release"
             ]
+          },
+          "event_id": {
+            "type": "string",
+            "description": "Snapshot-local event group. All original reports remain in items; group after applying company/market filters."
+          },
+          "related_article_ids": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          "editorial": {
+            "type": "object",
+            "description": "Optional cached AI assessment. Only high-confidence marketing is hidden by default; unknown or pending remains visible. This is not a verified fact.",
+            "properties": {
+              "category": {
+                "type": "string",
+                "enum": [
+                  "clinical",
+                  "regulatory",
+                  "deal",
+                  "financial",
+                  "business",
+                  "marketing",
+                  "other",
+                  "unknown"
+                ]
+              },
+              "confidence": {
+                "type": "string",
+                "enum": [
+                  "high",
+                  "uncertain"
+                ]
+              },
+              "method": {
+                "type": "string"
+              }
+            }
           }
         }
       },
@@ -364,6 +405,10 @@
           },
           "briefing": {
             "$ref": "#/components/schemas/Briefing"
+          },
+          "curation": {
+            "type": "object",
+            "description": "Classification backlog, marketing and event counts, and sanitized provider attempt status."
           }
         }
       }

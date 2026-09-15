@@ -20,7 +20,8 @@ time; first_seen_at is discovery time. Markets are heuristic and can overlap.
 Check last_success_at and collection_status. AI briefings are not independently
 verified. This is partial source coverage, not an exhaustive market feed.
 
-Sources: BioPharma Dive, the Fierce Biotech Biotech section, and official releases
+Sources: BioPharma Dive, Fierce Biotech, Fierce Pharma, BioSpace drug development/FDA/deals,
+Drugs.com clinical results/approvals/applications, and official releases
 from Lilly, Amgen, Regeneron and Vertex. US coverage is
 the priority; Hong Kong coverage is partial. GLOBAL includes unidentified
 companies and other listing markets. The A-share endpoint is retired.
@@ -34,3 +35,11 @@ verification dates are explicit; coverage is not exhaustive or real-time.
 Prefer title_zh and summary_zh for Chinese reading; title and excerpt retain
 original source text. translation.status may be pending when free APIs fail or
 hit their shared daily limits. Never infer extra facts from a short excerpt.
+
+All JSON items retain original reports, including marketing and same-event coverage.
+Filter by company/market first, then group by event_id if desired; event IDs are
+snapshot-local, not permanent identifiers. related_article_ids preserve all sources.
+The reader hides only editorial.category=marketing with confidence=high by default.
+Unclassified or uncertain items stay visible. Users can show marketing using the
+reader checkbox. Public RSS and briefings omit marketing and collapse event groups.
+Curation uses the same free provider budgets as translation and may be pending.

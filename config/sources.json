@@ -90,5 +90,89 @@
       "investors.vrtx.com"
     ],
     "article_selector": ".field--name-field-nir-news-body, .full-release-body, .xn-content"
+  },
+  {
+    "id": "drugs-clinical",
+    "name": "Drugs.com · 临床结果",
+    "publisher": "Drugs.com Clinical Trial Results",
+    "market": "GLOBAL",
+    "content_type": "news",
+    "url": "https://www.drugs.com/feeds/clinical_trials.xml",
+    "article_hosts": [
+      "www.drugs.com"
+    ],
+    "article_selector": ".contentBox"
+  },
+  {
+    "id": "drugs-approvals",
+    "name": "Drugs.com · 药品获批",
+    "publisher": "Drugs.com Headline News",
+    "market": "GLOBAL",
+    "content_type": "news",
+    "url": "https://www.drugs.com/feeds/new_drug_approvals.xml",
+    "article_hosts": [
+      "www.drugs.com"
+    ],
+    "article_selector": ".contentBox"
+  },
+  {
+    "id": "drugs-applications",
+    "name": "Drugs.com · 上市申请",
+    "publisher": "Drugs.com Headline News",
+    "market": "GLOBAL",
+    "content_type": "news",
+    "url": "https://www.drugs.com/feeds/new_drug_applications.xml",
+    "article_hosts": [
+      "www.drugs.com"
+    ],
+    "article_selector": ".contentBox"
+  },
+  {
+    "id": "biospace-development",
+    "name": "BioSpace · 药物研发",
+    "publisher": "BioSpace",
+    "market": "GLOBAL",
+    "content_type": "news",
+    "url": "https://www.biospace.com/drug-development.rss",
+    "article_hosts": [
+      "www.biospace.com"
+    ],
+    "article_selector": ".RichTextArticleBody"
+  },
+  {
+    "id": "biospace-fda",
+    "name": "BioSpace · FDA",
+    "publisher": "BioSpace",
+    "market": "GLOBAL",
+    "content_type": "news",
+    "url": "https://www.biospace.com/FDA.rss",
+    "article_hosts": [
+      "www.biospace.com"
+    ],
+    "article_selector": ".RichTextArticleBody"
+  },
+  {
+    "id": "biospace-deals",
+    "name": "BioSpace · 交易合作",
+    "publisher": "BioSpace",
+    "market": "GLOBAL",
+    "content_type": "news",
+    "url": "https://www.biospace.com/deals.rss",
+    "article_hosts": [
+      "www.biospace.com"
+    ],
+    "article_selector": ".RichTextArticleBody"
+  },
+  {
+    "id": "fiercepharma",
+    "name": "Fierce Pharma",
+    "publisher": "Fierce Pharma",
+    "market": "GLOBAL",
+    "content_type": "news",
+    "url": "https://www.fiercepharma.com/rss/xml",
+    "article_hosts": [
+      "www.fiercepharma.com"
+    ],
+    "article_selector": "#article-body-row"
   }
 ]

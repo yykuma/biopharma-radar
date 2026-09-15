@@ -9,13 +9,14 @@ import re
 import time
 from datetime import datetime, timezone
 from pathlib import Path
-from urllib.parse import urlsplit, urlunsplit
+from urllib.parse import urlsplit
 from xml.etree.ElementTree import Element, SubElement, ElementTree
 
 from trendradar.crawler.rss import RSSFetcher, RSSFeedConfig
 from ai_router import summarize
 from company_registry import CATALOG, match_companies
 from localize import apply_cached, localize, SEED_PATH
+from curate import canonical_url, restore, curate
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCES = json.loads((ROOT / 'config/sources.json').read_text())
@@ -56,7 +57,7 @@ def normalize(row, source, now):
     parts = urlsplit(url)
     if parts.scheme not in ('http', 'https') or not parts.hostname:
         return None
-    url = urlunsplit((parts.scheme, parts.netloc, parts.path, parts.query, ''))
+    url = canonical_url(url)
     title = plain(row.get('title', ''))[:500]
     if not title:
         return None
@@ -94,7 +95,14 @@ def prepare_previous(previous, now):
     for item in previous.get('items', []):
         source = source_by_id.get(item['source_id'])
         if source and (item.get('published_at') or item['first_seen_at']) > now - 30 * 86400:
-            merged[item['id']] = classify(dict(item), source)
+            item = dict(item)
+            if item.get('url'):
+                item['url'] = canonical_url(item['url'])
+                item['id'] = int(hashlib.sha256(item['url'].encode()).hexdigest()[:12], 16)
+            prior = merged.get(item['id'])
+            if prior:
+                item['first_seen_at'] = min(item['first_seen_at'], prior['first_seen_at'])
+            merged[item['id']] = classify(item, source)
     briefing = previous.get('briefing')
     previous_sources = {s['id'] for s in previous.get('sources', [])}
     if previous_sources != set(source_by_id):
@@ -118,18 +126,26 @@ def collect(out, previous_path=None, ai_enabled=False):
                 prior=merged.get(article['id'])
                 if prior:
                     article['first_seen_at']=prior['first_seen_at']
+                restore(article,prior)
                 apply_cached(article,prior,seed)
                 merged[article['id']]=article
     items=sorted(merged.values(), key=lambda a: (a['published_at'] or a['first_seen_at'],a['id']),reverse=True)[:1500]
     for item in items:
         apply_cached(item,item,seed)
     previous_briefing=localize(items,SOURCES,previous_briefing,ai_enabled,now)
+    previous_briefing, curation = curate(items,previous_briefing,ai_enabled,now)
+    visible = []
+    events = set()
+    for item in items:
+        if item.get("editorial", {}).get("category") != "marketing" and item["event_id"] not in events:
+            visible.append(item)
+            events.add(item["event_id"])
     success=any(s['status']=='ok' for s in states)
     snapshot=dict(schema_version='1.0', updated_at=now, last_success_at=now if success else previous.get('last_success_at'),
                   collection_status='ok' if all(s['status']=='ok' for s in states) else 'partial' if success else 'failed',
                   coverage_note='专业医药媒体与公司官方公告；公司名录与新闻覆盖分别维护，美港均为部分新闻覆盖。中文为来源翻译或摘要，原文保留。',
-                  sources=states, items=items, total=len(items),
-                  briefing=summarize(items,previous_briefing,ai_enabled))
+                  sources=states, items=items, total=len(items), curation=curation,
+                  briefing=summarize(visible,previous_briefing,ai_enabled))
     catalog={**CATALOG,'companies':[{**c,'news_count':sum(c['id'] in a['company_ids'] for a in items),'official_source_ids':[s['id'] for s in SOURCES if c['id'] in s.get('company_ids',[])]} for c in CATALOG['companies']]}
     (out/'companies.json').write_text(json.dumps(catalog,ensure_ascii=False,separators=(',',':')))
     by_company=out/'companies';by_company.mkdir(exist_ok=True)
@@ -144,13 +160,13 @@ def collect(out, previous_path=None, ai_enabled=False):
         (dest/(market.lower()+'.json')).write_text(json.dumps({'schema_version':'1.0','market':market,'updated_at':now,'items':entries},ensure_ascii=False))
     rss=Element('rss',version='2.0');channel=SubElement(rss,'channel')
     for k,v in {'title':'医药动态','link':os.environ.get('SITE_URL', 'https://biopharma-radar.pages.dev').rstrip('/')+'/','description':'美股为主、港股补充的生物医药行业新闻'}.items():SubElement(channel,k).text=v
-    for a in items[:100]:
+    for a in visible[:100]:
         node=SubElement(channel,'item')
         for k,v in {'title':a.get('title_zh') or a['title'],'link':a['url'],'guid':a['url'],'description':a.get('summary_zh') or a['excerpt']}.items():SubElement(node,k).text=v
         from email.utils import formatdate
         SubElement(node,'pubDate').text=formatdate(a['published_at'] or a['first_seen_at'],usegmt=True)
     ElementTree(rss).write(out/'feed.xml',encoding='utf-8',xml_declaration=True)
-    print(json.dumps({'news':len(items),'sources':states,'ai_status':snapshot['briefing']['status']},ensure_ascii=False))
+    print(json.dumps({'news':len(items),'sources':states,'ai_status':snapshot['briefing']['status'],'curation':curation},ensure_ascii=False))
     if not items:
         raise RuntimeError('No live or cached news; refusing to publish an empty snapshot')
     return snapshot

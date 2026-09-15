@@ -128,3 +128,28 @@ to RSS excerpts without bypassing access controls. Full source bodies are transi
 and are not exported. Invalid JSON, mismatched IDs and truncated responses remain
 pending for later runs. API failure does not block original news publication.
 The original title/excerpt remain available; Chinese fields are additive.
+
+## Editorial grouping and source expansion
+
+The feed configuration also includes Drugs.com clinical results, approvals and
+applications; BioSpace drug development, FDA and deals; and Fierce Pharma. Source
+health is measured on the GitHub runner, independently of a reader's network.
+Drugs.com attribution uses its required feed names; source links are retained.
+
+Tracking parameters are removed before URL identity is computed; meaningful
+query parameters remain. Existing tracked URLs migrate to canonical IDs, so a
+previously read/bookmarked tracked URL may have a new ID. Same-event coverage
+is grouped without removing original JSON records. Exact syndication can group
+without AI; semantic grouping requires a high-confidence model reference, a
+seven-day window and compatible company matches. Later developments must remain
+separate. Group IDs are snapshot-local.
+
+Editorial classification processes at most two batches of 24 records per run,
+sharing translation/briefing provider budgets and cooldowns. Responses are
+validated and cached against source text. Pending/uncertain stories stay visible.
+Only high-confidence pure publicity is hidden by default, with a reader toggle.
+Company announcements, commercialization, sales and licensing are not publicity
+by default. JSON keeps every record; RSS and briefings use one non-marketing
+representative per event. Company/market filters run before reader grouping, and
+read actions apply to the currently retained reports in an event. New reports
+remain unread. Saved bookmarks remain individually accessible.

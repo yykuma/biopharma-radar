@@ -126,14 +126,6 @@ export function ArticleDrawer() {
     setSelectedFeed(article.feed_id);
   };
 
-  const getLinkDomain = (url: string) => {
-    try {
-      return new URL(url).hostname;
-    } catch {
-      return url;
-    }
-  };
-
   const { goToNext, goToPrevious, hasNext, hasPrevious } =
     useArticleNavigation(articleIds, {
       enabled: selectedArticleId !== null,
@@ -265,7 +257,7 @@ export function ArticleDrawer() {
                         rel="noopener noreferrer"
                         className="truncate text-primary hover:underline"
                       >
-                        {getLinkDomain(safeArticleLink)}
+                        查看原链接
                       </a>
                     ) : null}
                   </div>

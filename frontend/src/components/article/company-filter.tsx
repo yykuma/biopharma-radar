@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { Search, X, Building2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -10,6 +10,15 @@ import { useUrlState } from '@/hooks/use-url-state';
 const categories:Record<string,string>={biotechnology:'生物技术',pharmaceuticals:'制药',research_services:'研发服务'};
 
 export function CompanyFilter() {
+  const queryClient=useQueryClient();
+  const [showMarketing,setShowMarketing]=useState(()=>{
+    try{return JSON.parse(localStorage.getItem('biopharma-show-marketing') ?? 'false')===true;}catch{return false;}
+  });
+  const changeMarketing=(value:boolean)=>{
+    setShowMarketing(value);
+    localStorage.setItem('biopharma-show-marketing',JSON.stringify(value));
+    void queryClient.invalidateQueries();
+  };
   const {selectedCompanyId,setSelectedCompany}=useUrlState();
   const {data,error}=useQuery({queryKey:['company-catalog'],queryFn:loadCompanies,staleTime:300000});
   const [open,setOpen]=useState(false);
@@ -28,6 +37,7 @@ export function CompanyFilter() {
       </Button>
       {selectedCompanyId ? <Button variant="ghost" size="sm" onClick={()=>setSelectedCompany(null)} aria-label="清除公司筛选"><X className="size-4"/>清除</Button> :
         <span className="text-xs text-muted-foreground">{data ? `${companies.length} 家公司 · 美股与港股` : error?'名录读取失败，可点击重试':'公司名录加载中'}</span>}
+      <label className="ml-auto flex cursor-pointer items-center gap-2 text-xs text-muted-foreground"><input type="checkbox" checked={showMarketing} onChange={e=>changeMarketing(e.target.checked)} className="accent-primary"/>显示宣传内容</label>
       {selected && <a href={`${import.meta.env.BASE_URL}data/companies/${selected.id}.json`} target="_blank" rel="noreferrer" className="text-xs text-muted-foreground underline underline-offset-4">公司新闻 JSON</a>}
     </div>
     <Dialog open={open} onOpenChange={setOpen}>
