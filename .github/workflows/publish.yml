@@ -1,6 +1,11 @@
 name: Collect news and publish
 on:
   workflow_dispatch:
+    inputs:
+      bootstrap:
+        description: 'First deployment only: no published snapshot exists'
+        type: boolean
+        default: false
   push:
     branches: [main]
   schedule:
@@ -27,6 +32,7 @@ jobs:
       - run: pip install -r requirements.txt
       - run: python -m unittest discover -s pipeline -p 'test_*.py'
       - name: Load previous snapshot
+        if: ${{ !inputs.bootstrap }}
         run: python pipeline/fetch_previous.py
       - name: Collect through TrendRadar and rotate AI providers
         env:
