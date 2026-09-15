@@ -88,3 +88,15 @@ assert.equal((await request('/items?group_id=2')).total,1);
 snapshot.items[2].editorial.confidence='uncertain';
 assert.equal((await request('/items')).total,2);
 console.log('Curation adapter: event pagination, linked originals, market/company filters, marketing visibility and grouped read state passed.');
+
+// A market count must not add the same event once per publisher.
+storage.clear();
+snapshot.sources[1].publisher='Other publisher';
+snapshot.items[2].event_id='event-a';
+delete snapshot.items[2].editorial;
+assert.equal((await request('/groups')).data.find(g=>g.id===3).unread_count,1);
+assert.equal((await request('/items?group_id=3')).total,1);
+await request('/items/-/read',{method:'POST',body:JSON.stringify({ids:[1]})});
+assert.equal((await request('/groups')).data.find(g=>g.id===3).unread_count,0);
+assert.equal((await request('/items/3')).data.unread,false);
+console.log('Market counts deduplicate across publishers and follow grouped read state.');

@@ -1,5 +1,7 @@
 // Core data models (matching backend/internal/model/model.go)
 export interface Group {
+  unread_count?: number;
+  item_count?: number;
   id: number;
   name: string;
   created_at: number;

@@ -10,14 +10,15 @@ interface FeedGroupProps {
   groupId: number;
   name: string;
   feeds: Feed[];
+  unreadCount?: number;
 }
 
-export function FeedGroup({ groupId, name, feeds }: FeedGroupProps) {
+export function FeedGroup({ groupId, name, feeds, unreadCount: groupedUnread }: FeedGroupProps) {
   const [isOpen, setIsOpen] = useState(true);
   const { selectedGroupId, setSelectedGroup } = useUrlState();
   const isSelected = selectedGroupId === groupId;
 
-  const unreadCount = feeds.reduce(
+  const unreadCount = groupedUnread ?? feeds.reduce(
     (sum, feed) => sum + (feed.unread_count || 0),
     0,
   );

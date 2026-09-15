@@ -74,7 +74,9 @@ export async function staticRequest<T>(endpoint:string, options:RequestInit = {}
   if (path==='/stats' && method==='GET') {
     return {total:eventCount(data.items.filter(visible)),unread:eventCount(data.items.filter(a=>visible(a)&&!read.includes(a.id)))} as T;
   }
-  const groups:Group[]=marketGroups.map(({id,name})=>({id,name,created_at:0,updated_at:0}));
+  const groups:Group[]=marketGroups.map(({id,name,market})=>({id,name,created_at:0,updated_at:0,
+    item_count:eventCount(data.items.filter(a=>visible(a)&&a.markets.includes(market))),
+    unread_count:eventCount(data.items.filter(a=>visible(a)&&a.markets.includes(market)&&!read.includes(a.id)))}));
   const publishers = [...new Set(data.sources.map(s=>s.publisher ?? s.name))].map(name=>{
     const sources=data.sources.filter(s=>(s.publisher ?? s.name)===name);
     return {name, sources, slot:data.sources.indexOf(sources[0])+1};

@@ -113,6 +113,7 @@ export function FeedList() {
                 groupId={group.id}
                 name={group.name}
                 feeds={groupFeeds}
+                unreadCount={group.unread_count}
               />
             );
           })}
