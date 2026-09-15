@@ -147,3 +147,10 @@
   --typeset-leading: 1.75;
   --typeset-flow: 1.25em;
 }
+/* Keep source notes subordinate to the article excerpt. */
+.typeset.typeset-article .radar-note {
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--color-muted-foreground);
+  margin-block: 12px 0;
+}

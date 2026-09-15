@@ -33,6 +33,7 @@ export function ArticleItem({
 
   const isSelected = selectedArticleId === article.id;
   const safeArticleLink = toSafeExternalUrl(article.link);
+  const summary = article.summary ?? extractSummary(article.content, 150);
 
   const handleToggleRead = async (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -78,11 +79,12 @@ export function ArticleItem({
             article.unread ? "text-foreground" : "text-muted-foreground",
           )}
         >
+          <span className={cn("mr-2 inline-block rounded border px-1.5 py-0.5 align-middle text-[11px] leading-none font-medium", article.content_type === 'brief' ? "border-amber-500/25 bg-amber-500/10 text-amber-700 dark:text-amber-400" : "border-sky-500/25 bg-sky-500/10 text-sky-700 dark:text-sky-400")}>
+            {article.content_type === 'brief' ? '短讯' : '新闻'}
+          </span>
           {article.title}
         </h3>
-        <p className="line-clamp-2 text-sm text-muted-foreground">
-          {extractSummary(article.content, 150)}
-        </p>
+        {summary && <p className="line-clamp-2 text-sm text-muted-foreground">{summary}</p>}
         <div className="flex items-center gap-2 text-xs">
           <FeedFavicon src={feedFaviconUrl} className="h-3.5 w-3.5 rounded-sm" />
           <span className="truncate font-medium text-muted-foreground">

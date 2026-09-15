@@ -1,5 +1,5 @@
 import unittest
-from collect import normalize
+from collect import normalize, classify
 
 
 class NormalizeTests(unittest.TestCase):
@@ -25,3 +25,18 @@ class NormalizeTests(unittest.TestCase):
         self.row['url']='https://example.org/news'
         self.row['published_at']='2020-01-01T00:00:00Z'
         self.assertIsNone(normalize(self.row,self.source,1789470783))
+
+    def test_german_merck_is_not_us_merck(self):
+        self.row['title'] = 'Drug market featuring Merck KGaA'
+        self.assertEqual(normalize(self.row, self.source, 1789470783)['markets'], ['GLOBAL'])
+        self.row['title'] = 'Drug market featuring Merck KGaA and Merck & Co.'
+        self.assertEqual(normalize(self.row, self.source, 1789470783)['markets'], ['US'])
+
+    def test_content_type_follows_source_format_and_updates_cached_articles(self):
+        source = {**self.source, 'publisher':'Publisher', 'content_type':'brief'}
+        article = {'title':'Drug market featuring Merck KGaA', 'markets':['US']}
+        classify(article, source)
+        self.assertEqual(article['markets'], ['GLOBAL'])
+        self.assertEqual(article['content_type'], 'brief')
+        self.assertEqual(article['publisher'], 'Publisher')
+        self.assertEqual(normalize(self.row, self.source, 1789470783)['content_type'], 'news')

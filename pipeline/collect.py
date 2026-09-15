@@ -29,6 +29,18 @@ COMPANIES = {
 GROUPS = {'A':'A 股', 'HK':'港股', 'US':'美股', 'GLOBAL':'全球医药'}
 
 
+def classify(article, source):
+    title = re.sub(r'Merck\s+KGaA', '', article['title'], flags=re.I)
+    names = [name for name in COMPANIES if name.casefold() in title.casefold()]
+    markets = sorted({m for name in names for m in COMPANIES[name]})
+    article.update(companies=names,
+                   markets=markets or ['GLOBAL' if source['id'].endswith('yahoo') else source['market']],
+                   market_basis='company_alias' if names else 'source_scope',
+                   source=source['name'], publisher=source.get('publisher', source['name']),
+                   content_type=source.get('content_type', 'news'), content_type_basis='source_format')
+    return article
+
+
 def plain(value):
     return re.sub(r'\s+', ' ', re.sub(r'<[^>]+>', ' ', html.unescape(value or ''))).strip()
 
@@ -55,16 +67,11 @@ def normalize(row, source, now):
     published = timestamp(row.get('published_at') or row.get('pubDate'))
     if published and (published < now - 30*86400 or published > now + 86400):
         return None
-    names = [name for name in COMPANIES if name.casefold() in title.casefold()]
-    markets = sorted({m for name in names for m in COMPANIES[name]})
-    if not markets:
-        markets = ['GLOBAL' if source['id'] in ('a-yahoo','hk-yahoo') else source['market']]
-    return dict(id=int(hashlib.sha256(url.encode()).hexdigest()[:12], 16), title=title,
-                url=url, source=source['name'], source_id=source['id'], markets=markets,
-                companies=names, market_basis='company_alias' if names else 'source_scope',
+    return classify(dict(id=int(hashlib.sha256(url.encode()).hexdigest()[:12], 16), title=title,
+                url=url, source_id=source['id'],
                 published_at=published, first_seen_at=now, last_seen_at=now,
                 excerpt=plain(row.get('summary', ''))[:400],
-                excerpt_kind='source_excerpt', language='zh' if re.search(r'[\u4e00-\u9fff]',title) else 'en')
+                excerpt_kind='source_excerpt', language='zh' if re.search(r'[\u4e00-\u9fff]',title) else 'en'), source)
 
 
 def fetch_source(source):
@@ -87,10 +94,10 @@ def fetch_source(source):
             rows = [vars(item) for item in items]
         articles = [item for row in rows if (item := normalize(row, source, now))]
         state = 'ok' if rows else 'empty'
-        return articles, dict(id=source['id'], name=source['name'], status=state, checked_at=now,
+        return articles, dict(id=source['id'], name=source['name'], publisher=source.get('publisher', source['name']), status=state, checked_at=now,
                              received=len(rows), matched=len(articles), error=None)
     except Exception as exc:
-        return [], dict(id=source['id'], name=source['name'], status='error', checked_at=now,
+        return [], dict(id=source['id'], name=source['name'], publisher=source.get('publisher', source['name']), status='error', checked_at=now,
                         received=0, matched=0, error=plain(str(exc))[:180])
 
 
@@ -100,6 +107,10 @@ def collect(out, previous_path=None, ai_enabled=False):
     previous = json.loads(previous_path.read_text()) if previous_path and previous_path.exists() else {}
     now = int(time.time())
     merged = {a['id']:a for a in previous.get('items', []) if (a.get('published_at') or a['first_seen_at']) > now-30*86400}
+    source_by_id = {s['id']: s for s in SOURCES}
+    for article in merged.values():
+        if source := source_by_id.get(article['source_id']):
+            classify(article, source)
     states=[]
     with concurrent.futures.ThreadPoolExecutor(max_workers=4) as pool:
         for articles, state in pool.map(fetch_source, SOURCES):

@@ -4,10 +4,11 @@ export interface NewsRecord {
   id: number; title: string; url: string; source: string; source_id: string;
   markets: string[]; companies: string[]; published_at: number | null;
   first_seen_at: number; excerpt: string;
+  publisher?: string; content_type?: 'brief' | 'news';
 }
 export interface Snapshot {
   updated_at: number; last_success_at: number | null; collection_status: string;
-  items: NewsRecord[]; sources: { id: string; name: string; status: string; checked_at: number; matched: number }[];
+  items: NewsRecord[]; sources: { id: string; name: string; publisher?: string; status: string; checked_at: number; matched: number }[];
   briefing: { status: string; text: string; generated_at: number | null; references?: { number:number; title:string; url:string }[] };
 }
 const names = ['A 股', '港股', '美股', '全球医药'];
@@ -40,18 +41,36 @@ export async function staticRequest<T>(endpoint:string, options:RequestInit = {}
   const data=await loadSnapshot();
   const read=local<number[]>('read',[]);
   const groups:Group[]=names.map((name,i)=>({id:i+1,name,created_at:0,updated_at:0}));
-  const feedDefs=markets.flatMap((market,mi)=>data.sources.map((source,si)=>({market,source,id:(mi+1)*1000+si+1})));
-  const chooseFeed=(a:NewsRecord)=>feedDefs.find(f=>f.source.id===a.source_id && a.markets.includes(f.market));
+  const publishers = [...new Set(data.sources.map(s=>s.publisher ?? s.name))].map(name=>{
+    const sources=data.sources.filter(s=>(s.publisher ?? s.name)===name);
+    return {name, sources, slot:data.sources.indexOf(sources[0])+1};
+  });
+  const feedDefs=markets.flatMap((market,mi)=>publishers.map(p=>({market,...p,id:(mi+1)*1000+p.slot})));
+  const belongs=(a:NewsRecord,f:typeof feedDefs[number])=>f.sources.some(s=>s.id===a.source_id)&&a.markets.includes(f.market);
+  const chooseFeed=(a:NewsRecord)=>{
+    const candidates=feedDefs.filter(f=>belongs(a,f));
+    return candidates.find(f=>f.id===Number(q.get('feed_id')))
+      ?? candidates.find(f=>f.market===markets[Number(q.get('group_id'))-1]) ?? candidates[0];
+  };
   const items:Item[]=data.items.map(a=>({id:a.id,feed_id:chooseFeed(a)?.id ?? 0,guid:a.url,title:a.title,link:a.url,
+    summary:a.excerpt,content_type:a.content_type ?? 'news',
     pub_date:a.published_at ?? a.first_seen_at,created_at:a.first_seen_at,unread:!read.includes(a.id),
-    content:`<p><strong>${escape(a.source)}</strong> · ${escape(a.markets.join(' / '))}${a.companies.length?' · '+escape(a.companies.join('、')):''}</p><p>${escape(a.excerpt || '该来源仅提供标题，请点击原文阅读完整报道。')}</p><p><small>以上为来源摘录。${a.published_at ? '' : '来源未提供发布时间，列表按首次发现时间排序。'}市场标签基于公司别名或来源范围。</small></p>`}));
-  const feeds:Feed[]=feedDefs.filter(f=>data.items.some(a=>a.source_id===f.source.id&&a.markets.includes(f.market))).map(f=>({
-    id:f.id,group_id:markets.indexOf(f.market)+1,name:f.source.name,link:data.items.find(a=>a.source_id===f.source.id)?.url ?? '',
-    suspended:false,created_at:0,updated_at:data.updated_at,item_count:data.items.filter(a=>a.source_id===f.source.id&&a.markets.includes(f.market)).length,
-    unread_count:data.items.filter(a=>a.source_id===f.source.id&&a.markets.includes(f.market)&&!read.includes(a.id)).length,
-    fetch_state:{expires_at:0,last_checked_at:f.source.checked_at,next_check_at:0,last_http_status:f.source.status==='ok'?200:0,
-      retry_after_until:0,last_success_at:f.source.status==='ok'?f.source.checked_at:0,last_error_at:0,consecutive_failures:f.source.status==='ok'?0:1}}));
-  let bookmarks=local<Bookmark[]>('bookmarks',[]).map(b=>({...b,unread:!read.includes(b.item_id ?? b.id)}));
+    content:`${a.excerpt?`<p>${escape(a.excerpt)}</p>`:''}<p class="radar-note">${a.excerpt?'来源摘录':'仅标题，可查看原文'}${a.published_at?'':' · 时间为收录时间'}</p>`}));
+  const feeds:Feed[]=feedDefs.filter(f=>data.items.some(a=>belongs(a,f))).map(f=>{
+    const entries=data.items.filter(a=>belongs(a,f));
+    const checkedAt=Math.max(...f.sources.map(s=>s.checked_at));
+    const healthy=f.sources.every(s=>s.status==='ok');
+    return {
+      id:f.id,group_id:markets.indexOf(f.market)+1,name:f.name,link:entries[0]?.url ?? '',
+      suspended:false,created_at:0,updated_at:data.updated_at,item_count:entries.length,
+      unread_count:entries.filter(a=>!read.includes(a.id)).length,
+      fetch_state:{expires_at:0,last_checked_at:checkedAt,next_check_at:0,last_http_status:healthy?200:0,
+        retry_after_until:0,last_success_at:healthy?checkedAt:0,last_error_at:0,consecutive_failures:healthy?0:1}};
+  });
+  let bookmarks=local<Bookmark[]>('bookmarks',[]).map(b=>{
+    const item=items.find(a=>a.id===(b.item_id ?? b.id));
+    return {...b,...(item?{content:item.content,summary:item.summary,content_type:item.content_type,feed_id:item.feed_id}:{}),unread:!read.includes(b.item_id ?? b.id)};
+  });
   const paginate=<U extends {id:number}>(rows:U[])=>{
     const limit=Math.min(100,Math.max(1,Number(q.get('limit'))||50));
     const offset=Math.max(0,Number(q.get('before'))||0);
@@ -61,7 +80,7 @@ export async function staticRequest<T>(endpoint:string, options:RequestInit = {}
     const original=data.items.find(n=>n.id===('item_id' in a?a.item_id:a.id));
     const feedId=Number(q.get('feed_id'));
     const f=feedDefs.find(f=>f.id===feedId);
-    return (!q.has('feed_id') || (f && original?.source_id===f.source.id && original.markets.includes(f.market))) &&
+    return (!q.has('feed_id') || (f && original && belongs(original,f))) &&
       (!q.has('group_id') || original?.markets.includes(markets[Number(q.get('group_id'))-1])) &&
       (q.get('unread')!=='true'||a.unread);
   };

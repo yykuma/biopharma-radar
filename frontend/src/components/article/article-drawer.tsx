@@ -229,6 +229,7 @@ export function ArticleDrawer() {
                     {article.title}
                   </h1>
                   <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm">
+                    <span className="rounded border px-1.5 py-0.5 text-[11px] text-muted-foreground">{article.content_type === 'brief' ? '短讯' : '新闻'}</span>
                     {article.feed_id > 0 ? (
                       <button
                         type="button"

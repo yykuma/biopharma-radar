@@ -130,6 +130,8 @@ export function useStarredItems(
         title: bookmark.title,
         link: bookmark.link,
         content: bookmark.content,
+        summary: bookmark.summary,
+        content_type: bookmark.content_type,
         pub_date: bookmark.pub_date,
         unread: bookmark.unread,
         created_at: bookmark.created_at,

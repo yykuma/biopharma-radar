@@ -238,6 +238,24 @@
           },
           "excerpt": {
             "type": "string"
+          },
+          "publisher": {
+            "type": "string",
+            "description": "Display publisher, independent of collection market."
+          },
+          "content_type": {
+            "type": "string",
+            "enum": [
+              "brief",
+              "news"
+            ],
+            "description": "Source format: brief for wire/flash feeds; news for reporting and press-release feeds. Not inferred from excerpt length."
+          },
+          "content_type_basis": {
+            "type": "string",
+            "enum": [
+              "source_format"
+            ]
           }
         }
       },

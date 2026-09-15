@@ -9,7 +9,7 @@ at `792bcc3928b1617bba09df34989fd5675c159b86`.
 
 GitHub Actions collects news every two hours, exports static JSON, and builds Fusion for
 Cloudflare Pages. No separate Fusion Go server or database is required. Financial-platform
-sources still use the public NewsNow API with usage and completion-status tracking. There is no NewsNow UI.
+sources still use the public NewsNow API. There is no NewsNow UI.
 The previous published snapshot retains up to 1,500 articles for 30 days and AI routing
 state. Bookmarks and read status are browser-local. Sources are maintained in Git.
 
@@ -38,6 +38,11 @@ query strings do not filter responses. See `openapi.json` and `llms.txt`.
 All timestamps are Unix seconds. Null `published_at` means unknown publication time;
 `first_seen_at` is discovery time. Check `last_success_at` and `collection_status`.
 One article can belong to multiple markets. Schema version: `1.0`.
+`publisher` is the display source, independent of the collection channel name.
+The sidebar merges channels from the same publisher within each market.
+`content_type` is `brief` for wire/flash feeds and `news` for reporting and company
+press-release feeds; `content_type_basis` is `source_format`. Missing excerpts do
+not turn news into briefs. These fields also apply to retained articles on refresh.
 
 ## Adding and rotating AI APIs
 
