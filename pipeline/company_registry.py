@@ -26,7 +26,7 @@ def match_companies(title, source):
             found.add(company['id'])
         for listing in company['listings']:
             ticker = re.escape(listing['ticker'])
-            pattern = (rf'\b0?{int(listing["ticker"])}\.HK\b' if listing['market']=='HK'
+            pattern = (rf'\b0*{int(listing["ticker"])}\.HK\b' if listing['market']=='HK'
                        else rf'(?:\${ticker}\b|\b(?:NASDAQ|NYSE|NYSE American)\s*:\s*{ticker}\b)')
             if re.search(pattern, text, re.I):
                 found.add(company['id'])

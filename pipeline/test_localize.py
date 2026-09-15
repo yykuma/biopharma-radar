@@ -53,6 +53,8 @@ class LocalizationTests(unittest.TestCase):
         self.assertEqual(match_companies('Accompanying Pfizermab treatment',{}),[])
         self.assertEqual(match_companies('A quarterly update',{'company_ids':['us-lly']})[0]['id'],'us-lly')
         self.assertEqual(match_companies('09926.HK announced results',{})[0]['id'],'hk-09926')
+        self.assertEqual(match_companies('00013.HK announced results',{})[0]['id'],'us-hcm')
+        self.assertEqual(match_companies('00512.HK announced results',{})[0]['id'],'hk-00512')
         self.assertEqual(len({c['id'] for c in CATALOG['companies']}),len(CATALOG['companies']))
 
     def test_article_parser_ignores_navigation_and_private_hosts(self):
