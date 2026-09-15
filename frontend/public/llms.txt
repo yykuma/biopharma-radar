@@ -5,10 +5,9 @@ Send a descriptive User-Agent header such as YourNewsReader/1.0 when using
 scripts. Cloudflare may reject generic default Python user agents with HTTP 403.
 
 - [All news](data/latest.json)
-- [A shares](data/markets/a.json)
 - [Hong Kong](data/markets/hk.json)
 - [US](data/markets/us.json)
-- [Global](data/markets/global.json)
+- [Industry news](data/markets/global.json)
 - [AI briefing](data/briefing.json)
 - [RSS](data/feed.xml)
 - [OpenAPI](openapi.json)
@@ -18,3 +17,7 @@ Timestamps are Unix seconds in UTC. Null published_at means unknown publication
 time; first_seen_at is discovery time. Markets are heuristic and can overlap.
 Check last_success_at and collection_status. AI briefings are not independently
 verified. This is partial source coverage, not an exhaustive market feed.
+
+Sources: BioPharma Dive and the Fierce Biotech Biotech section. US coverage is
+the priority; Hong Kong coverage is partial. GLOBAL includes unidentified
+companies and other listing markets. The A-share endpoint is retired.

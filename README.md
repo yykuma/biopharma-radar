@@ -1,20 +1,22 @@
 # BioPharma Radar
 
-Public healthcare and biotech news. The frontend reuses [Fusion](https://github.com/0x2E/fusion)
-at `1f99b1fc654baa0108e4df4577429d62d0e53cb8`. The pipeline imports RSSFetcher,
-and DataFetcher from [TrendRadar](https://github.com/sansan0/TrendRadar)
+Professional biopharma news, prioritizing US-listed companies with partial Hong Kong coverage. The frontend reuses [Fusion](https://github.com/0x2E/fusion)
+at `1f99b1fc654baa0108e4df4577429d62d0e53cb8`. The pipeline imports RSSFetcher from [TrendRadar](https://github.com/sansan0/TrendRadar)
 at `792bcc3928b1617bba09df34989fd5675c159b86`.
 
 ## Architecture
 
 GitHub Actions collects news every two hours, exports static JSON, and builds Fusion for
-Cloudflare Pages. No separate Fusion Go server or database is required. Financial-platform
-sources still use the public NewsNow API. There is no NewsNow UI.
+Cloudflare Pages. No separate Fusion Go server or database is required.
+Sources are BioPharma Dive and the Fierce Biotech Biotech section.
+The former Google, Yahoo, wire feeds and single-company feed are retired; their
+articles are removed from current snapshots. Source changes clear cached briefing
+text while preserving AI quota, cooldown and rotation state.
 The previous published snapshot retains up to 1,500 articles for 30 days and AI routing
 state. Bookmarks and read status are browser-local. Sources are maintained in Git.
 
 Market labels are heuristic and incomplete. Unknown companies remain global.
-Yahoo's requested ticker list is not proof of a listing market. Content consists of
+The industry group includes unidentified companies and other listing markets. Content consists of
 headlines and short source excerpts, not mirrored full articles. All source links remain.
 
 ## Development
@@ -32,12 +34,12 @@ Build with `pnpm build`. Hash navigation supports Cloudflare Pages deep links.
 
 ## Public interface
 
-`data/latest.json`, `data/briefing.json`, `data/markets/{a,hk,us,global}.json`, and
+`data/latest.json`, `data/briefing.json`, `data/markets/{us,hk,global}.json`, and
 `data/feed.xml` are static GET resources. Consumers filter downloaded records locally;
 query strings do not filter responses. See `openapi.json` and `llms.txt`.
 All timestamps are Unix seconds. Null `published_at` means unknown publication time;
 `first_seen_at` is discovery time. Check `last_success_at` and `collection_status`.
-One article can belong to multiple markets. Schema version: `1.0`.
+The A-share data endpoint is retired. One article can belong to multiple markets. Schema version: `1.0`.
 `publisher` is the display source, independent of the collection channel name.
 The sidebar merges channels from the same publisher within each market.
 `content_type` is `brief` for wire/flash feeds and `news` for reporting and company

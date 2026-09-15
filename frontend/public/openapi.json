@@ -47,38 +47,6 @@
         }
       }
     },
-    "/data/markets/a.json": {
-      "get": {
-        "operationId": "markets_a_json",
-        "summary": "A shares",
-        "responses": {
-          "200": {
-            "description": "Static JSON snapshot",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "market": {
-                      "type": "string"
-                    },
-                    "updated_at": {
-                      "type": "integer"
-                    },
-                    "items": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/News"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/data/markets/hk.json": {
       "get": {
         "operationId": "markets_hk_json",
@@ -146,7 +114,7 @@
     "/data/markets/global.json": {
       "get": {
         "operationId": "markets_global_json",
-        "summary": "Global",
+        "summary": "Industry news with no identified US/HK company",
         "responses": {
           "200": {
             "description": "Static JSON snapshot",
@@ -214,9 +182,8 @@
             "items": {
               "type": "string",
               "enum": [
-                "A",
-                "HK",
                 "US",
+                "HK",
                 "GLOBAL"
               ]
             }

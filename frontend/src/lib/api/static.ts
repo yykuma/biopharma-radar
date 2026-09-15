@@ -11,8 +11,11 @@ export interface Snapshot {
   items: NewsRecord[]; sources: { id: string; name: string; publisher?: string; status: string; checked_at: number; matched: number }[];
   briefing: { status: string; text: string; generated_at: number | null; references?: { number:number; title:string; url:string }[] };
 }
-const names = ['A 股', '港股', '美股', '全球医药'];
-const markets = ['A', 'HK', 'US', 'GLOBAL'];
+const marketGroups = [
+  {id:3,market:'US',name:'美股'},
+  {id:2,market:'HK',name:'港股'},
+  {id:4,market:'GLOBAL',name:'行业动态'},
+];
 let cached: Promise<Snapshot> | null = null;
 let loadedAt = 0;
 export function loadSnapshot(): Promise<Snapshot> {
@@ -43,17 +46,17 @@ export async function staticRequest<T>(endpoint:string, options:RequestInit = {}
   if (path==='/stats' && method==='GET') {
     return {total:data.items.length,unread:data.items.filter(a=>!read.includes(a.id)).length} as T;
   }
-  const groups:Group[]=names.map((name,i)=>({id:i+1,name,created_at:0,updated_at:0}));
+  const groups:Group[]=marketGroups.map(({id,name})=>({id,name,created_at:0,updated_at:0}));
   const publishers = [...new Set(data.sources.map(s=>s.publisher ?? s.name))].map(name=>{
     const sources=data.sources.filter(s=>(s.publisher ?? s.name)===name);
     return {name, sources, slot:data.sources.indexOf(sources[0])+1};
   });
-  const feedDefs=markets.flatMap((market,mi)=>publishers.map(p=>({market,...p,id:(mi+1)*1000+p.slot})));
+  const feedDefs=marketGroups.flatMap(({market,id:groupId})=>publishers.map(p=>({market,groupId,...p,id:groupId*1000+p.slot})));
   const belongs=(a:NewsRecord,f:typeof feedDefs[number])=>f.sources.some(s=>s.id===a.source_id)&&a.markets.includes(f.market);
   const chooseFeed=(a:NewsRecord)=>{
     const candidates=feedDefs.filter(f=>belongs(a,f));
     return candidates.find(f=>f.id===Number(q.get('feed_id')))
-      ?? candidates.find(f=>f.market===markets[Number(q.get('group_id'))-1]) ?? candidates[0];
+      ?? candidates.find(f=>f.groupId===Number(q.get('group_id'))) ?? candidates[0];
   };
   const items:Item[]=data.items.map(a=>({id:a.id,feed_id:chooseFeed(a)?.id ?? 0,guid:a.url,title:a.title,link:a.url,
     summary:a.excerpt,content_type:a.content_type ?? 'news',
@@ -64,7 +67,7 @@ export async function staticRequest<T>(endpoint:string, options:RequestInit = {}
     const checkedAt=Math.max(...f.sources.map(s=>s.checked_at));
     const healthy=f.sources.every(s=>s.status==='ok');
     return {
-      id:f.id,group_id:markets.indexOf(f.market)+1,name:f.name,link:entries[0]?.url ?? '',
+      id:f.id,group_id:f.groupId,name:f.name,link:entries[0]?.url ?? '',
       suspended:false,created_at:0,updated_at:data.updated_at,item_count:entries.length,
       unread_count:entries.filter(a=>!read.includes(a.id)).length,
       fetch_state:{expires_at:0,last_checked_at:checkedAt,next_check_at:0,last_http_status:healthy?200:0,
@@ -84,7 +87,7 @@ export async function staticRequest<T>(endpoint:string, options:RequestInit = {}
     const feedId=Number(q.get('feed_id'));
     const f=feedDefs.find(f=>f.id===feedId);
     return (!q.has('feed_id') || (f && original && belongs(original,f))) &&
-      (!q.has('group_id') || original?.markets.includes(markets[Number(q.get('group_id'))-1])) &&
+      (!q.has('group_id') || original?.markets.includes(marketGroups.find(g=>g.id===Number(q.get('group_id')))?.market ?? '')) &&
       (q.get('unread')!=='true'||a.unread);
   };
   let result:unknown;

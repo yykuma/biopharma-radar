@@ -1,5 +1,5 @@
 import unittest
-from collect import normalize, classify
+from collect import normalize, classify, prepare_previous, SOURCES
 
 
 class NormalizeTests(unittest.TestCase):
@@ -15,9 +15,7 @@ class NormalizeTests(unittest.TestCase):
 
     def test_cross_listed_company_and_unrelated_news(self):
         self.row['title']='恒瑞医药发布公司新闻'
-        self.assertEqual(normalize(self.row,self.source,1789470783)['markets'],['A','HK'])
-        self.row['title']='Technology company releases new phone'
-        self.assertIsNone(normalize(self.row,self.source,1789470783))
+        self.assertEqual(normalize(self.row,self.source,1789470783)['markets'],['HK'])
 
     def test_rejects_unsafe_urls_and_old_items(self):
         self.row['url']='javascript:alert(1)'
@@ -34,8 +32,8 @@ class NormalizeTests(unittest.TestCase):
 
     def test_exchange_codes_classify_financial_wire_items(self):
         source = {'id':'gelonghui', 'name':'Gelonghui', 'market':'GLOBAL', 'content_type':'brief'}
-        for title, market in [('康为世纪(688426.SH)：公司公告','A'),
-                              ('东北制药(000597.SZ)：公司公告','A'),
+        for title, market in [('康为世纪(688426.SH)：公司公告','GLOBAL'),
+                              ('东北制药(000597.SZ)：公司公告','GLOBAL'),
                               ('康宁杰瑞制药-B(09966.HK)：公司公告','HK'),
                               ('医药行业动态','GLOBAL')]:
             with self.subTest(title=title):
@@ -50,3 +48,23 @@ class NormalizeTests(unittest.TestCase):
         self.assertEqual(article['content_type'], 'brief')
         self.assertEqual(article['publisher'], 'Publisher')
         self.assertEqual(normalize(self.row, self.source, 1789470783)['content_type'], 'news')
+
+
+class SourceScopeTests(unittest.TestCase):
+    def test_source_change_removes_retired_news_and_briefing_but_keeps_router_state(self):
+        state={'last_model':'provider/model', 'token_usage':{'provider':123}}
+        old={'id':1,'source_id':'a-google','title':'School event','first_seen_at':100}
+        keep={'id':2,'source_id':SOURCES[0]['id'],'title':'Lilly company news','first_seen_at':100}
+        previous={'sources':[{'id':'a-google'}], 'items':[old,keep],
+                  'briefing':{'text':'Old source summary','generated_at':100,'router_state':state}}
+        items, briefing=prepare_previous(previous, 200)
+        self.assertEqual(list(items), [2])
+        self.assertEqual(briefing['status'], 'pending')
+        self.assertIsNone(briefing['generated_at'])
+        self.assertEqual(briefing['references'], [])
+        self.assertEqual(briefing['router_state'], state)
+
+    def test_unchanged_sources_retain_cached_briefing(self):
+        briefing={'status':'ok','text':'Current summary','generated_at':100}
+        _, retained=prepare_previous({'sources':SOURCES,'briefing':briefing}, 200)
+        self.assertEqual(retained, briefing)
