@@ -119,7 +119,7 @@ Company filters combine with market, unread and bookmark filters. News counts
 represent retained articles, not total market news. Official source IDs indicate
 which company feeds are connected; a catalog entry does not enable collection.
 
-The first 52 articles have reviewed Chinese translations in
+The initial 52 articles and four reviewed AI outputs have Chinese translations in
 `config/editorial-translations.json`. A source fingerprint prevents reuse after
 source text changes. Untranslated articles are processed in up to six sequential batches of four per
 collection run (24 articles maximum), with a 3,000-token output ceiling per batch.

@@ -168,3 +168,33 @@ class ParallelTests(unittest.TestCase):
         self.assertEqual(sum(previous['router_state']['token_usage'].values()), 50)
         self.assertEqual(report['execution']['max_observed_parallel'], 2)
         self.assertEqual({a['task'] for a in report['execution']['attempts']}, {'translation', 'curation'})
+
+    @patch('localize.fetch_text',return_value=('',None))
+    def test_single_primary_runs_translation_before_classification_and_briefing(self,_fetch):
+        from ai_router import summarize
+        config=self.config(('sense','fallback'))
+        config['providers'][1]['routing_role']='fallback'
+        config.update(summary_interval_hours=6,max_input_articles=20,max_output_tokens=700)
+        item={'id':1,'title':'Company reports trial results','excerpt':'The primary endpoint was not met.',
+              'source':'Company','source_id':'company','language':'en','first_seen_at':100000,
+              'company_ids':[],'url':'https://example.org/news'}
+        calls=[]
+        def call(p,m,messages,limit):
+            data=json.loads(messages[-1]['content'])
+            if isinstance(data,dict):
+                calls.append('curation')
+                rows=[{'id':'1','category':'clinical','confidence':'high','same_event_as':None}]
+            elif 'number' in data[0]:
+                calls.append('briefing')
+                return Completion('The company reported that its trial did not meet the primary endpoint [1].',25,'stop')
+            else:
+                calls.append('translation')
+                rows=[{'id':'1','title_zh':'公司公布临床试验结果','summary_zh':'试验未达到主要终点。'}]
+            return Completion(json.dumps(rows),25,'stop')
+        session=RoutingSession(new_state({},100000))
+        previous,report=enrich([item],[{'id':'company'}],None,True,100000,call,config,session)
+        summarize([item],previous,True,call,config,100000,session)
+        self.assertEqual(calls,['translation','curation','briefing'])
+        self.assertEqual(report['execution']['mode'],'priority_serial')
+        self.assertEqual(sum(session.state['token_usage'].values()),75)
+        self.assertEqual([a['task'] for a in session.attempts],calls)

@@ -622,5 +622,53 @@
       "basis": "article_intro",
       "source_url": "https://investor.regeneron.com/news-releases/news-release-details/pasatrutm-garetosmab-grts-first-and-only-fda-approved-treatment"
     }
+  },
+  "6438801539392": {
+    "title_zh": "FDA批准Pixclara（floretyrosine F 18）FET-PET显像剂用于胶质瘤",
+    "summary_zh": "Telix 宣布，美国 FDA 已批准 Pixclara（floretyrosine F 18）的新药申请。这是一款用于胶质瘤的 FET-PET 显像剂。",
+    "content_fingerprint": "0a9dae36a25fb114ac60d407f497a59383b9676385b5c97c17d30c17a42c50d6",
+    "translation": {
+      "status": "translated",
+      "method": "editorial",
+      "translated_at": 1789484525,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/newdrugs/fda-approves-pixclara-floretyrosine-f-18-fet-pet-imaging-agent-glioma-6882.html"
+    }
+  },
+  "11107692161445": {
+    "title_zh": "FDA批准Isembyld（apitegromab-mstn）用于儿童和成人脊髓性肌萎缩症的肌肉靶向治疗",
+    "summary_zh": "美国 FDA 已批准 Isembyld（apitegromab-mstn），用于儿童及成人脊髓性肌萎缩症（SMA）患者的肌肉靶向治疗。该消息由 Scholar Rock 发布。",
+    "content_fingerprint": "d3aef276dfc77a93a2832473f5abfacce9ff0d65e0cfb3f2fa2e62dde1b09e8d",
+    "translation": {
+      "status": "translated",
+      "method": "editorial",
+      "translated_at": 1789484525,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/newdrugs/fda-approves-isembyld-apitegromab-mstn-muscle-targeted-children-adults-spinal-muscular-atrophy-sma-6881.html"
+    }
+  },
+  "33957631444416": {
+    "title_zh": "FDA批准Stelara用于儿童溃疡性结肠炎",
+    "summary_zh": "美国 FDA 已批准 Stelara（ustekinumab）注射液，用于治疗 2 岁及以上儿童患者的中度至重度活动性溃疡性结肠炎。",
+    "content_fingerprint": "87a39b1658a5a5ffdc180bbb5e2b1f2679542fc53958bd3d2eae1c60097200f0",
+    "translation": {
+      "status": "translated",
+      "method": "editorial",
+      "translated_at": 1789484525,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/newdrugs/fda-approves-stelara-pediatric-ulcerative-colitis-6875.html"
+    }
+  },
+  "28008046147907": {
+    "title_zh": "Nuvation Bio的Safusidenib获FDA快速通道资格用于IDH1突变胶质瘤治疗",
+    "summary_zh": "Nuvation Bio 宣布，FDA 已授予 Safusidenib 快速通道资格，用于 IDH1 突变胶质瘤的治疗。",
+    "content_fingerprint": "521083be068216aa630eabab3a0254337c5aa95a172c6da9b2dbe25873e8648d",
+    "translation": {
+      "status": "translated",
+      "method": "editorial",
+      "translated_at": 1789484525,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/clinical_trials/nuvation-bio-granted-fda-fast-track-designation-safusidenib-idh1-mutant-glioma-22563.html"
+    }
   }
 }
