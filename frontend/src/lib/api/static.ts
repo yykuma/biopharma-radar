@@ -40,6 +40,9 @@ export async function staticRequest<T>(endpoint:string, options:RequestInit = {}
   if (path==='/feeds/refresh') { cached=null; await loadSnapshot(); return undefined as T; }
   const data=await loadSnapshot();
   const read=local<number[]>('read',[]);
+  if (path==='/stats' && method==='GET') {
+    return {total:data.items.length,unread:data.items.filter(a=>!read.includes(a.id)).length} as T;
+  }
   const groups:Group[]=names.map((name,i)=>({id:i+1,name,created_at:0,updated_at:0}));
   const publishers = [...new Set(data.sources.map(s=>s.publisher ?? s.name))].map(name=>{
     const sources=data.sources.filter(s=>(s.publisher ?? s.name)===name);

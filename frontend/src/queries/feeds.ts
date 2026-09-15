@@ -7,6 +7,7 @@ import {
 } from "@tanstack/react-query";
 import { feedAPI, type Feed } from "@/lib/api";
 import { queryKeys } from "./keys";
+import { staticRequest } from "@/lib/api/static";
 
 export const feedQueries = {
   list: () =>
@@ -43,6 +44,10 @@ export function useFeedLookup() {
 
 export function useUnreadCounts() {
   const { data: feeds = [] } = useFeeds();
+  const { data: counts } = useQuery({
+    queryKey: [...queryKeys.feeds.all, 'unique-counts'],
+    queryFn: () => staticRequest<{total:number;unread:number}>('/stats'),
+  });
 
   const getUnreadCount = useCallback(
     (feedId: number) => feeds.find((f) => f.id === feedId)?.unread_count ?? 0,
@@ -58,11 +63,11 @@ export function useUnreadCounts() {
   );
 
   const getTotalUnreadCount = useCallback(
-    () => feeds.reduce((sum, f) => sum + (f.unread_count ?? 0), 0),
-    [feeds],
+    () => counts?.unread ?? 0,
+    [counts],
   );
 
-  return { getUnreadCount, getGroupUnreadCount, getTotalUnreadCount };
+  return { getUnreadCount, getGroupUnreadCount, getTotalUnreadCount, totalCount:counts?.total ?? 0 };
 }
 
 export function useCreateFeed() {

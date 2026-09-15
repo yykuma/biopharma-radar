@@ -15,7 +15,7 @@ export function FeedList() {
   const { t } = useI18n();
   const { data: groups = [], isLoading } = useGroups();
   const { feeds, getFeedsByGroup } = useFeedLookup();
-  const { getTotalUnreadCount } = useUnreadCounts();
+  const { getTotalUnreadCount, totalCount } = useUnreadCounts();
   const { total: starredTotal } = useBookmarkLookup();
   const {
     selectedFeedId,
@@ -53,7 +53,7 @@ export function FeedList() {
     {
       value: "all",
       label: t("article.filter.all"),
-      count: totalUnread,
+      count: totalCount,
       icon: Layers,
     },
   ];

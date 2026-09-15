@@ -16,6 +16,7 @@ const source = (await readFile(new URL('../src/lib/api/static.ts',import.meta.ur
 const {staticRequest:request} = await import('data:text/javascript,'+encodeURIComponent(stripTypeScriptTypes(source)));
 
 const hk = await request('/items?group_id=2');
+assert.deepEqual(await request('/stats'),{total:3,unread:3});
 assert.deepEqual(hk.data.map(x=>x.id),[1]);
 const feeds = (await request('/feeds')).data;
 assert.equal(feeds.find(f=>f.group_id===2).item_count,1);
@@ -36,6 +37,7 @@ assert.ok(!first.data[0].content.includes('<script>'));
 assert.ok(first.data[1].content.includes('&lt;script&gt;'));
 assert.equal(first.data[1].content_type,'news');
 await request('/items/-/read',{method:'POST',body:JSON.stringify({ids:[1]})});
+assert.deepEqual(await request('/stats'),{total:3,unread:2});
 assert.equal((await request('/items?group_id=2&unread=true')).data.length,0);
 await request('/bookmarks',{method:'POST',body:JSON.stringify({...first.data[0],item_id:1,feed_name:'Company'})});
 assert.equal((await request('/bookmarks')).data.length,1);
