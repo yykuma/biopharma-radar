@@ -85,16 +85,17 @@ def group_events(items):
         article['related_article_ids'] = [a['id'] for k, a in by_id.items() if k != key and root(k) == root(key)]
 
 
-def curate(items, previous_briefing, enabled, now, call=invoke, config=None):
+def curate(items, previous_briefing, enabled, now, call=invoke, config=None, session=None):
     config = dict(config or load_registry())
     config['task'] = 'news_translation'
-    state = new_state((previous_briefing or {}).get('router_state', {}), now)
+    config['operation'] = 'curation'
+    state = session.state if session else new_state((previous_briefing or {}).get('router_state', {}), now)
     pending = [a for a in items if a.get('editorial', {}).get('fingerprint') != digest(a)
                or a.get('editorial', {}).get('version') != VERSION]
     attempts = []
     # Two bounded batches share the existing provider budgets and cooldowns.
     for offset in range(0, min(len(pending), 48), 24):
-        if not enabled or not candidates(config, state, now):
+        if not enabled or not (session.available(config,now) if session else candidates(config, state, now)):
             break
         batch = pending[offset:offset + 24]
         ids = {str(a['id']) for a in batch}
@@ -119,7 +120,7 @@ def curate(items, previous_briefing, enabled, now, call=invoke, config=None):
             {'role': 'user', 'content': json.dumps({'articles': [record(a) for a in batch],
                                                    'references': [record(a) for a in references.values()]}, ensure_ascii=False)}]
         available = ids | set(references)
-        outcome = route_text(messages, state, config, now, call, max_tokens=3600,
+        outcome = route_text(messages, state, config, now, call, max_tokens=3600, session=session,
                              validate=lambda text: parse_labels(text, ids, available))
         attempts.extend(outcome.get('attempts', []))
         if outcome['status'] != 'ok':

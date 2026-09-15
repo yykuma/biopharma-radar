@@ -15,8 +15,9 @@ from xml.etree.ElementTree import Element, SubElement, ElementTree
 from trendradar.crawler.rss import RSSFetcher, RSSFeedConfig
 from ai_router import summarize
 from company_registry import CATALOG, match_companies
-from localize import apply_cached, localize, SEED_PATH
-from curate import canonical_url, restore, curate
+from localize import apply_cached, SEED_PATH
+from curate import canonical_url, restore
+from editorial import enrich
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCES = json.loads((ROOT / 'config/sources.json').read_text())
@@ -132,8 +133,7 @@ def collect(out, previous_path=None, ai_enabled=False):
     items=sorted(merged.values(), key=lambda a: (a['published_at'] or a['first_seen_at'],a['id']),reverse=True)[:1500]
     for item in items:
         apply_cached(item,item,seed)
-    previous_briefing=localize(items,SOURCES,previous_briefing,ai_enabled,now)
-    previous_briefing, curation = curate(items,previous_briefing,ai_enabled,now)
+    previous_briefing, curation = enrich(items,SOURCES,previous_briefing,ai_enabled,now)
     visible = []
     events = set()
     for item in items:

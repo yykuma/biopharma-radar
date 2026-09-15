@@ -3,6 +3,7 @@ import hashlib
 import json
 import os
 import time
+import threading
 from datetime import datetime, timezone
 from dataclasses import dataclass
 from pathlib import Path
@@ -55,6 +56,8 @@ def candidates(config, state, now):
             continue
         if cooldowns.get('provider:'+p['id'], 0) > now:
             continue
+        if cooldowns.get('supplier:'+p.get('supplier', p['id']), 0) > now:
+            continue
         for m in p['models']:
             key = p['id']+'/'+m['id']
             if (os.environ.get(m.get('key_env',p['key_env'])) and m.get('enabled') and m.get('free_tier') in ('free', 'limited_free', 'beta_free')
@@ -68,6 +71,16 @@ def candidates(config, state, now):
         index = next((i for i,(_,_,key) in enumerate(choices) if key==last),-1)
         if index>=0:
             choices=choices[index+1:]+choices[:index+1]
+    for bucket in (choices, fallback):
+        for supplier in {p.get('supplier', p['id']) for p, _, _ in bucket}:
+            positions = [i for i, (p, _, _) in enumerate(bucket) if p.get('supplier', p['id']) == supplier]
+            models = [bucket[i] for i in positions]
+            last_local = state.get('last_models', {}).get(supplier)
+            index = next((i for i, (_, _, key) in enumerate(models) if key == last_local), -1)
+            if index >= 0:
+                models = models[index + 1:] + models[:index + 1]
+                for i, model in zip(positions, models):
+                    bucket[i] = model
     return choices + fallback
 
 
@@ -110,28 +123,64 @@ def new_state(state, now):
     day = datetime.fromtimestamp(now, timezone.utc).strftime('%Y-%m-%d')
     usage = state.get('daily_usage', {})
     state={'last_model':state.get('last_model'), 'cooldowns':{k:v for k,v in state.get('cooldowns',{}).items() if v>now},
-           'token_usage':dict(state.get('token_usage', {})),
+           'token_usage':dict(state.get('token_usage', {})), 'last_models':dict(state.get('last_models', {})),
            'daily_usage':{'date':day,'requests':dict(usage.get('requests', {})) if usage.get('date') == day else {}}}
     return state
 
 
-def route_text(messages, state, config, now, call=invoke, max_tokens=1200, validate=None):
-    attempts=[];skip_providers=set()
-    for provider,model,key in candidates(config,state,now):
-        if provider['id'] in skip_providers: continue
-        if len(attempts)>=min(5,config['max_attempts_per_run']):break
-        if not within_limit(provider, 'provider:'+provider['id'], state, now) or not within_limit(model, key, state, now):
-            continue
-        for scope in ['provider:'+provider['id'], key]:
-            counts = state['daily_usage']['requests']
-            counts[scope] = counts.get(scope, 0) + 1
+class RoutingSession:
+    """Atomically reserve quota and one in-flight request per supplier."""
+
+    def __init__(self, state):
+        self.state = state
+        self.condition = threading.Condition()
+        self.busy = set()
+        self.max_parallel = 0
+        self.attempts = []
+
+    def available(self, config, now):
+        with self.condition:
+            return bool(candidates(config, self.state, now))
+
+    def reserve(self, config, now, tried):
+        deadline = time.monotonic() + 180
+        with self.condition:
+            while True:
+                choices = [choice for choice in candidates(config, self.state, now) if choice[2] not in tried]
+                for provider, model, key in choices:
+                    supplier = provider.get('supplier', provider['id'])
+                    if supplier in self.busy or len(self.busy) >= 2:
+                        continue
+                    self.busy.add(supplier)
+                    self.max_parallel = max(self.max_parallel, len(self.busy))
+                    for scope in ['provider:' + provider['id'], key]:
+                        counts = self.state['daily_usage']['requests']
+                        counts[scope] = counts.get(scope, 0) + 1
+                    return provider, model, key, supplier
+                remaining = deadline - time.monotonic()
+                if not choices or remaining <= 0:
+                    return None
+                self.condition.wait(timeout=remaining)
+
+
+def route_text(messages, state, config, now, call=invoke, max_tokens=1200, validate=None, session=None):
+    session = session or RoutingSession(state)
+    state = session.state
+    attempts=[];tried=set()
+    while len(attempts) < min(5, config['max_attempts_per_run']):
+        choice = session.reserve(config, now, tried)
+        if choice is None:
+            break
+        provider, model, key, supplier = choice
+        tried.add(key)
         try:
             result=call(provider,model,messages,max_tokens)
             usage = None
             if isinstance(result, Completion):
                 usage = result.tokens
                 if usage is not None:
-                    state['token_usage'][provider['id']] = state['token_usage'].get(provider['id'], 0) + usage
+                    with session.condition:
+                        state['token_usage'][provider['id']] = state['token_usage'].get(provider['id'], 0) + usage
                 if result.finish_reason in ('length', 'content_filter'):
                     raise ValueError('Incomplete or filtered completion')
                 result = result.text
@@ -139,7 +188,10 @@ def route_text(messages, state, config, now, call=invoke, max_tokens=1200, valid
                 raise ValueError('Empty or unusable completion')
             if validate: validate(result.strip())
             attempts.append({'provider':provider['id'],'model':model['id'],'status':'ok','total_tokens':usage})
-            state['last_model']=key
+            with session.condition:
+                state['last_model']=key
+                state.setdefault('last_models', {})[supplier] = key
+                session.attempts.append({'task': config.get('operation', config['task']), **attempts[-1]})
             return dict(status='ok',text=result.strip(),generated_at=now,model=model['id'],provider=provider['id'],
                         router_state=state,attempts=attempts)
         except Exception as exc:
@@ -147,11 +199,18 @@ def route_text(messages, state, config, now, call=invoke, max_tokens=1200, valid
             if not isinstance(status,int):status=0
             reason={401:'authentication',403:'permission',429:'rate_limited',404:'model_unavailable'}.get(status,'temporary_failure' if status>=500 else 'invalid_response')
             attempts.append({'provider':provider['id'],'model':model['id'],'status':reason,'http_status':status})
-            if status in (401,403,429):
-                skip_providers.add(provider['id'])
-                state['cooldowns']['provider:'+provider['id']]=now+(86400 if status in (401,403) else 3600)
-            else:
-                state['cooldowns'][key]=now+(86400 if status==404 else 900)
+            with session.condition:
+                session.attempts.append({'task': config.get('operation', config['task']), **attempts[-1]})
+                if status in (401,403,429):
+                    until = now+(86400 if status in (401,403) else 3600)
+                    state['cooldowns']['provider:'+provider['id']] = until
+                    state['cooldowns']['supplier:'+supplier] = until
+                else:
+                    state['cooldowns'][key]=now+(86400 if status==404 else 900)
+        finally:
+            with session.condition:
+                session.busy.remove(supplier)
+                session.condition.notify_all()
     return dict(status='unavailable',router_state=state,attempts=attempts,last_attempt_at=now)
 
 

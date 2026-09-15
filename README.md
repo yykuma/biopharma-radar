@@ -58,8 +58,8 @@ the requested task (`news_summary` or `news_translation`) participate. These cos
 verification. Keep paid billing and automatic top-ups disabled.
 
 `round_robin` advances after the last successful model; `failover` preserves order.
-Each task allows at most three attempts, without SDK retries or paid fallback. Translation and briefing share provider daily request caps, cooldowns and usage counters.
-429 cools the entire provider for an hour; 401/403 for 24 hours. A 404 cools the model
+Each task allows at most three attempts, without SDK retries or paid fallback. Translation, classification and briefing share provider daily request caps, cooldowns and usage counters.
+429 cools all pools of the supplier for an hour; 401/403 for 24 hours. A 404 cools the model
 for 24 hours; other failures for 15 minutes. Cooldowns and rotation position persist
 in the published briefing without credentials or raw exception messages.
 
@@ -95,7 +95,7 @@ credits upstream; local token counters cannot reveal account credit balances.
 truncated responses. It excludes other clients and requests with unknown usage.
 `max_requests_per_day` counts every attempt, resets at UTC midnight, and is scoped
 to a pool or model. `expires_at` is a local review deadline, not a provider promise.
-`routing_role: fallback` reserves limited APIs for primary-provider failures.
+`routing_role: fallback` keeps Mistral behind the preferred AMD and SenseNova routes; it may serve work while preferred suppliers are busy or unavailable.
 SenseNova defaults to two attempts per pool per day and a 30-day pricing review.
 Quota descriptions are operator notes, not a hard guarantee about provider billing.
 
@@ -153,3 +153,17 @@ by default. JSON keeps every record; RSS and briefings use one non-marketing
 representative per event. Company/market filters run before reader grouping, and
 read actions apply to the currently retained reports in an event. New reports
 remain unread. Saved bookmarks remain individually accessible.
+
+## Bounded parallel AI execution
+
+Translation and editorial classification run concurrently with two workers.
+A shared routing session atomically reserves daily allowance before dispatch,
+allows at most two requests globally and one per supplier, and persists token
+usage, cooldowns and each supplier's last successful model. SenseNova Flash and
+general retain separate quota counters while sharing one in-flight slot. Models
+rotate within each supplier. No duplicate speculative requests are sent.
+AMD and SenseNova are preferred; Mistral remains a fallback. Existing request
+caps, provider review deadlines and free-only model selection remain enforced.
+Briefing generation starts after both tasks finish so it uses completed labels
+and translations. The public curation.execution report records sanitized
+attempts and observed concurrency; zero means no eligible request was dispatched.

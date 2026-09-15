@@ -43,3 +43,8 @@ The reader hides only editorial.category=marketing with confidence=high by defau
 Unclassified or uncertain items stay visible. Users can show marketing using the
 reader checkbox. Public RSS and briefings omit marketing and collapse event groups.
 Curation uses the same free provider budgets as translation and may be pending.
+
+AI translation and classification can run on two different suppliers in parallel,
+with at most one in-flight request per supplier. SenseNova quota pools are counted
+separately but share a supplier slot. Inspect curation.execution for actual
+concurrency and sanitized attempts; existing daily caps and cooldowns still apply.
