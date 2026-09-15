@@ -99,6 +99,12 @@ def candidates(config, state, now):
                 models = models[index + 1:] + models[:index + 1]
                 for i, model in zip(positions, models):
                     bucket[i] = model
+        # Give each supplier a turn before trying another model from the same supplier.
+        supplier_queues = {}
+        for choice in bucket:
+            supplier_queues.setdefault(choice[0].get('supplier', choice[0]['id']), []).append(choice)
+        bucket[:] = [queue[index] for index in range(max(map(len, supplier_queues.values()), default=0))
+                     for queue in supplier_queues.values() if index < len(queue)]
     return choices + fallback
 
 
@@ -198,6 +204,10 @@ class RoutingSession:
         with self.condition:
             while True:
                 choices = [choice for choice in candidates(config, self.state, now) if choice[2] not in tried]
+                tried_suppliers = {p.get('supplier', p['id']) for p in config['providers']
+                                   if any(key.startswith(p['id'] + '/') for key in tried)}
+                choices.sort(key=lambda choice: (choice[0].get('routing_role') == 'fallback',
+                             choice[0].get('supplier', choice[0]['id']) in tried_suppliers))
                 for provider, model, key in choices:
                     supplier = provider.get('supplier', provider['id'])
                     if self.busy.get(supplier, 0) >= self.supplier_limits.get(supplier, 1) or sum(self.busy.values()) >= self.max_requests:

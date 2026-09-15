@@ -49,7 +49,7 @@ not turn news into briefs. These fields also apply to retained articles on refre
 
 Edit `config/ai-providers.json`. Credentials must never be stored in this file.
 Add a GitHub Actions secret and map it into the workflow environment. Existing names:
-`AMD_API_KEY`, `MISTRAL_API_KEY`, `GLM_API_KEY`, `SENSENOVA_API_KEY`. Individual models may override `key_env`.
+`AMD_API_KEY`, `MISTRAL_API_KEY`, `GLM_API_KEY`, `SENSENOVA_API_KEY`, `AGNES_API_KEY`. Individual models may override `key_env`.
 The integration currently supports OpenAI-compatible chat completions with usage and completion-status tracking.
 
 Providers/models have separate enable switches. Models are classified by `category`,
@@ -215,3 +215,7 @@ limit or retention horizon invalidates validators and forces a fresh request.
 Source state exposes HTTP status, response bytes, and new/updated article counts.
 The previous published JSON is the restart checkpoint for articles and AI state.
 Retention is 90 days and at most 5,000 original reports.
+
+## Agnes AI integration
+
+`agnes-2.5-flash` uses the official OpenAI-compatible base URL `https://apihub.agnes-ai.com/v1`. Its current input, cached-input and output prices were verified as zero on 2026-09-15 at https://www.agnes-ai.com/en/docs/pricing. The promotion has no published fixed end date; the registry expiry is a local review deadline. Only this model is enabled for Agnes. Credentials use the `AGNES_API_KEY` Actions secret. Agnes shares the global concurrency ceiling, keeps one in-flight request, and has no daily application cap. Translation, classification and briefing use the same router.

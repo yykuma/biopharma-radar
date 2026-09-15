@@ -4,7 +4,8 @@
     "supplier_concurrency": {
       "amd": 1,
       "sensenova": 1,
-      "mistral": 1
+      "mistral": 1,
+      "agnes": 1
     },
     "task_order": [
       "translation",
@@ -266,6 +267,31 @@
           ],
           "enabled": false,
           "tested": false
+        }
+      ]
+    },
+    {
+      "id": "agnes",
+      "name": "Agnes AI",
+      "protocol": "openai_compatible",
+      "base_url": "https://apihub.agnes-ai.com/v1",
+      "key_env": "AGNES_API_KEY",
+      "enabled": true,
+      "quota_scope": "provider",
+      "expires_at": "2026-10-15T00:00:00Z",
+      "quota_note": "Limited-time free promotion verified 2026-09-15. Expiry is a local pricing review date; the provider has not announced a fixed promotion end date.",
+      "pricing_source": "https://www.agnes-ai.com/en/docs/pricing",
+      "models": [
+        {
+          "id": "agnes-2.5-flash",
+          "category": "text",
+          "free_tier": "limited_free",
+          "tasks": [
+            "news_summary",
+            "news_translation"
+          ],
+          "enabled": true,
+          "tested": true
         }
       ]
     }

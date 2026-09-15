@@ -670,5 +670,56 @@
       "basis": "feed_excerpt",
       "source_url": "https://www.drugs.com/clinical_trials/nuvation-bio-granted-fda-fast-track-designation-safusidenib-idh1-mutant-glioma-22563.html"
     }
+  },
+  "259213904022968": {
+    "title_zh": "Connect的Dupixent竞品哮喘二期试验未达主要终点，但公司仍持谨慎乐观",
+    "summary_zh": "Connect Biopharma的IL-4/IL-13抑制剂在二期哮喘研究中的主要终点未能达成，其挑战Dupixent市场份额的计划受挫。尽管试验结果不及预期，生物科技公司仍表示在数据中看到一定希望。",
+    "content_fingerprint": "5edc081e3d3fab7f8a3c9529b4c311479b8a0b14650ed4663e73eb7004682e7f",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "agnes",
+      "model": "agnes-2.5-flash",
+      "translated_at": 1789485530,
+      "basis": "feed_excerpt"
+    }
+  },
+  "153063453738779": {
+    "title_zh": "FDA开放Operation TrialBlazer申请，旨在将早期临床试验回流美国",
+    "summary_zh": "FDA启动Operation TrialBlazer计划，通过合格研究机构与制药赞助方的合作，降低新药临床试验申请期间的临床暂停风险，并加速美国境内首次人体试验进程。初始申请期将于10月30日截止。",
+    "content_fingerprint": "9ebe9f7716d21e049bb6997e85c7546d73a140101e6b5517634a9a548192a697",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "agnes",
+      "model": "agnes-2.5-flash",
+      "translated_at": 1789485530,
+      "basis": "feed_excerpt"
+    }
+  },
+  "209240473742335": {
+    "title_zh": "赛诺菲与Cheplapharm达成协议，出售20款老药以推动创新转型",
+    "summary_zh": "德国制药商Cheplapharm将从赛诺菲接手20款药品及三处生产基地。作为交易对价，赛诺菲将获得Cheplapharm公司26.4%的股份，此举旨在剥离成熟产品资产，聚焦创新药开发。",
+    "content_fingerprint": "085d1502d3af765463cf4202558e43d2e0d7551505aa82c5a84888067c644749",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "agnes",
+      "model": "agnes-2.5-flash",
+      "translated_at": 1789485530,
+      "basis": "feed_excerpt"
+    }
+  },
+  "273586503763862": {
+    "title_zh": "GSK准备为首款肺癌药物Jideytro申请FDA一线治疗批准",
+    "summary_zh": "GSK正推进Jideytro的一线治疗上市申请。Fierce Pharma报道称，该项目取得的完全缓解率表现为申请提供了支持；Jideytro是GSK的首款肺癌药物。",
+    "content_fingerprint": "4218e2d7888bf4c7bf32d4075491e8b77b71b9a30600cc9affdc76554099e341",
+    "translation": {
+      "status": "translated",
+      "method": "editorial",
+      "translated_at": 1789485597,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.fiercepharma.com/pharma/gsk-prepares-frontline-fda-bid-jideytro-its-first-lung-cancer-drug"
+    }
   }
 }

@@ -114,3 +114,19 @@ class RoutingChangesTests(unittest.TestCase):
         self.assertEqual(retry_delay('120'),120)
         self.assertIsNone(retry_delay('invalid'))
         self.assertIsNone(retry_delay(None))
+
+    @patch.dict(os.environ,{'TEST_KEY':'fixture'})
+    def test_supplier_fairness_reaches_other_services_before_retrying_models(self):
+        from ai_router import route_text,new_state,ProviderError
+        config={'strategy':'round_robin','task':'news_translation','max_attempts_per_run':3,
+                'providers':[{'id':p,'enabled':True,'key_env':'TEST_KEY','rate_limit_scope':'model',
+                'models':[{'id':m,'enabled':True,'free_tier':'free','tasks':['news_translation']} for m in models]}
+                for p,models in [('amd',['one','two','three','four']),('agnes',['agnes-2.5-flash'])]]}
+        calls=[]
+        def call(p,m,*args):
+            calls.append(p['id']+'/'+m['id'])
+            if p['id']=='amd':raise ProviderError(429)
+            return 'A complete response from the second supplier.'
+        result=route_text([],new_state({},100000),config,100000,call)
+        self.assertEqual(result['status'],'ok')
+        self.assertEqual(calls,['amd/one','agnes/agnes-2.5-flash'])
