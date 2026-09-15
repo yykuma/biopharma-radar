@@ -1,0 +1,123 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "BioPharma Radar",
+    "version": "1.0.0",
+    "description": "Static GET. Download then filter. Unix-second timestamps; partial coverage."
+  },
+  "servers": [
+    {
+      "url": "/"
+    }
+  ],
+  "paths": {
+    "/data/latest.json": {
+      "get": {
+        "operationId": "latest_json",
+        "summary": "All news with source health",
+        "responses": {
+          "200": {
+            "description": "Static JSON snapshot",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/data/briefing.json": {
+      "get": {
+        "operationId": "briefing_json",
+        "summary": "Cached AI briefing",
+        "responses": {
+          "200": {
+            "description": "Static JSON snapshot",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/data/markets/a.json": {
+      "get": {
+        "operationId": "markets_a_json",
+        "summary": "A shares",
+        "responses": {
+          "200": {
+            "description": "Static JSON snapshot",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/data/markets/hk.json": {
+      "get": {
+        "operationId": "markets_hk_json",
+        "summary": "Hong Kong",
+        "responses": {
+          "200": {
+            "description": "Static JSON snapshot",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/data/markets/us.json": {
+      "get": {
+        "operationId": "markets_us_json",
+        "summary": "US",
+        "responses": {
+          "200": {
+            "description": "Static JSON snapshot",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/data/markets/global.json": {
+      "get": {
+        "operationId": "markets_global_json",
+        "summary": "Global",
+        "responses": {
+          "200": {
+            "description": "Static JSON snapshot",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

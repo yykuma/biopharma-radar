@@ -1,0 +1,18 @@
+# BioPharma Radar
+
+Public healthcare and biotech news. Static, read-only JSON. No authentication.
+
+- [All news](data/latest.json)
+- [A shares](data/markets/a.json)
+- [Hong Kong](data/markets/hk.json)
+- [US](data/markets/us.json)
+- [Global](data/markets/global.json)
+- [AI briefing](data/briefing.json)
+- [RSS](data/feed.xml)
+- [OpenAPI](openapi.json)
+
+Filter locally; query strings do not filter. Preserve source URLs.
+Timestamps are Unix seconds in UTC. Null published_at means unknown publication
+time; first_seen_at is discovery time. Markets are heuristic and can overlap.
+Check last_success_at and collection_status. AI briefings are not independently
+verified. This is partial source coverage, not an exhaustive market feed.

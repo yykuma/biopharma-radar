@@ -1,0 +1,60 @@
+name: Collect news and publish
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+  schedule:
+    - cron: '17 */2 * * *'
+permissions:
+  contents: read
+  deployments: write
+concurrency:
+  group: news-publish
+  cancel-in-progress: false
+jobs:
+  publish:
+    if: ${{ vars.SITE_URL != '' }}
+    runs-on: ubuntu-latest
+    env:
+      SITE_URL: ${{ vars.SITE_URL }}
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+          cache: pip
+      - run: pip install -r requirements.txt
+      - run: python -m unittest discover -s pipeline -p 'test_*.py'
+      - name: Load previous snapshot
+        run: python pipeline/fetch_previous.py
+      - name: Collect through TrendRadar and rotate AI providers
+        env:
+          AMD_API_KEY: ${{ secrets.AMD_API_KEY }}
+          MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+          SENSENOVA_API_KEY: ${{ secrets.SENSENOVA_API_KEY }}
+          GLM_API_KEY: ${{ secrets.GLM_API_KEY }}
+        run: python pipeline/collect.py --previous previous.json --ai
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.19.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: pnpm
+          cache-dependency-path: frontend/pnpm-lock.yaml
+      - run: pnpm install --frozen-lockfile
+        working-directory: frontend
+      - run: node scripts/test-static.mjs
+        working-directory: frontend
+      - run: pnpm build
+        working-directory: frontend
+        env:
+          SITE_BASE: /
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy frontend/dist --project-name=${{ vars.CLOUDFLARE_PROJECT_NAME }} --branch=main
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}

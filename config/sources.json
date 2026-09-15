@@ -1,0 +1,59 @@
+[
+  {
+    "id": "a-google",
+    "name": "A股医药 · 新闻搜索",
+    "market": "GLOBAL",
+    "url": "https://news.google.com/rss/search?q=%E6%81%92%E7%91%9E+OR+%E8%BF%88%E7%91%9E+OR+%E8%8D%AF%E6%98%8E%E5%BA%B7%E5%BE%B7+OR+%E7%99%BE%E5%88%A9%E5%A4%A9%E6%81%92+OR+%E7%88%B1%E5%B0%94%E7%9C%BC%E7%A7%91+when%3A7d&hl=zh-CN&gl=CN&ceid=CN%3Azh-Hans"
+  },
+  {
+    "id": "a-yahoo",
+    "name": "A股医药 · Yahoo",
+    "market": "A",
+    "url": "https://feeds.finance.yahoo.com/rss/2.0/headline?s=600276.SS,300760.SZ,600436.SS,300015.SZ&region=US&lang=en-US"
+  },
+  {
+    "id": "hk-yahoo",
+    "name": "港股医药 · Yahoo",
+    "market": "HK",
+    "url": "https://feeds.finance.yahoo.com/rss/2.0/headline?s=1177.HK,1801.HK,2269.HK,1093.HK,3692.HK&region=US&lang=en-US"
+  },
+  {
+    "id": "us-yahoo",
+    "name": "美股医药 · Yahoo",
+    "market": "US",
+    "url": "https://feeds.finance.yahoo.com/rss/2.0/headline?s=LLY,JNJ,MRK,PFE,ABBV,AMGN,GILD,REGN,VRTX&region=US&lang=en-US"
+  },
+  {
+    "id": "fiercebiotech",
+    "name": "Fierce Biotech",
+    "market": "GLOBAL",
+    "url": "https://www.fiercebiotech.com/rss/xml"
+  },
+  {
+    "id": "lilly",
+    "name": "礼来 · 公司新闻",
+    "market": "US",
+    "url": "https://investor.lilly.com/rss/news-releases.xml"
+  },
+  {
+    "id": "cls-telegraph",
+    "name": "财联社电报 · 医药筛选",
+    "market": "GLOBAL",
+    "platform": "cls-telegraph",
+    "domain": "cls.cn"
+  },
+  {
+    "id": "wallstreetcn-quick",
+    "name": "华尔街见闻 · 医药筛选",
+    "market": "GLOBAL",
+    "platform": "wallstreetcn-quick",
+    "domain": "wallstreetcn.com"
+  },
+  {
+    "id": "gelonghui",
+    "name": "格隆汇 · 医药筛选",
+    "market": "HK",
+    "platform": "gelonghui",
+    "domain": "gelonghui.com"
+  }
+]

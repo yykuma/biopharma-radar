@@ -1,0 +1,1 @@
+trendradar @ git+https://github.com/sansan0/TrendRadar.git@792bcc3928b1617bba09df34989fd5675c159b86
