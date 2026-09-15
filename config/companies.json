@@ -7055,7 +7055,10 @@
       "category": "pharmaceuticals",
       "aliases": [
         "HUTCHMED (China) Limited",
-        "HUTCHMED (China)"
+        "HUTCHMED (China)",
+        "HUTCHMED",
+        "Hutchison China MediTech",
+        "和黄医药"
       ],
       "listings": [
         {
@@ -7063,10 +7066,18 @@
           "ticker": "HCM",
           "exchange": "NASDAQ",
           "source_url": "https://www.nasdaqtrader.com/dynamic/SymDir/nasdaqlisted.txt"
+        },
+        {
+          "market": "HK",
+          "ticker": "00013",
+          "exchange": "HKEX",
+          "security_name": "HUTCHMED",
+          "source_url": "https://www.hkex.com.hk/eng/services/trading/securities/securitieslists/ListOfSecurities.xlsx"
         }
       ],
       "classification_source": "https://stockanalysis.com/stocks/industry/drug-manufacturers-specialty-and-generic/",
-      "verified_at": "2026-09-15"
+      "verified_at": "2026-09-15",
+      "name_zh": "和黄医药"
     },
     {
       "id": "us-hcwb",

@@ -101,8 +101,8 @@ Quota descriptions are operator notes, not a hard guarantee about provider billi
 
 ## Company catalog and Chinese news
 
-`config/companies.json` is the reviewed initial catalog: 690 US listings and 81 HK
-listings, consolidated to 768 issuers. Three issuers have both markets. This is
+`config/companies.json` is the reviewed initial catalog: 690 US listings and 82 HK
+listings, consolidated to 768 issuers. Four issuers have both markets. This is
 source-based coverage, not an assertion that every currently listed company is
 present. OTC companies, devices and hospitals are outside the US category scope.
 Each entry retains classification/listing sources and a verification date.

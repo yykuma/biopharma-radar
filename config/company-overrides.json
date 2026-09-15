@@ -875,5 +875,14 @@
       "RemeGen",
       "Remegen"
     ]
+  },
+  {
+    "us_ticker": "HCM",
+    "hk_ticker": "00013",
+    "name_zh": "和黄医药",
+    "aliases": [
+      "HUTCHMED",
+      "Hutchison China MediTech"
+    ]
   }
 ]
