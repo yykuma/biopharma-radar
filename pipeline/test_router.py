@@ -1,7 +1,12 @@
 import os
+import json
 import unittest
 from unittest.mock import patch
 from ai_router import summarize, Completion
+
+
+def briefing(text):
+    return json.dumps([{'text':text,'sources':[1]}])
 
 
 class Failure(Exception):
@@ -20,7 +25,7 @@ class RouterTests(unittest.TestCase):
         def call(p,m,*args):
             calls.append(m['id'])
             if p['id']=='a':raise Failure()
-            return 'A sufficiently long news summary from the fallback model.'
+            return briefing('A sufficiently long news summary from the fallback model.')
         result=summarize(self.items,enabled=True,call=call,config=self.config,now=100000)
         self.assertEqual(calls,['one','three'])
         self.assertEqual(result['router_state']['cooldowns']['provider:a'],103600)
@@ -30,7 +35,7 @@ class RouterTests(unittest.TestCase):
     def test_rotation_and_no_duplicate_summary(self):
         previous={'router_state':{'last_model':'a/one'}}
         calls=[]
-        def call(p,m,*args):calls.append(m['id']);return 'A sufficiently long summary with a reference [1].'
+        def call(p,m,*args):calls.append(m['id']);return briefing('A sufficiently long summary with a reference [1].')
         result=summarize(self.items,previous,True,call,self.config,100000)
         self.assertEqual(calls,['two'])
         again=summarize(self.items,result,True,call,self.config,200000)
@@ -54,7 +59,7 @@ class RouterTests(unittest.TestCase):
         previous={'router_state':{'daily_usage':{'date':'1970-01-02','requests':{'provider:b':1}}}}
         result=summarize(self.items,previous,True,lambda *a:self.fail('Capped or expired call'),self.config,100000)
         self.assertEqual(result['status'],'unavailable')
-        result=summarize(self.items,result,True,lambda *a:'A sufficiently long next-day summary.',self.config,200000)
+        result=summarize(self.items,result,True,lambda *a:briefing('A sufficiently long next-day summary.'),self.config,200000)
         self.assertEqual(result['provider'],'b')
 
     @patch.dict(os.environ, {'A_KEY':'test','B_KEY':'test'})
@@ -64,7 +69,7 @@ class RouterTests(unittest.TestCase):
         def call(p,m,*args):
             calls.append(m['id'])
             if p['id']=='a':raise ValueError('Failed model')
-            return 'A sufficiently long fallback summary.'
+            return briefing('A sufficiently long fallback summary.')
         summarize(self.items,enabled=True,call=call,config=self.config,now=100000)
         self.assertEqual(calls,['one','three'])
 
@@ -79,7 +84,7 @@ class RouterTests(unittest.TestCase):
     @patch.dict(os.environ, {'A_KEY':'test','B_KEY':'test'})
     def test_fallback_pool_stays_after_rotation(self):
         self.config['providers'][1]['routing_role']='fallback'
-        result=summarize(self.items,{'router_state':{'last_model':'a/two'}},True,lambda *a:'A sufficiently long primary summary.',self.config,100000)
+        result=summarize(self.items,{'router_state':{'last_model':'a/two'}},True,lambda *a:briefing('A sufficiently long primary summary.'),self.config,100000)
         self.assertEqual(result['provider'],'a')
 
 if __name__=='__main__':unittest.main()

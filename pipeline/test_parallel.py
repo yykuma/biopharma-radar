@@ -186,7 +186,7 @@ class ParallelTests(unittest.TestCase):
                 rows=[{'id':'1','category':'clinical','confidence':'high','same_event_as':None}]
             elif 'number' in data[0]:
                 calls.append('briefing')
-                return Completion('The company reported that its trial did not meet the primary endpoint [1].',25,'stop')
+                return Completion(json.dumps([{'text':'The company reported that its trial did not meet the primary endpoint.','sources':[1]}]),25,'stop')
             else:
                 calls.append('translation')
                 rows=[{'id':'1','title_zh':'公司公布临床试验结果','summary_zh':'试验未达到主要终点。'}]
