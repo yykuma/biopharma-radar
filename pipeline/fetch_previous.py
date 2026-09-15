@@ -6,7 +6,10 @@ import json
 import os
 
 try:
-    with urllib.request.urlopen(os.environ.get('SITE_URL', 'https://biopharma-radar.pages.dev').rstrip('/')+'/data/latest.json',timeout=25) as response:
+    request = urllib.request.Request(
+        os.environ.get('SITE_URL', 'https://biopharma-radar.pages.dev').rstrip('/')+'/data/latest.json',
+        headers={'User-Agent':'BioPharmaRadar/1.0 (+https://github.com/yykuma/biopharma-radar)', 'Accept':'application/json'})
+    with urllib.request.urlopen(request,timeout=25) as response:
         data=response.read()
         if not isinstance(json.loads(data).get('items'),list):raise ValueError('Invalid snapshot')
         Path('previous.json').write_bytes(data)

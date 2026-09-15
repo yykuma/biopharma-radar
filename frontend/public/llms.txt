@@ -1,6 +1,8 @@
 # BioPharma Radar
 
 Public healthcare and biotech news. Static, read-only JSON. No authentication.
+Send a descriptive User-Agent header such as YourNewsReader/1.0 when using
+scripts. Cloudflare may reject generic default Python user agents with HTTP 403.
 
 - [All news](data/latest.json)
 - [A shares](data/markets/a.json)
