@@ -65,7 +65,7 @@ in the published briefing without credentials or raw exception messages.
 
 Up to 20 news records and 700 output tokens per summary; at most one successful
 summary every six hours. Identical input is reused. Failure preserves the last
-summary while news publishing continues. AMD Qwen models participate in rotation; GLM remains disabled. SenseNova prioritizes its native 6.8 Flash Lite model; its third-party general pool is fallback.
+summary while news publishing continues. AMD Qwen models participate in rotation; GLM remains disabled. SenseNova uses only `deepseek-v4-flash` in its general pool as a preferred route; native SenseNova models are disabled. Agnes is a fallback.
 
 ## Free hosting limitations
 
@@ -95,7 +95,7 @@ credits upstream; local token counters cannot reveal account credit balances.
 truncated responses. It excludes other clients and requests with unknown usage.
 `max_requests_per_day` counts every attempt, resets at UTC midnight, and is scoped
 to a pool or model. `expires_at` is a local review deadline, not a provider promise.
-`routing_role: fallback` keeps Mistral behind the preferred AMD and SenseNova routes; it may serve work while preferred suppliers are busy or unavailable.
+`routing_role: fallback` keeps Mistral and Agnes behind the preferred AMD and SenseNova DeepSeek routes; it may serve work while preferred suppliers are busy or unavailable.
 OpenRouter has a 50-request daily cap; all other providers and models have no daily application cap. SenseNova retains a pricing review deadline.
 Quota descriptions are operator notes, not a hard guarantee about provider billing.
 
@@ -119,9 +119,10 @@ Company filters combine with market, unread and bookmark filters. News counts
 represent retained articles, not total market news. Official source IDs indicate
 which company feeds are connected; a catalog entry does not enable collection.
 
-The initial 52 articles and four reviewed AI outputs have Chinese translations in
-`config/editorial-translations.json`. A source fingerprint prevents reuse after
-source text changes. Untranslated articles are processed in up to six sequential batches of four per
+Reviewed Chinese translations are stored in `config/editorial-translations.json`.
+The September 16, 2026 backlog pass adds 117 translations completed or reviewed
+by Codex Astra at low reasoning effort, with per-record model provenance.
+A source fingerprint prevents reuse after source text changes. Untranslated articles are processed in up to six sequential batches of four per
 collection run (24 articles maximum), with a 3,000-token output ceiling per batch.
 Older unattempted articles come first. Failed batches stop that run and retain an
 attempt timestamp so they do not indefinitely block other pending articles. Translation fetches only bounded
@@ -164,7 +165,7 @@ allows at most two requests globally and one per supplier, and persists token
 usage, cooldowns and each supplier's last successful model. SenseNova Flash and
 general retain separate quota counters while sharing one in-flight slot. Models
 rotate within each supplier. No duplicate speculative requests are sent.
-AMD and SenseNova are preferred; Mistral remains a fallback. Provider review deadlines and free-only model selection remain enforced.
+AMD, SenseNova DeepSeek and task-compatible OpenRouter models are preferred; Mistral and Agnes are fallbacks. Provider review deadlines and free-only model selection remain enforced.
 Briefing generation starts after both tasks finish so it uses completed labels
 and translations. Briefing uses the same routing session. The public curation.execution report records sanitized
 attempts and observed concurrency; zero means no eligible request was dispatched.
@@ -188,7 +189,7 @@ profile processes backlog with two total requests and one per supplier.
 | `execution.task_order` | translation, curation | Priority when only one primary supplier is eligible |
 | `providers[].rate_limit_scope` | AMD: model; others: supplier | Scope paused after a 429; authentication failures always pause the supplier |
 | `providers[].enabled` / `models[].enabled` | Per entry | Enable/disable a provider or model |
-| `providers[].routing_role` | Mistral: fallback | Preferred routes serve first; idle fallback can accept work |
+| `providers[].routing_role` | Mistral/Agnes: fallback | Preferred routes serve first; idle fallback can accept work |
 
 These are application ceilings, not purchased or guaranteed provider allowances.
 Increasing the workload does not reset provider cooldowns or usage counters.
@@ -218,7 +219,7 @@ Retention is 90 days and at most 5,000 original reports.
 
 ## Agnes AI integration
 
-`agnes-2.5-flash` uses the official OpenAI-compatible base URL `https://apihub.agnes-ai.com/v1`. Its current input, cached-input and output prices were verified as zero on 2026-09-15 at https://www.agnes-ai.com/en/docs/pricing. The promotion has no published fixed end date; the registry expiry is a local review deadline. Only this model is enabled for Agnes. Credentials use the `AGNES_API_KEY` Actions secret. Agnes shares the global concurrency ceiling, keeps one in-flight request, and has no daily application cap. Translation, classification and briefing use the same router.
+`agnes-2.5-flash` uses the official OpenAI-compatible base URL `https://apihub.agnes-ai.com/v1`. Its current input, cached-input and output prices were verified as zero on 2026-09-15 at https://www.agnes-ai.com/en/docs/pricing. The promotion has no published fixed end date; the registry expiry is a local review deadline. Only this model is enabled for Agnes, as a fallback route. Credentials use the `AGNES_API_KEY` Actions secret. Agnes shares the global concurrency ceiling, keeps one in-flight request, and has no daily application cap. Translation, classification and briefing use the same router.
 
 ## OpenRouter free routing and durable counter
 

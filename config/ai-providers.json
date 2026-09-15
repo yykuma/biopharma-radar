@@ -97,7 +97,7 @@
       "protocol": "openai_compatible",
       "base_url": "https://token.sensenova.cn/v1",
       "key_env": "SENSENOVA_API_KEY",
-      "enabled": true,
+      "enabled": false,
       "quota_scope": "provider",
       "expires_at": "2026-10-15T00:00:00Z",
       "quota_note": "Public beta: 60k credits per rolling 5h / 600k per rolling week for each pool. Flash uses general credits if its dedicated pool is exhausted. Tokens are not credits. Recheck beta pricing before renewing this local review deadline.",
@@ -112,7 +112,7 @@
             "news_translation",
             "news_curation"
           ],
-          "enabled": true,
+          "enabled": false,
           "tested": true,
           "extra_body": {
             "thinking": {
@@ -222,8 +222,7 @@
           "enabled": false,
           "tested": false
         }
-      ],
-      "routing_role": "fallback"
+      ]
     },
     {
       "id": "mistral",
@@ -308,7 +307,8 @@
           "enabled": true,
           "tested": true
         }
-      ]
+      ],
+      "routing_role": "fallback"
     },
     {
       "id": "openrouter",

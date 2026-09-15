@@ -721,5 +721,1760 @@
       "basis": "feed_excerpt",
       "source_url": "https://www.fiercepharma.com/pharma/gsk-prepares-frontline-fda-bid-jideytro-its-first-lung-cancer-drug"
     }
+  },
+  "258869669279486": {
+    "title_zh": "让精准治疗惠及所有人：弥合科学与生活之间的差距",
+    "summary_zh": "为什么这么多符合条件的患者仍未获得为他们设计的疗法？",
+    "content_fingerprint": "d56be095f3aeac83b78a1b4761089e9ed17f910db0d8865b5eaa753000014597",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.fiercepharma.com/sponsored/precision-all-closing-gap-between-science-and-life"
+    }
+  },
+  "256995209109765": {
+    "title_zh": "GSK作出“艰难决定”，关闭德国流感疫苗生产基地",
+    "summary_zh": "GSK正将两座流感疫苗生产基地整合为一座，数百个工作岗位面临风险。",
+    "content_fingerprint": "f64e29d70d78766e481065f5d5e55b02786e843f9ceda64cf177fe79609ee72c",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.fiercepharma.com/manufacturing/gsk-makes-difficult-decision-shutter-german-flu-vaccine-manufacturing-site"
+    }
+  },
+  "247255204689212": {
+    "title_zh": "原料药生产正在发生怎样的变化？",
+    "summary_zh": "药明康德的Ke Chen探讨正在重塑原料药生产的趋势；严谨行事、理解并控制生产流程仍是基石。",
+    "content_fingerprint": "67e38dcc4bf99e0f18723413367b18cedcb37c717490c74d3beda956b6ab5b70",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.fiercepharma.com/sponsored/how-api-manufacturing-changing"
+    }
+  },
+  "245575507023054": {
+    "title_zh": "生物制药的下一项数据优势，或许始于遗传学",
+    "summary_zh": "真实世界数据已成为行业基本配置。下一个挑战是将其与遗传学洞见连接起来，从而改进研发决策。",
+    "content_fingerprint": "73ed739a603ac77a3a27e710a1ec8a25ca94b11e11b62eaa56a4b6b8e5937cec",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.fiercepharma.com/sponsored/biopharmas-next-data-advantage-may-start-genetics"
+    }
+  },
+  "191424748267261": {
+    "title_zh": "AstraZeneca的Etcamah在一线乳腺癌试验中失利，口服SERD再添失败案例",
+    "summary_zh": "Etcamah如今与Roche的竞品口服SERD giredestrant一样，未能在一线HR+/HER2-乳腺癌治疗中达到目标，这给其他公司在相同治疗场景中的努力带来麻烦。",
+    "content_fingerprint": "257cd3c821a16c44d283594a1ea04de2275ef4e095804e60d33e841b55e97f03",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.fiercepharma.com/pharma/astrazeneca-etcamah-flunks-first-line-breast-cancer-trial-adding-oral-serds-failure-record"
+    }
+  },
+  "191302643508867": {
+    "title_zh": "死亡风险上升，为AstraZeneca与Daiichi的Enhertu一线肺癌数据蒙上阴影",
+    "summary_zh": "一项3期试验的初步结果显示死亡风险高出15%，这可能阻碍AstraZeneca和Daiichi Sankyo将其明星ADC药物Enhertu确立为HER2突变非小细胞肺癌患者的一线治疗。",
+    "content_fingerprint": "7eae91e9a871ca1e63349e3802308dacd3c8f5c5f4a73c1be5312c0144ed41d3",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.fiercepharma.com/pharma/higher-death-risk-shadows-astrazeneca-daiichi-enhertu-first-line-lung-cancer-data"
+    }
+  },
+  "168642929631463": {
+    "title_zh": "弥合创新与实际成效之间的差距",
+    "summary_zh": "为什么诊断驱动的疗法还没有惠及足够多的患者？",
+    "content_fingerprint": "55b1c8e5799d24eb4a3188b73e2bed72ea7581ae8e7654f982b49fd25f095b1c",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.fiercepharma.com/sponsored/closing-gap-between-innovation-and-impact"
+    }
+  },
+  "160947241047550": {
+    "title_zh": "口服GLP-1追踪：Novo的Wegovy口服药与Lilly的Foundayo处方量持续攀升",
+    "summary_zh": "Fierce Pharma推出每周一期的《口服GLP-1追踪》，利用分析师报告和IQVIA数据监测处方趋势及市场份额变化。Novo Nordisk的Wegovy口服药与Eli Lilly的Foundayo正竞逐成为数百万人的首选口服减重方案。",
+    "content_fingerprint": "9dfd833930346d98fda7c77261938ba809a6bcfbb4de173687b74afa460ca094",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.fiercepharma.com/pharma/oral-glp-1-tracker-launch-trajectories-lilly-foundayo-novo-wegovy-pill"
+    }
+  },
+  "145353574237551": {
+    "title_zh": "奥运滑雪运动员Lindsey Vonn与Vertex携手开展疼痛宣传活动",
+    "summary_zh": "Lindsey Vonn对疼痛的了解超过大多数人。多年精英高山滑雪训练已给身体带来巨大压力，而她的伤病以及今年早些时候险些失去一条腿的严重事故，又让她经历了更高程度的疼痛。",
+    "content_fingerprint": "fcb3932c2165b2ceb4750d758b7706ca0d718558f748ededdfa4a82fe6cd81d0",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.fiercepharma.com/marketing/olympic-skier-lindsey-vonn-joins-vertex-pain-campaign"
+    }
+  },
+  "120112607819389": {
+    "title_zh": "Novo推进品牌更名，将不再使用Nordisk名称",
+    "summary_zh": "随着Novo Nordisk继续与Eli Lilly在竞争日益激烈的肥胖症和糖尿病市场争夺份额，Novo正对其业务、标志和名称进行大规模品牌重塑。",
+    "content_fingerprint": "59841092bc412a38bab4ee2fa394ccbe4578b90bb98ddd7bc614ea4b93a7325e",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.fiercepharma.com/marketing/no-more-nordisk-novo-goes-it-alone-amid-rebranding-push"
+    }
+  },
+  "107035212223539": {
+    "title_zh": "AbbVie借PGA Tour小鸟球活动支持神经系统疾病患者倡导",
+    "summary_zh": "AbbVie已与PGA Tour及2026年总统杯合作，发起“Birdies for Brain Health”活动，为六家患者倡导组织筹集资金。",
+    "content_fingerprint": "9e3e317ee66a1822defae1eb88ba609e35d547d90a43aa4376494806e85410c8",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.fiercepharma.com/marketing/abbvie-chips-neurology-advocacy-through-pga-tour-birdie-campaign"
+    }
+  },
+  "78649806293547": {
+    "title_zh": "Shionogi聘请The Bloc，为新冠口服药Xocova开展全渠道宣传",
+    "summary_zh": "Shionogi正加大对新冠药物Xocova的推广力度，并与The Bloc合作开展全渠道宣传活动，鼓励接触病毒后的人联系医务人员。",
+    "content_fingerprint": "57cf1eb666d3dd89b3af58ed68e33660f07ba0adb4789c1d74b415ace587a796",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.fiercepharma.com/marketing/shionogi-taps-bloc-omnichannel-campaign-backing-covid-19-pill-xocova"
+    }
+  },
+  "76392027210312": {
+    "title_zh": "Merck与Gilead失败的Trodelvy肺癌试验显示中国结果更佳",
+    "summary_zh": "Merck和Gilead失败的Trodelvy一线非小细胞肺癌试验近日公布全球3期数据，可能重新引发人们对如何将中国数据推广到西方的讨论。",
+    "content_fingerprint": "3a01061a5e5fe749bf4ce88f285f35f545b83c3317460bf083f7af2eb4bfe5ea",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.fiercepharma.com/pharma/merck-gileads-failed-trodelvy-trial-first-line-lung-cancer-shows-better-china-results"
+    }
+  },
+  "62584880028240": {
+    "title_zh": "推进治疗：Rana McKay博士详解ADT联合Darolutamide",
+    "summary_zh": "Rana McKay博士介绍ARANOTE试验中的NUBEQA®（darolutamide），并解读这些数据对患者、医生和医疗服务提供者的意义。",
+    "content_fingerprint": "dbadb330bb11aed20f5421e54d9caeed174545d554c7b928a51b04cca0880b90",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.fiercepharma.com/sponsored/advancing-mcspc-treatment-closer-look-adt-darolutamide-dr-rana-mckay"
+    }
+  },
+  "61254527437290": {
+    "title_zh": "Fierce Pharma亚洲动态：Takeda研发领导层变动；Daiichi驳回13亿美元索赔；Samsung Bio签署新合同",
+    "summary_zh": "Takeda长期担任研发负责人的Andy Plump将退休。Daiichi Sankyo在诉讼中成功驳回一项13亿美元的损害赔偿索赔。Samsung Biologics与一家未具名客户签署了价值2.62亿美元的合同。此外还有更多消息。",
+    "content_fingerprint": "b7ed92bd0febc27e7ab51e6226b38a5c4f4f299fa82886f65ff115f18bc7f5f4",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.fiercepharma.com/pharma/takeda-rd-leadership-change-daiichi-13b-court-win-new-samsung-bio-contract"
+    }
+  },
+  "59066640446733": {
+    "title_zh": "CDMO公司Argonaut以未披露金额出售生命科学和诊断业务部门",
+    "summary_zh": "Argonaut Manufacturing Services是一家专注于注射用生物制剂及其他药物无菌灌装和成品加工的CDMO公司，已将其生命科学和诊断业务部门出售给私募股权公司1315 Capital，交易价格未披露。",
+    "content_fingerprint": "cb9344a51b74ae1b2a2ce77546a471fd9d3f84b3bea2035305c48ce5897363e9",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.fiercepharma.com/pharma/cdmo-argonaut-sheds-life-sciences-diagnostics-division-undisclosed-sum"
+    }
+  },
+  "46717912800542": {
+    "title_zh": "FDA批准首个放射性配体等效药：Curium仿制Novartis的Lutathera",
+    "summary_zh": "FDA批准了行业首个放射性配体等效药，即Curium的镥Lu 177 dotatate注射液Bexlutry；此前，一家法院已裁定这家波士顿公司不承担Novartis提出的任何专利侵权责任。",
+    "content_fingerprint": "657415e876cc8725d2a35bfb74406bc2c4319997eee51a4bbd36bd1f9b9d3ecb",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.fiercepharma.com/pharma/fda-approves-first-radioligand-equivalent-curiums-copycat-novartis-lutathera"
+    }
+  },
+  "39266477833041": {
+    "title_zh": "随着迷幻药获批的“文化分量”日益凸显，FDA听证会聚焦可及性与安全性",
+    "summary_zh": "FDA正逐步迈向可能批准首款迷幻药物。该机构今天召开听证会，征求公众意见，讨论这类药物应如何使用、监测，以及如何在真实世界中持续开展研究。",
+    "content_fingerprint": "ff9783a3e7df08e5341fda30243ab193eceadf5bf075d2bcfb0a947f7184cd77",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.fiercepharma.com/biotech/cultural-weight-psychedelic-approval-looms-fda-hearing-focuses-access-and-safety"
+    }
+  },
+  "36399580096383": {
+    "title_zh": "为什么商业团队更早参与有助于制定更明智的战略",
+    "summary_zh": "商业计划不能再一成不变。Acumetis的Swathi Rangan解释了团队如何随着市场变化调整战略。",
+    "content_fingerprint": "11dcf6835492b71986994c254b30268878757591863c9648d9feb1fa3961829f",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.fiercepharma.com/sponsored/why-commercial-strategy-needs-start-earlier-ever"
+    }
+  },
+  "31595932899545": {
+    "title_zh": "Akeso与Summit的ivonescimab在肺癌生存期上超过Keytruda，PD-L1高表达患者数据尤佳",
+    "summary_zh": "在一线、PD-L1阳性非小细胞肺癌的3期Harmoni-2试验中，Akeso和Summit的ivonescimab相比Keytruda将死亡风险降低了27%；在PD-L1高表达亚组中，数据尤其强劲。",
+    "content_fingerprint": "5d9f4badeaf4a3fe178d59e1b02d510f9676ffc2d948695d19b43aa9c006afca",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.fiercepharma.com/pharma/akeso-summit-ivonescimab-tops-keytruda-lung-cancer-survival-strong-data-pd-l1-high-patients"
+    }
+  },
+  "30217144176498": {
+    "title_zh": "Scholar Rock获得期待已久的FDA批准，成为SMA肌肉萎缩领域的首个疗法",
+    "summary_zh": "FDA表示，这种注射用单克隆抗体是首个用于治疗SMA患者肌肉萎缩的疗法。",
+    "content_fingerprint": "13ff0bf921975f815f20a84f8656e95d1f90e4b7e64130af4b9a4734b46209ba",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.fiercepharma.com/ai-and-machine-learning/scholar-rockscores-long-awaited-fda-approval-first-muscle-loss-sma"
+    }
+  },
+  "29146163623269": {
+    "title_zh": "FDA批准Cabometyx新剂型后，分析师预计对Exelixis的威胁有限",
+    "summary_zh": "获得FDA正式批准后，Handa Pharmaceuticals的品牌药物改良剂型战略第三次取得成果。",
+    "content_fingerprint": "bb0d814977007c0956356c3411b048b60157c293ec9b367afd7f5b4d3948e7e8",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.fiercepharma.com/pharma/after-fda-nod-novel-cabometyx-formulation-analyst-predicts-limited-threat-exelixis"
+    }
+  },
+  "22097412284219": {
+    "title_zh": "Deerfield为“Built for This”增长阶段大举招聘并提拔员工",
+    "summary_zh": "医疗保健营销与传播机构Deerfield Group正在打造新的增长模式，同时进行一系列任命和晋升，以加强其计划。",
+    "content_fingerprint": "86af7cfe118f3820062527e4056ff04b274adbf106815abb56b37b01a105fece",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.fiercepharma.com/marketing/deerfield-goes-major-hiring-and-promotion-spree-built-growth-phase"
+    }
+  },
+  "6276967980834": {
+    "title_zh": "首次以FDA肿瘤部门负责人身份接受采访，Angelo de Claro誓言延续OCE的创新传统",
+    "summary_zh": "Angelo de Claro医学博士接掌FDA肿瘤卓越中心后首次接受采访，阐述了优先加强组织能力并持续推进监管现代化的监管议程。",
+    "content_fingerprint": "d26954208d560ba672e4c7d7624c5de152a6414af03454568447a1b3daca6f17",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.fiercepharma.com/pharma/first-interview-fda-oncology-chief-angelo-de-claro-vows-continue-innovation-behind-oce"
+    }
+  },
+  "197726546981706": {
+    "title_zh": "Lilly与加拿大生物科技公司开展中枢神经系统基因药物合作，每个项目金额最高2.37亿美元",
+    "summary_zh": "Eli Lilly持续尝试强化基因药物业务，并在与QurCan Therapeutics的合作中承诺，每个项目的潜在交易金额最高可达2.37亿美元。",
+    "content_fingerprint": "cb2c9bf90de8dad3d5c617f625736bb87cc691f20b779326c770381409a88491",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.fiercebiotech.com/biotech/lilly-pledges-237m-program-cns-genetic-med-collab-canadian-biotech"
+    }
+  },
+  "158437227794517": {
+    "title_zh": "Fierce Biotech裁员追踪2026：Sionna员工减半，Merck在新泽西州进一步裁员",
+    "summary_zh": "如果你知道某家生物科技公司正在裁员，请联系Fierce Biotech编辑团队。",
+    "content_fingerprint": "494681f8659d3c50ef0e3c710fc8ae862585ca480b46ed635f64a01252955ea7",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.fiercebiotech.com/biotech/fierce-biotech-layoff-tracker-2026"
+    }
+  },
+  "72235024581246": {
+    "title_zh": "Fierce Biotech融资追踪2026：RegCell筹得6600万美元，Encoded完成2.75亿美元F轮融资",
+    "summary_zh": "Fierce Biotech融资追踪记录生物科技公司获得的、金额达到或超过5000万美元的风险投资轮次。",
+    "content_fingerprint": "71c5c06fb3344753e5d08980af740be3f49a1b2b9c60ba0aae5dfb57c0d5774e",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.fiercebiotech.com/biotech/fierce-biotech-fundraising-tracker-26"
+    }
+  },
+  "58521527082360": {
+    "title_zh": "囊性纤维化试验失败后，Sionna进行战略调整并裁减46%的员工",
+    "summary_zh": "Sionna Therapeutics正在裁减近半数员工，公司努力从备受关注的囊性纤维化加用疗法项目失败中恢复。",
+    "content_fingerprint": "48b8f1073c303db98d4fd4cd7c2f3d32cf6ffcb2ae54044ff05b49fc8f0dfe55",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.fiercebiotech.com/biotech/sionna-lays-46-workforce-strategic-shift-after-cystic-fibrosis-trial-fail"
+    }
+  },
+  "35506658482440": {
+    "title_zh": "FDA启动试点项目，加快美国早期药物研究",
+    "summary_zh": "该项目6月首次预告，并于周二作为“Operation Trialblazer”的一部分正式公布，将促成药企与研究机构合作，更快地让药物进入人体试验。",
+    "content_fingerprint": "3880675911fe44b563ae6e18099b8751b18c0c192fd5c8aaeb166ae8ed36c929",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.biopharmadive.com/news/fda-operation-trialblazer-ind-pilot-program-drug-trials/830372/"
+    }
+  },
+  "271262508034501": {
+    "title_zh": "PDUFA VIII会议前，罕见病改革、CMC风险和美国试验回流成为关注重点",
+    "summary_zh": "FDA将于周三听取行业利益相关方和公众的意见，了解他们希望纳入《处方药使用者付费法》最新版本的内容；该法案将制定FDA 2028至2032财年的重点。",
+    "content_fingerprint": "c975d004d9af1487320218ee7e4f4be43a19ff1fade58028a6923ada90a7669c",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.biospace.com/fda/rare-disease-reform-cmc-risk-reshoring-us-trials-top-of-mind-ahead-of-pdufa-viii-meeting"
+    }
+  },
+  "225506357475997": {
+    "title_zh": "随着迷幻药接近上市，利益相关方敦促FDA明确数据和治疗标准",
+    "summary_zh": "周一举行的迷幻疗法监管公开听证会上，安全性和可及性是重点议题。NeuroAlchemy联合创始人Michaela Vogt在会上说：“这种药物打开了大门”，但要让这一新药物类别惠及患者，还需要考虑许多其他因素。",
+    "content_fingerprint": "09fe510cfb23479bb6c1d27cbd4a18f7764e6bada70fc5d1b688a26097b551bc",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.biospace.com/fda/stakeholders-urge-fda-to-define-data-treatment-standards-as-psychedelic-drugs-near-market"
+    }
+  },
+  "158832388144322": {
+    "title_zh": "在3名患者死亡的情况下，Cullinan与Taiho仍计划凭借生存获益为肺癌药物提交FDA申请",
+    "summary_zh": "分析师认为，Cullinan Therapeutics和Taiho Oncology能够克服安全性风险，因为zipalertinib在一种肺癌的一线治疗中“树立了新标准”。该候选药物已在二线治疗场景接受审评，预计明年年初作出决定。",
+    "content_fingerprint": "5538210c17bf38444615ad96d46abb9f34b702cab64350b2b85fb9f267551e1a",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.biospace.com/drug-development/despite-3-patient-deaths-cullinan-taiho-plan-fda-filing-for-lung-cancer-pill-on-survival-benefit"
+    }
+  },
+  "34315926319043": {
+    "title_zh": "GSK收购Chimagen的三特异性T细胞接合剂，交易总额最高达7.5亿美元",
+    "summary_zh": "几年前与Chimagen Biosciences签署T细胞接合剂合作协议后，GSK再次扩大合作，这次从这家抗体专业公司收购了一个多发性骨髓瘤项目。",
+    "content_fingerprint": "3dfbf54b0d00cf3b1109a30f4b61cc71f9ed5305694ab86ac267bfae2e4c6274",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.biospace.com/deals/gsk-bags-chimagens-trispecific-t-cell-engager-in-deal-worth-up-to-750m"
+    }
+  },
+  "254900722889672": {
+    "title_zh": "Summit、BioNTech等公司携下一代肺癌药物成为WCLC焦点",
+    "summary_zh": "在韩国举行的世界肺癌大会正在进行，BioNTech、Summit Therapeutics、GSK和Roche成为焦点。这些公司及其合作伙伴分享了备受关注项目的新发现，突出显示了多种肺癌中的总生存期获益。",
+    "content_fingerprint": "6d7f933b49d577525709c5d7c1216aec5eb1a0e38f85e525dcc055296864a501",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.biospace.com/drug-development/summit-biontech-more-headline-wclc-with-next-gen-lung-cancer-drugs"
+    }
+  },
+  "74552554603395": {
+    "title_zh": "在广泛性焦虑障碍研究中“再次取得明确胜利”后，Definium推进LSD药物的FDA申报",
+    "summary_zh": "Jefferies分析师周一表示，Definium Therapeutics的DT120连续第二项广泛性焦虑障碍研究取得积极的主要结果，使关注点转向商业化；Stifel则称该项目正走向FDA申报。",
+    "content_fingerprint": "ab4a4b93792bf2690c217e40da215b71c6e39bc1f0b3c4419719ac8a01d8247a",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.biospace.com/drug-development/definium-moves-toward-fda-submission-for-lsd-drug-in-anxiety-after-another-clear-win"
+    }
+  },
+  "274520237667367": {
+    "title_zh": "AstraZeneca新近获批的抗癌药在后期研究中失败，进军更大市场的道路受阻",
+    "summary_zh": "SERENA-4评估了AstraZeneca的Etcamah作为部分晚期乳腺癌患者的一线治疗选择；这一治疗场景原本可能为该药带来29亿美元的机会。",
+    "content_fingerprint": "2dd8ba89f4bbf3d2a42182c2230706d0f4f9cc9a9115181c43ea6c0db09508ef",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.biospace.com/drug-development/astrazenecas-newly-approved-cancer-pill-fails-late-stage-study-blocking-path-to-bigger-market"
+    }
+  },
+  "249532639830569": {
+    "title_zh": "Scholar Rock获得首个FDA批准，推出针对肌肉的罕见病药物",
+    "summary_zh": "Scholar Rock的脊髓性肌萎缩症药物将命名为Isembyld，最初曾于2025年9月遭FDA拒绝，当时FDA指出第三方生产商存在合规问题。",
+    "content_fingerprint": "6ec00d7bd20edf8d3e0d8ac66cea8c638192d62db21e29f309fc1b759efa6676",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.biospace.com/fda/scholar-rock-secures-first-fda-approval-for-muscle-targeting-rare-disease-drug"
+    }
+  },
+  "275605469226224": {
+    "title_zh": "环肽打开药物新前沿，但前提是生产能力跟得上",
+    "summary_zh": "口服环肽兼具小分子药物的便利性和类似抗体的选择性，这一药物形式正获得发展动力。但低于1%的生物利用度、有限的PK数据和不够稳健的合成工艺仍在拖慢进展。Viva Biotech的专家介绍了混合合成、ADME/PK建模和AI辅助设计如何拓展肽类疗法的应用范围。",
+    "content_fingerprint": "7c9aca0285c8c95b8b3339974a9e52a528c58023471ce54802a68e96878f557b",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.biospace.com/drug-development/cyclic-peptides-open-new-drug-frontiers-if-manufacturing-can-keep-up"
+    }
+  },
+  "141032019212119": {
+    "title_zh": "迷幻疗法乘公众支持之势走进FDA听证会",
+    "summary_zh": "周一FDA将就迷幻治疗的未来举行听证会。在听证会前，公众意见显示，人们广泛支持进一步探索这些化合物的治疗潜力，这与FDA内部日益增长的支持相呼应。",
+    "content_fingerprint": "429a1a60d0bbf947317f25587a63b2a17584fea9d8daae67aeb348b68fea72d1",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.biospace.com/fda/psychedelic-therapies-ride-wave-of-public-favor-into-fda-hearing"
+    }
+  },
+  "9350650766052": {
+    "title_zh": "5家药企追赶Merck和Moderna，角逐癌症疫苗市场",
+    "summary_zh": "Merck和Moderna上个月在黑色素瘤领域取得亮眼结果后，正引领新一代个体化癌症疫苗的发展。另有五家拥有类似疗法的公司，希望在其他公司曾经失败的领域取得突破。",
+    "content_fingerprint": "518ac5e65cf4d3317f5b5864329ec88f728d1899491b144d886cae9295b040a5",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.biospace.com/drug-development/5-drugmakers-chasing-merck-and-moderna-in-the-cancer-vaccine-race"
+    }
+  },
+  "119188093884064": {
+    "title_zh": "经历短暂的政治逆风后，mRNA重获强劲势头",
+    "summary_zh": "就在特朗普政府削减mRNA项目5亿美元资金一年后的同一天，FDA批准了基于该技术的Moderna流感疫苗。数周后，Moderna和Merck公布了个体化mRNA癌症疫苗的积极3期结果。正如一位mRNA专家所说：“科学赢了。”",
+    "content_fingerprint": "41ba2ecb48cf7005faa7b8ec81ca11fa70121a219bed833311d3edf8efa0a209",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.biospace.com/drug-development/after-a-brief-storm-of-political-headwinds-mrna-is-back-with-strong-momentum"
+    }
+  },
+  "41689475849140": {
+    "title_zh": "FDA批准Pharming的Joenja，成为美国儿童APDS的首个治疗方法",
+    "summary_zh": "Pharming的Joenja获FDA批准，成为美国首个用于APDS患儿的治疗药物。Pharming（Euronext Amsterdam: PHARM/Nasdaq: PHAR）是一家专注于罕见免疫和遗传疾病的全球生物科技公司。",
+    "content_fingerprint": "5a383e746ce522cc59e5bb253a855ddcadb28af4cfdbd42e55c209db280f9c5e",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/newdrugs/fda-approves-pharming-s-joenja-first-children-apds-u-s-6879.html"
+    }
+  },
+  "18882711837244": {
+    "title_zh": "Samsung Biologics与一家欧洲制药公司签署2.62亿美元生产合同",
+    "summary_zh": "这项协议将持续至2033年。与此同时，Samsung Biologics继续扩大其在韩国的大规模生产布局。",
+    "content_fingerprint": "e4ca0cf5f93cb8bc77d7f09fd19ee725f083fd1fb0cab59c42ff74abab43e333",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.biospace.com/drug-delivery/samsung-biologics-inks-262m-manufacturing-deal-with-european-pharma-company"
+    }
+  },
+  "65906666027238": {
+    "title_zh": "Mikhail和Davis体现FDA的稳定化努力，Seehafer预示人工智能革命即将到来",
+    "summary_zh": "新近正式出任CBER和CDER负责人的Karim Mikhail和Michael Davis，数月来一直努力扭转前任局长Marty Makary任内开始失控的局面。与此同时，Jared Seehafer将成为FDA首位专门负责人工智能的副局长。",
+    "content_fingerprint": "b1bf42cc53c66213483b0dac1203a20f79d6dfb71254976b4cd07990f06400b7",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.biospace.com/fda/mikhail-davis-embody-the-fdas-stabilization-seehafer-signals-ai-revolution-is-coming"
+    }
+  },
+  "274375409705494": {
+    "title_zh": "Novartis多项并购失误和研发失败后，董事会面临投资者审视",
+    "summary_zh": "多项后期试验接连失败，引发了人们对Novartis如何部署资本、寻求推动公司在2030年代增长的药物的质疑。",
+    "content_fingerprint": "a9ff100e4b6a72abfda969703fde45279527e85ecee270d82d0d5959065aa97e",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.biospace.com/business/novartis-board-faces-investor-scrutiny-after-m-a-misfires-and-r-d-flops"
+    }
+  },
+  "225841467487203": {
+    "title_zh": "FDA暂停备受困扰的癫痫药关键试验入组，Biohaven再受打击",
+    "summary_zh": "此次暂停入组发生在BHV-7000去年年底的中期抑郁症试验未显示疗效之后。此前，FDA于2025年11月拒绝批准Biohaven的脊髓小脑性共济失调治疗，这一消息再次给公司带来监管打击。",
+    "content_fingerprint": "968edc6e578453bfa4c218c7817266ee83bd3b639e2aa5c55af29eb7d1420159",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.biospace.com/fda/biohaven-takes-another-hit-as-fda-pauses-enrollment-in-pivotal-trials-for-embattled-epilepsy-drug"
+    }
+  },
+  "143140740286445": {
+    "title_zh": "对于PDUFA VIII而言，最有价值的激励或许是时间",
+    "summary_zh": "文章认为，FDA提议对在美国开展早期试验的药物减免50%的申请费，但这不太可能实现预期目标。生物科技公司真正想要的是速度。",
+    "content_fingerprint": "42e5f963a6718c8a1291b9b5eea1a1179ca371409aba0ed32974e1722b26d1a1",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.biospace.com/fda/opinion-for-pdufa-viii-the-most-valuable-incentive-may-be-time"
+    }
+  },
+  "230162148225543": {
+    "title_zh": "Novo取消心脏病试验、Novartis临床失败，Alexander病迎来首个批准疗法",
+    "summary_zh": "9月伊始，Novo Nordisk取消了其备受困扰的IL-6抑制剂另外两项后期试验；Novartis则在心血管疾病和肌营养不良适应症上遭遇3期试验挫折。Ultragenyx重点投入的Angelman综合征项目未能在3期试验中显示获益，而Ionis Pharmaceuticals获得了Alexander病首个靶向疗法的批准。",
+    "content_fingerprint": "e25c4317312f6fcd4d10b6d54c9153f0dc0a7297f73057b16fe6c4e0e214c45c",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.biospace.com/fda/novos-canned-heart-disease-trials-novartis-clinical-fails-first-approval-for-alexander-disease"
+    }
+  },
+  "137810080711863": {
+    "title_zh": "代理CBER和CDER负责人转正，FDA着手恢复稳定",
+    "summary_zh": "FDA正等待总统Donald Trump提名的局长人选Heidi Overton可能获得确认之际，决定将Michael Davis和Karim Mikhail从代理部门负责人晋升为正式负责人。",
+    "content_fingerprint": "782ec24daf63c3ad5c4a7eb9aa0b640a6597ad6aeb155f63ee06f20835e4f94e",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.biospace.com/fda/acting-cber-cder-heads-become-permanent-as-fda-works-to-restore-stability"
+    }
+  },
+  "180791035087712": {
+    "title_zh": "2026年IPO股票追踪：新上市生物科技公司表现如何",
+    "summary_zh": "BioSpace正在推出IPO仪表板，帮助行业追踪2026年进入美国公开市场的生物科技公司。",
+    "content_fingerprint": "479c08b8c292fddab8948089cf636e9028af440294e3cab683044d6e79ceadcc",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.biospace.com/business/2026-ipo-stock-tracker-how-biotechs-new-to-public-markets-are-performing"
+    }
+  },
+  "76069080284048": {
+    "title_zh": "交叉轮融资持续涌入，为生物科技IPO管线提供资金",
+    "summary_zh": "PitchBook预测，今年生物科技交叉轮融资总额可能超过42.2亿美元，涉及约28轮融资。",
+    "content_fingerprint": "bb7a476187132a27cd4b443a62f6a882c7b903882d86ff6f1d39cccb038a9e49",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.biospace.com/business/steady-stream-of-crossover-rounds-stock-biotechs-ipo-pipeline"
+    }
+  },
+  "99196635496378": {
+    "title_zh": "Truist：生物科技行业回暖，上半年进展为下半年平稳发展铺路",
+    "summary_zh": "Truist Securities在调查行业领导者后表示，随着并购增加、风险资本回归以及政策风险缓解，生物科技行业在经历长期的后疫情低迷后正处于积极发展轨道。",
+    "content_fingerprint": "89fc47e8b052d6cb58ac1e7296a929630e5b618483208fd49842a681db61b781",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.biospace.com/business/biotech-is-back-with-h1-progress-smoothing-glide-path-through-end-of-year-truist"
+    }
+  },
+  "95948602190557": {
+    "title_zh": "Pfizer将Seagen的ADC转交合作开发，430亿美元收购案的价值更难判断",
+    "summary_zh": "在达成这项共同开发交易之前，Pfizer已报告Seagen一项资产的后期试验失败，并停止了另一款在研疗法的开发；后者由已成为Pfizer子公司的Seagen开发。",
+    "content_fingerprint": "9a1c272ef13fd67fea0781d8b59a4481f9a57c2ff1502c93fb567967c11386fc",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.biospace.com/deals/pfizer-punts-seagen-adc-further-muddying-value-of-the-43b-buyout"
+    }
+  },
+  "65785180007338": {
+    "title_zh": "GSK再结成亚洲联盟，押注最高13亿美元推进HUTCHMED抗癌疗法",
+    "summary_zh": "GSK将先行支付1.1亿美元，并获得推进HMPL-A830的全球独家权利。该药物结合了靶向EGFR的抗体和小分子KRAS阻断剂，计划用于结直肠癌、胰腺癌和肺癌研究。",
+    "content_fingerprint": "3eb5e37da9088d03167cb33ca32e911c4a8e0407dccea80f10c11f11bc27e619",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.biospace.com/deals/gsk-inks-another-asia-alliance-betting-up-to-1-3b-for-hutchmeds-cancer-therapy"
+    }
+  },
+  "38072930978805": {
+    "title_zh": "生物制药反向合并交易第三季度增长1600%，规模可与IPO媲美",
+    "summary_zh": "今年选择通过反向合并进入公开市场的生物科技公司，数量几乎与采用更传统首次公开募股方式的公司相当。",
+    "content_fingerprint": "1ba8f5084fac851803137a309540fab1ad296a1980a47cec6ec44893c2b8100b",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.biospace.com/business/biopharma-reverse-mergers-rise-1-600-in-q3-to-rival-ipos"
+    }
+  },
+  "234501417363702": {
+    "title_zh": "Roche在亚洲发现又一肿瘤领域瑰宝，达成15亿美元B细胞疾病合作",
+    "summary_zh": "Roche选择Simcere Zaiming合作开发一种新的T细胞接合剂，该药物可能广泛用于B细胞介导的疾病，包括淋巴瘤和自身免疫性疾病。",
+    "content_fingerprint": "26c5a2e47f1aedf49bc851953cdacd2beefd4e9088c7656dbc865f9f60424e18",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.biospace.com/drug-development/roche-finds-another-oncology-gem-in-asia-with-1-5b-b-cell-disease-partnership"
+    }
+  },
+  "58154201990361": {
+    "title_zh": "FDA批准Imaavy（nipocalimab-aahu），成为首个温抗体型自身免疫性溶血性贫血疗法",
+    "summary_zh": "2026年8月24日，Johnson & Johnson（NYSE: JNJ）宣布，FDA已批准Imaavy®（nipocalimab-aahu）用于治疗温抗体型自身免疫性溶血性贫血（wAIHA）。",
+    "content_fingerprint": "cbcb62c656098f449b5891a9a69c680c4052b8afeef8c1d8e70dae3aa5f95e38",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/newdrugs/fda-approves-imaavy-nipocalimab-aahu-first-ever-warm-autoimmune-hemolytic-anemia-6862.html"
+    }
+  },
+  "39652491189721": {
+    "title_zh": "Jemperli获美国FDA优先审评资格，用于治疗dMMR/MSI-H局部晚期直肠癌",
+    "summary_zh": "GSK于2026年8月24日宣布，FDA已受理Jemperli（dostarlimab-gxly）用于dMMR/MSI-H局部晚期直肠癌的补充生物制品许可申请，并给予优先审评。",
+    "content_fingerprint": "0b1b236fbab00ad58884506dac53ccae03051c9a64ea54100d313d0a1b228fc4",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/clinical_trials/jemperli-dostarlimab-gxly-accepted-priority-review-us-fda-dmmr-msi-h-locally-advanced-rectal-cancer-22564.html"
+    }
+  },
+  "231156848062150": {
+    "title_zh": "Xspray Pharma收到FDA关于Dasynoc的完整回复函",
+    "summary_zh": "2026年8月19日消息，FDA就Dasynoc发出完整回复函，涉及此前披露的NerPharMa检查发现，其中包括尚未解决的GMP（药品生产质量管理规范）问题。",
+    "content_fingerprint": "6fb4a752b85704b498d03d3be81902776bf2e5acaf73291c9cc7c33c78c83407",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/nda/dasynoc_260819.html"
+    }
+  },
+  "214424568825852": {
+    "title_zh": "FDA受理Teva的Ecopipam新药申请并给予优先审评，该药为儿童Tourette综合征同类首创在研疗法",
+    "summary_zh": "Teva Pharmaceuticals宣布，FDA已受理Ecopipam的新药申请并给予优先审评。该药是一种用于儿童Tourette综合征患者的同类首创在研疗法。",
+    "content_fingerprint": "0136a11922bda1bfefaa668c8ede6e27771fd627a515370793e3750f45e0b65f",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/nda/ecopipam_260819.html"
+    }
+  },
+  "69738263999630": {
+    "title_zh": "FDA批准Lerochol（lerodalcibep-liga）自动注射器版本及更新后的适应症",
+    "summary_zh": "LIB Therapeutics宣布，FDA批准Lerochol（lerodalcibep-liga）的自动注射器版本及更新后的适应症。该公司专注于帮助高风险患者实现胆固醇控制目标。",
+    "content_fingerprint": "910425cf165192c3f5ad3a4b608dac26da471a5f8db80f9c3b31d66f6d7bd6ba",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/newdrugs/u-s-food-administration-approves-autoinjector-version-lerochol-lerodalcibep-liga-updated-indication-6859.html"
+    }
+  },
+  "212107276253326": {
+    "title_zh": "FDA批准阿尔茨海默病Tau蛋白PET显像剂Tauklarify（florquinitau F 18注射液）",
+    "summary_zh": "Tauklarify（florquinitau F 18注射液）获FDA批准，是一种用于阿尔茨海默病的氟-18标记Tau蛋白PET显像剂。",
+    "content_fingerprint": "bdb73af849ffe4c8b32afc86d4369835de620ec871e7c532805a402734cf79cf",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/newdrugs/fda-approves-tauklarify-florquinitau-f-18-f18-labeled-tau-pet-imaging-agent-alzheimer-s-6858.html"
+    }
+  },
+  "36985523995085": {
+    "title_zh": "FDA加速批准Zenbexus（iberdomide）联合daratumumab和hyaluronidase-fihj及地塞米松治疗多发性骨髓瘤",
+    "summary_zh": "Bristol Myers Squibb（NYSE: BMY）于2026年8月13日宣布，FDA批准Zenbexus（iberdomide）联合用药。该加速批准方案包括daratumumab和hyaluronidase-fihj及地塞米松，用于治疗多发性骨髓瘤。",
+    "content_fingerprint": "f72530ad39af4e08f950e63827ee7b937bae454cf2edc9b4fad73cce0a2606cb",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/newdrugs/fda-grants-accelerated-approval-zenbexus-iberdomide-combination-daratumumab-hyaluronidase-fihj-6857.html"
+    }
+  },
+  "187343051253999": {
+    "title_zh": "Zipalertinib联合化疗在3期REZILIENT3试验计划中期分析中达到无进展生存期主要终点",
+    "summary_zh": "Taiho Oncology、Taiho Pharmaceutical和Cullinan Therapeutics（Nasdaq: CGEM）公布全球3期REZILIENT3试验消息。该试验评估zipalertinib联合化疗一线治疗EGFR外显子20插入突变非小细胞肺癌，在计划中期分析中达到了无进展生存期主要终点。",
+    "content_fingerprint": "a32b32406fb36c17d6eb85af6294b2aca4043580fc4e1cd1845d51013ba0eb49",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/clinical_trials/zipalertinib-plus-chemotherapy-meets-primary-endpoint-progression-free-survival-planned-interim-22555.html"
+    }
+  },
+  "74942764056051": {
+    "title_zh": "FDA受理Belite Bio的Tinlarebant新药申请并给予优先审评，用于1型Stargardt病",
+    "summary_zh": "Belite Bio（NASDAQ: BLTE）宣布，FDA已受理Tinlarebant用于治疗1型Stargardt病的新药申请，并给予优先审评。",
+    "content_fingerprint": "2766d5549233e2d5c18f0b978e9b0e96aa52de453ea0a2e1cfe25c9da06fc18c",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/nda/tinlarebant_260811.html"
+    }
+  },
+  "212016979182519": {
+    "title_zh": "AbCellera公布ABCL635积极2期主要结果：血管舒缩症状频率和严重程度显著降低，耐受性良好",
+    "summary_zh": "AbCellera（Nasdaq: ABCL）于2026年8月10日公布ABCL635的1/2期临床试验中2期部分的积极主要结果，显示血管舒缩症状的频率和严重程度显著降低，且耐受性良好。",
+    "content_fingerprint": "688325ef28d9a33dbf45b551490d3553edadca6fbabc01586312a27764721423",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/clinical_trials/abcellera-announces-positive-top-line-phase-2-clinical-trial-results-abcl635-demonstrating-22554.html"
+    }
+  },
+  "268489454353031": {
+    "title_zh": "Silence Therapeutics公布Divesiran治疗真性红细胞增多症的2期SANRECO试验积极主要结果",
+    "summary_zh": "Silence Therapeutics（Nasdaq: SLN）公布Divesiran用于真性红细胞增多症的2期SANRECO试验积极主要结果，认为这些结果支持该药成为同类最佳疗法的潜力。",
+    "content_fingerprint": "1042d2f462fa3069280d561c81dfbd258904215de35b76fc61b40aae1b90f9b0",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/clinical_trials/silence-therapeutics-announces-positive-topline-results-phase-2-sanreco-trial-divesiran-22556.html"
+    }
+  },
+  "114622803285391": {
+    "title_zh": "Scholar Rock：Apitegromab治疗SMA的生物制品许可申请审评将结合第二家灌装及成品加工厂继续推进",
+    "summary_zh": "Scholar Rock（NASDAQ: SRRK）宣布，FDA对apitegromab治疗脊髓性肌萎缩症（SMA）的生物制品许可申请审评，将结合第二家灌装及成品加工厂继续推进。",
+    "content_fingerprint": "8d289d25700b99e90426021cac009ba265d228ce28f61fc4db8bfcb56acdf15c",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/nda/apitegromab_260807.html"
+    }
+  },
+  "150197659135666": {
+    "title_zh": "BioInvent的BI-1808治疗卵巢癌获FDA快速通道资格",
+    "summary_zh": "BioInvent（Nasdaq Stockholm: BINV）宣布，BI-1808用于治疗卵巢癌获得FDA快速通道资格。",
+    "content_fingerprint": "53fe9547d9fe4ede77293355f68b2b56ff1695bbca18c01b801828977d69c7b7",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/clinical_trials/bioinvent-receives-fda-fast-track-designation-bi-1808-ovarian-cancer-22552.html"
+    }
+  },
+  "104457036486622": {
+    "title_zh": "Aclaris的Modzatinib（ATI-2138）治疗中重度扁平苔藓获快速通道资格",
+    "summary_zh": "Aclaris Therapeutics（NASDAQ: ACRS）宣布，modzatinib（ATI-2138）用于中重度扁平苔藓（LP）获得快速通道资格。",
+    "content_fingerprint": "27f1d1de7dea866fb5e7d962999a1bae23ee806c7bc07f9981794b2f2df7fc5b",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/clinical_trials/aclaris-therapeutics-receives-fast-track-designation-modzatinib-ati-2138-moderate-severe-lichen-22553.html"
+    }
+  },
+  "115182609104403": {
+    "title_zh": "FDA加速批准Tudriqev（vusolimogene oderparepvec-wtpg）联合Nivolumab治疗不可切除的晚期皮肤黑色素瘤",
+    "summary_zh": "Replimune Group（NASDAQ: REPL）宣布，FDA加速批准Tudriqev（vusolimogene oderparepvec-wtpg）联合nivolumab，用于不可切除的晚期皮肤黑色素瘤。",
+    "content_fingerprint": "a8fb7a5a1df3e25efe39b7d8719169d814a077619678b14411560eb429f8f325",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/newdrugs/fda-grants-accelerated-approval-tudriqev-vusolimogene-oderparepvec-wtpg-combination-nivolumab-6856.html"
+    }
+  },
+  "84968915620920": {
+    "title_zh": "Lexeo的LX2020治疗PKP2致心律失常性心肌病获FDA再生医学先进疗法资格",
+    "summary_zh": "Lexeo Therapeutics（Nasdaq: LXEO）宣布，LX2020用于治疗PKP2致心律失常性心肌病获得FDA再生医学先进疗法（RMAT）资格。",
+    "content_fingerprint": "3c071fc15a7885997e1ce574697e17baf703afff85a5644490759c32e47b76ce",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/clinical_trials/lexeo-therapeutics-receives-fda-regenerative-medicine-advanced-therapy-rmat-designation-lx2020-pkp2-22549.html"
+    }
+  },
+  "188737121699720": {
+    "title_zh": "FDA批准mRNA流感疫苗mFLUSIVA用于预防季节性流感",
+    "summary_zh": "Moderna（NASDAQ: MRNA）于2026年8月5日宣布，FDA已批准季节性流感新疫苗mFLUSIVA®（mRNA-1010），用于所有成年人。",
+    "content_fingerprint": "089941f0e5f632f15675685aa682cb0eb9617fc4abbd32d0d6e82534f2ae830b",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/newdrugs/fda-approves-mflusiva-influenza-vaccine-mrna-prevention-seasonal-influenza-6855.html"
+    }
+  },
+  "141379611893880": {
+    "title_zh": "FDA批准Mucinex 12HR Cold & Fever Multi-Symptom治疗感冒和流感症状",
+    "summary_zh": "Reckitt宣布Mucinex® 12HR Cold & Fever Multi-Symptom获FDA批准。该产品含右美沙芬、愈创甘油醚和萘普生，用于缓解感冒及流感症状。",
+    "content_fingerprint": "d6bf336e8fea9adea2faca839ddb8f1cd3647cee108ce1fb7ffcb35ae4a02c24",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/newdrugs/fda-approves-mucinex-12hr-cold-fever-multi-symptom-dextromethorphan-guaifenesin-naproxen-cold-flu-6853.html"
+    }
+  },
+  "85185126962601": {
+    "title_zh": "FDA批准Orzeyful（oveporexton），针对1型发作性睡病的根本病因",
+    "summary_zh": "Takeda（TSE: 4502/NYSE: TAK）于2026年8月5日宣布，FDA已批准Orzeyful™（oveporexton）。该药是一种口服食欲素2型受体（OX2R）激动剂。",
+    "content_fingerprint": "b05ec97318c382e8f33ae977fcf06de751aa0aa9b0e3101ec31a96516c32ba07",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/newdrugs/fda-approves-orzeyful-oveporexton-underlying-cause-narcolepsy-type-1-6854.html"
+    }
+  },
+  "118954360224290": {
+    "title_zh": "FDA批准Rituxan生物类似药Zimrixby（rituximab-cdxx）",
+    "summary_zh": "Fresenius旗下运营公司Fresenius Kabi宣布，FDA已批准Dr. Reddy’s Laboratories（DRL）开发的利妥昔单抗生物类似药，该产品为Rituxan®（rituximab）的生物类似药。",
+    "content_fingerprint": "2489aa1507214b9496743346a1c3663f92b0a933207528fa3b99f047a08eaa86",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/newdrugs/fda-approves-zimrixby-rituximab-cdxx-biosimilar-rituxan-6873.html"
+    }
+  },
+  "31014857461042": {
+    "title_zh": "Vertex公布2026年第二季度财务业绩",
+    "summary_zh": "总收入33.3亿美元，较2025年第二季度增长12%；全年收入指引上调至131亿至132亿美元。研发管线持续推进，povetacicept的PDUFA目标日期为11月30日。",
+    "content_fingerprint": "a630fc03ba55b1f6962da80b473a3529cd5616652cfcb2ed96c18fb08862aeff",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://investors.vrtx.com/news-releases/news-release-details/vertex-reports-second-quarter-2026-financial-results"
+    }
+  },
+  "200092963731471": {
+    "title_zh": "Lilly的Olomorasib治疗既往接受过治疗的KRAS G12C突变晚期胰腺癌获FDA突破性疗法资格",
+    "summary_zh": "Eli Lilly（NYSE: LLY）于2026年8月3日宣布，FDA给予olomorasib单药治疗突破性疗法资格，针对既往接受过治疗的KRAS G12C突变晚期胰腺癌。",
+    "content_fingerprint": "172ef57ca4163055421ca0e6ad97e5c13b73c04fdbd9b0ccc2c7015a1eaea6e3",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/clinical_trials/lilly-s-olomorasib-receives-u-s-fda-s-breakthrough-therapy-designation-previously-treated-kras-g12c-22541.html"
+    }
+  },
+  "193793119042832": {
+    "title_zh": "Aravax的下一代花生过敏免疫疗法PVX108获FDA快速通道资格",
+    "summary_zh": "Aravax于2026年8月3日宣布，下一代花生过敏免疫疗法PVX108获得FDA快速通道资格。该公司正在开发针对食物过敏、可改变疾病进程的下一代免疫疗法。",
+    "content_fingerprint": "4b7995b924b5ece8d968954de99c56fc02c097ec100eab2fa839689b3578c96d",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/clinical_trials/aravax-awarded-fda-fast-track-designation-pvx108-next-generation-immunotherapy-peanut-allergy-22542.html"
+    }
+  },
+  "203322836460159": {
+    "title_zh": "Novo Nordisk更新Ziltivekimab用于ASCVD、CKD及炎症患者的3期ZEUS试验进展",
+    "summary_zh": "Novo Nordisk于2026年7月31日公布ZEUS心血管结局3期试验的主要结果。Ziltivekimab显示出靶点作用及对IL-6通路的抑制。",
+    "content_fingerprint": "bfdcc38733edc058ee00d8a2cf012b2b15495f6ebeb9b38dfb06b15096b5711e",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/clinical_trials/novo-nordisk-provides-update-zeus-phase-3-trial-ziltivekimab-ascvd-ckd-inflammation-22538.html"
+    }
+  },
+  "77780378719334": {
+    "title_zh": "FDA批准Pluvicto治疗PSMA阳性转移性激素敏感性前列腺癌",
+    "summary_zh": "Novartis于2026年7月31日宣布，FDA已批准Pluvicto®（lutetium Lu 177 vipivotide tetraxetan）联合雄激素受体通路抑制剂（ARPI），用于PSMA阳性转移性激素敏感性前列腺癌（mHSPC）。",
+    "content_fingerprint": "36f81c4f1ce173abeff74c383d05e154f904f6d00eca1d3ad2d3bf06fbbc511d",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/newdrugs/fda-approves-pluvicto-psma-metastatic-hormone-sensitive-prostate-cancer-mhspc-6852.html"
+    }
+  },
+  "2625137910609": {
+    "title_zh": "Regeneron向2026年创意创新奖获奖者颁发15万美元奖金",
+    "summary_zh": "来自纽约大学、斯坦福大学和伦斯勒理工学院的职业生涯早期科学家，因其雄心勃勃的“梦想项目”提案获得表彰。",
+    "content_fingerprint": "eca849da8817f67837116b91376f1e8ad82e3400b75c81f32c24e1927cc8cb6a",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://investor.regeneron.com/news-releases/news-release-details/regeneron-awards-150000-winners-2026-regeneron-prize-creative"
+    }
+  },
+  "106393218881941": {
+    "title_zh": "Regeneron公布2026年第二季度财务及运营业绩",
+    "summary_zh": "2026年第二季度收入同比增长17%至43亿美元；Dupixent®全球净销售额（由Sanofi入账）增长38%，创下60亿美元的新高；EYLEA HD®美国净销售额增长52%，创下5.96亿美元的新高。",
+    "content_fingerprint": "3b86880f6652fa249586dcae1fc67fda3606067781ac588431f54eb623599565",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://investor.regeneron.com/news-releases/news-release-details/regeneron-reports-second-quarter-2026-financial-and-operating"
+    }
+  },
+  "139146379989375": {
+    "title_zh": "Abivax称就Obefazimod新药申请前事宜与FDA开展了积极沟通",
+    "summary_zh": "Abivax（Euronext Paris: FR0012333284–ABVX/Nasdaq: ABVX）公布了就obefazimod新药申请提交前事宜与FDA积极沟通的消息。",
+    "content_fingerprint": "796f3b43e90b27fda1bd470a22563a9a044aadc0fd07738be70b2a25bcd568fd",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/clinical_trials/abivax-announces-positive-pre-nda-fda-obefazimod-22540.html"
+    }
+  },
+  "137454218656905": {
+    "title_zh": "FDA批准NovoLog生物类似药Garzulys（insulin aspart-fsan）",
+    "summary_zh": "Garzulys（insulin aspart-fsan）获FDA批准，成为NovoLog的生物类似药。",
+    "content_fingerprint": "39f1e71c498f972fa1e87e365885dfe062a6972258f929b37821732b592548dc",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/newdrugs/fda-approves-garzulys-insulin-aspart-fsan-biosimilar-novolog-6851.html"
+    }
+  },
+  "260657041055176": {
+    "title_zh": "FDA批准每周一次避孕贴Gwyn Lo（norelgestromin和炔雌醇）",
+    "summary_zh": "Viatris（Nasdaq: VTRS）于2026年7月29日宣布，FDA已批准Gwyn Lo™（norelgestromin和炔雌醇）经皮避孕贴，每周使用一次。",
+    "content_fingerprint": "734c983d5d47b4748be43c7a029b2d6aa02757ad7dd832b85491b7a7f37aa180",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/newdrugs/fda-approves-gwyn-lo-norelgestromin-ethinyl-estradiol-once-weekly-contraceptive-patch-6850.html"
+    }
+  },
+  "214538637032120": {
+    "title_zh": "FDA受理Saol重新提交的SL1009（DCA）申请，PDUFA日期定为2026年12月30日",
+    "summary_zh": "Saol Therapeutics宣布，FDA已受理重新提交的SL1009（DCA）申请，PDUFA目标日期为2026年12月30日。",
+    "content_fingerprint": "402a0b9398bbfb200f6c39adc83ed8fcdeff5c2f33b3c36993eed0688215e942",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/nda/sl1009_260728.html"
+    }
+  },
+  "93021420071803": {
+    "title_zh": "FDA批准Simtriyo（centanafadine）治疗注意缺陷多动障碍",
+    "summary_zh": "Otsuka Pharmaceutical Development & Commercialization和Otsuka Pharmaceutical宣布，FDA批准Simtriyo（centanafadine）治疗注意缺陷多动障碍（ADHD）。",
+    "content_fingerprint": "fbfe745c050c55608b9ab6f0bcb64cc124e27a4f08d4057c5486ecc37d4e7ba0",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/newdrugs/fda-approves-simtriyo-centanafadine-attention-deficit-hyperactivity-disorder-adhd-6848.html"
+    }
+  },
+  "279958261547761": {
+    "title_zh": "FDA批准Tylenol with Naproxen作为非处方止痛药",
+    "summary_zh": "Tylenol®于2026年7月24日宣布，FDA已批准Tylenol® with Naproxen。该非处方止痛药含对乙酰氨基酚和萘普生钠。",
+    "content_fingerprint": "f8698ed47e01262306b2d13876e64469ac8b27055e1dcb8366ba8f8d50d15df1",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/newdrugs/fda-approves-tylenol-naproxen-acetaminophen-naproxen-sodium-over-counter-pain-6845.html"
+    }
+  },
+  "69154051488313": {
+    "title_zh": "MannKind：FDA批准Furoscix ReadyFlow，为首个且唯一提供等同静脉给药利尿治疗的自动注射器",
+    "summary_zh": "MannKind（Nasdaq: MNKD）宣布Furoscix ReadyFlow获FDA批准。该产品是首个且唯一提供与静脉给药等效利尿治疗的自动注射器，用于心力衰竭或慢性肾病成年患者的水肿。",
+    "content_fingerprint": "add4eae5aa5ae3d1e3b85257e70cb75e162e03b757536fb527692df7a493da20",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/newdrugs/mannkind-announces-fda-approval-furoscix-readyflow-first-only-autoinjector-delivering-iv-equivalent-6846.html"
+    }
+  },
+  "265760263907928": {
+    "title_zh": "FDA批准Lytenava（bevacizumab-vikg）治疗湿性年龄相关性黄斑变性",
+    "summary_zh": "Lytenava（bevacizumab-vikg）获FDA批准，用于治疗湿性年龄相关性黄斑变性。Outlook Therapeutics（Nasdaq: OTLK）专注于ONS-5010/Lytenava（bevacizumab-vikg，bevacizumab gamma）的开发和商业化。",
+    "content_fingerprint": "32af26f08f470ed6e650f1d623553c4f851378660a1d98e1601ef8ae53ba1f45",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/newdrugs/fda-approves-lytenava-bevacizumab-vikg-wet-age-related-macular-degeneration-6847.html"
+    }
+  },
+  "106114747609560": {
+    "title_zh": "FDA批准Jideytro（zidesamtinib）治疗既往接受过治疗的ROS1阳性非小细胞肺癌",
+    "summary_zh": "GSK（LSE/NYSE: GSK）于2026年7月22日宣布，FDA已批准ROS1选择性抑制剂Jideytro（zidesamtinib），用于既往接受过治疗的ROS1阳性非小细胞肺癌。",
+    "content_fingerprint": "af68b4690d864ca0f6ab70d733020018366414fbab18c52264dd505c1e59e352",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/newdrugs/fda-approves-jideytro-zidesamtinib-previously-treated-ros1-positive-non-small-cell-lung-cancer-6844.html"
+    }
+  },
+  "256648692040916": {
+    "title_zh": "FDA受理Revolution Medicines的Daraxonrasib新药申请，用于经治转移性胰腺癌",
+    "summary_zh": "Revolution Medicines（Nasdaq: RVMD）的daraxonrasib新药申请获FDA受理，用于既往接受过治疗的转移性胰腺癌。",
+    "content_fingerprint": "9e3515bd1bf28b2ed32c0ad2a8202ba270921fecfa598138a28172b90dd8af2f",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/nda/daraxonrasib_260722.html"
+    }
+  },
+  "91766372793325": {
+    "title_zh": "BridgeBio：FDA受理Encaleret治疗ADH1的新药申请",
+    "summary_zh": "BridgeBio Pharma（Nasdaq: BBIO）宣布，FDA已受理encaleret用于ADH1的新药申请。",
+    "content_fingerprint": "862802780513a23e0adaff68ece592eee581d2209a16090358e381ff9d9265dc",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/nda/encaleret_260722.html"
+    }
+  },
+  "65665349226292": {
+    "title_zh": "FDA批准Glenmark的Ryaltris鼻喷剂扩大用于6岁至未满12岁儿童",
+    "summary_zh": "Glenmark于2026年7月21日宣布，FDA已批准扩大Ryaltris鼻喷剂的使用范围，纳入6岁至未满12岁儿童。该鼻喷剂含盐酸奥洛他定和糠酸莫米松，每喷剂量为665微克/25微克。",
+    "content_fingerprint": "7e102a0b7c61441079afb017cd034a15a6da63969bde4977809f2e10859e2d8a",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/newdrugs/glenmark-receives-u-s-fda-approval-expand-ryaltris-nasal-children-aged-6-less-than-12-years-6843.html"
+    }
+  },
+  "267873462900387": {
+    "title_zh": "Novartis的Fabhalta获FDA常规批准，成为首个且唯一显著延缓原发性IgAN肾功能下降的补体抑制剂",
+    "summary_zh": "Novartis于2026年7月17日宣布，FDA已常规批准Fabhalta（iptacopan），用于延缓原发性免疫球蛋白A肾病（IgAN）成年患者的肾功能下降。",
+    "content_fingerprint": "9320cc5df464e704d596e6a070226e3b5be32c1d9611da0f709c436546e1e3d5",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/newdrugs/novartis-fabhalta-iptacopan-receives-fda-traditional-approval-first-only-complement-inhibitor-6841.html"
+    }
+  },
+  "118980309426150": {
+    "title_zh": "FDA受理Camurus重新提交的CAM2029治疗肢端肥大症新药申请",
+    "summary_zh": "Camurus（NASDAQ STO: CAMX）于2026年7月17日宣布，FDA已受理重新提交的CAM2029新药申请，用于肢端肥大症。",
+    "content_fingerprint": "205bbacd3689ec867356b744993bae1bf75f1840ed67a2ee16bd2ee802232292",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/nda/oclaiz_260717.html"
+    }
+  },
+  "274330900517162": {
+    "title_zh": "FDA受理Axsome的AXS-12新药申请，用于发作性睡病相关猝倒",
+    "summary_zh": "Axsome Therapeutics（NASDAQ: AXSM）宣布，FDA已受理AXS-12治疗发作性睡病相关猝倒的新药申请。",
+    "content_fingerprint": "4d0b5dfacd5a9aa09376ef20969802b26525cca4484944516db40f7be675e125",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/nda/axs_12_260715.html"
+    }
+  },
+  "70643918888544": {
+    "title_zh": "FDA受理Apnimed的AD109新药申请，该在研口服药用于成人阻塞性睡眠呼吸暂停",
+    "summary_zh": "Apnimed宣布，FDA已受理AD109的新药申请。AD109是一种用于治疗成人阻塞性睡眠呼吸暂停的在研口服药。",
+    "content_fingerprint": "893fbdbfe84ed8762991e9d5a4eafde0f5a6ce2ba7c000231adf8197e9e0b997",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/nda/ad109_260714.html"
+    }
+  },
+  "278366663898464": {
+    "title_zh": "FDA受理Bristol Myers Squibb的Mezigdomide新药申请，用于复发或难治性多发性骨髓瘤",
+    "summary_zh": "Bristol Myers Squibb（NYSE: BMY）于2026年7月13日宣布，FDA已受理mezigdomide的新药申请，用于复发或难治性多发性骨髓瘤患者。申请涉及与carfilzomib联合使用的方案。",
+    "content_fingerprint": "62511cb98c3fad562a0f9bc3014652536789a76909364678399b1a67ea6a2ba1",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/nda/mezigdomide_260713.html"
+    }
+  },
+  "132907563385964": {
+    "title_zh": "Elevar收到FDA完整回复函，涉及Rivoceranib联合Camrelizumab一线治疗不可切除或转移性肝细胞癌",
+    "summary_zh": "Elevar Therapeutics收到FDA完整回复函，涉及rivoceranib联合camrelizumab作为不可切除或转移性肝细胞癌一线治疗的申请。Elevar是HLB控股的子公司。",
+    "content_fingerprint": "cdd0b69513b26849560ae10c20a339e4ddb9b8de83b3d4360851831e4c0b72e0",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/nda/rivoceranib_260710.html"
+    }
+  },
+  "107657467626740": {
+    "title_zh": "FDA受理Immunome的Varegacestat新药申请，用于成人硬纤维瘤",
+    "summary_zh": "Immunome（Nasdaq: IMNM）宣布，FDA已受理varegacestat用于治疗成人硬纤维瘤的新药申请。",
+    "content_fingerprint": "15d870463409249234f18873b9379bb05be21b5117647bf02161bba878a9d1e7",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/nda/varegacestat_260708.html"
+    }
+  },
+  "1077293803500": {
+    "title_zh": "Saol重新提交SL1009（DCA）新药申请，用于超罕见病丙酮酸脱氢酶复合体缺乏症",
+    "summary_zh": "Saol Therapeutics于2026年7月7日宣布，已向FDA重新提交SL1009（DCA）的新药申请，用于治疗超罕见病丙酮酸脱氢酶复合体缺乏症（PDCD）。",
+    "content_fingerprint": "7ff19c2557093bf1e282bd5f19d64bd86f509592c1397cc2117cb264afe5953a",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/nda/sl1009_260707.html"
+    }
+  },
+  "198390628437945": {
+    "title_zh": "Vertex将于8月3日公布2026年第二季度财务业绩",
+    "summary_zh": "Vertex Pharmaceuticals（Nasdaq: VRTX）将于2026年8月3日星期一金融市场收盘后公布2026年第二季度财务业绩，并于美国东部时间下午4:30举行电话会议及网络直播。",
+    "content_fingerprint": "69a8c727fa65ee6c948aea1c90904644e063dab2eb7dbd91c432dd6e2761c5b6",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://investors.vrtx.com/news-releases/news-release-details/vertex-announce-second-quarter-2026-financial-results-august-3rd"
+    }
+  },
+  "54745409273685": {
+    "title_zh": "FDA受理Pharvaris的Deucrictibant IR新药申请，用于遗传性血管性水肿发作的按需治疗",
+    "summary_zh": "Pharvaris（Nasdaq: PHVS）宣布，FDA已受理deucrictibant IR用于遗传性血管性水肿发作按需治疗的新药申请。",
+    "content_fingerprint": "a0cd335a87cf61c7ec97a2efd4f339c70e10d212e0ff88677aa6c487b4f01006",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/nda/deucrictibant_260706.html"
+    }
+  },
+  "139389959757891": {
+    "title_zh": "Vertex拟收购Crinetics Pharmaceuticals",
+    "summary_zh": "Crinetics将为Vertex带来已商业化及处于3期的内分泌领域资产，具有成为同类最佳疗法的潜力，潜在峰值销售额约50亿美元。Crinetics近期推出的PALSONIFY®是首个且唯一用于成人肢端肥大症、每日一次的口服疗法。",
+    "content_fingerprint": "3743a7ee0ad67c32e5683dc5be9a314cf49e3d23e7ec405016450960ab496173",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://investors.vrtx.com/news-releases/news-release-details/vertex-acquire-crinetics-pharmaceuticals"
+    }
+  },
+  "9691239453496": {
+    "title_zh": "Ascelia Pharma更新Orviglance新药申请进展",
+    "summary_zh": "Ascelia Pharma（股票代码：ACE）于2026年7月3日宣布已收到完整回复函（CRL）。该公告更新了Orviglance新药申请的进展。",
+    "content_fingerprint": "01573c4d42d19e7c554d68b2852e1b11777b22fc5602405c164ef31d4f038714",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/nda/orviglance_260703.html"
+    }
+  },
+  "132155379048894": {
+    "title_zh": "Kowa在美国提交Nicox的NCX 470新药申请",
+    "summary_zh": "Nicox（Euronext Growth Paris: FR0013018124，ALCOX）于2026年7月1日宣布，Kowa已向FDA提交NCX 470（又名K-911）的新药申请。",
+    "content_fingerprint": "4715f2a17d09aa50ef8c8aa2817e2da25a4195fa4a2e008985ff38fc0151d7d0",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/nda/k_911_260701.html"
+    }
+  },
+  "271629632699711": {
+    "title_zh": "Unicycive收到FDA针对重新提交的Oxylanthanum Carbonate新药申请的完整回复函",
+    "summary_zh": "Unicycive Therapeutics（Nasdaq: UNCY）宣布，收到FDA就重新提交的oxylanthanum carbonate（OLC）新药申请发出的完整回复函。",
+    "content_fingerprint": "d18ceea5cdb05c64a8c02b16bf2ca0e8fee17a1a117c2fd75380f2c257c3b224",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/nda/oxylanthanum_carbonate_260630.html"
+    }
+  },
+  "210624467034660": {
+    "title_zh": "Cogent提交Bezuclastinib治疗晚期系统性肥大细胞增多症的新药申请",
+    "summary_zh": "Cogent Biosciences（Nasdaq: COGT）宣布，已提交bezuclastinib用于晚期系统性肥大细胞增多症（AdvSM）的新药申请。",
+    "content_fingerprint": "9998b6c2520418ae2ad79f0df1a0d20d4bb9e61b8ac39da63a9668c1aa0728b5",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/nda/bezuclastinib_260630.html"
+    }
+  },
+  "118638404528696": {
+    "title_zh": "FDA受理Replimune重新提交的RP1治疗晚期黑色素瘤生物制品许可申请",
+    "summary_zh": "Replimune Group（NASDAQ: REPL）宣布，FDA已受理重新提交的RP1生物制品许可申请，用于晚期黑色素瘤。",
+    "content_fingerprint": "4560fd4f1175dcf9ccab5c1bb5f9c10d1332b07f1754c2f4c47ea1388da8d865",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/nda/vusolimogene_oderparepvec_260626.html"
+    }
+  },
+  "273836372149766": {
+    "title_zh": "Sobi收到FDA就NASP（纳米包封西罗莫司联合pegadricase）发出的完整回复函",
+    "summary_zh": "Sobi®（STO: SOBI）于2026年6月26日宣布，收到FDA针对NASP生物制品许可申请发出的完整回复函（CRL）。",
+    "content_fingerprint": "2bd9fcad59ed766de74d2c6874ac06f309eff0792914715c87a4043fa58d8d2b",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/nda/nasp_260626.html"
+    }
+  },
+  "280522522048418": {
+    "title_zh": "Regeneron将公布2026年第二季度财务及运营业绩，并举行电话会议和网络直播",
+    "summary_zh": "Regeneron Pharmaceuticals（NASDAQ: REGN）于2026年6月25日宣布，将于2026年7月30日星期四美国金融市场开盘前公布第二季度财务及运营业绩。",
+    "content_fingerprint": "f6eb119adead3dc9f577ea9773f25c399b13e3177d71afa0dc2c04622516f8a6",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://investor.regeneron.com/news-releases/news-release-details/regeneron-report-second-quarter-2026-financial-and-operating"
+    }
+  },
+  "122009673139440": {
+    "title_zh": "FDA和EMA受理Cemdisiran治疗全身型重症肌无力的监管申请",
+    "summary_zh": "Cemdisiran有望成为首个获批治疗全身型重症肌无力（gMG）的siRNA药物，以及唯一每年皮下注射四次的疗法。FDA已受理新药申请并给予优先审评，目标决定日期为2026年11月；预计欧盟委员会将于2027年下半年作出决定。",
+    "content_fingerprint": "9f07c8e4518bd03a281e701bb7f06b372bdc0e21cd1493982f5a6e2ce95701fc",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://investor.regeneron.com/news-releases/news-release-details/cemdisiran-regulatory-submissions-accepted-review-fda-and-ema"
+    }
+  },
+  "210472857429175": {
+    "title_zh": "FDA和EMA受理Cemdisiran治疗全身型重症肌无力的监管申请",
+    "summary_zh": "Regeneron Pharmaceuticals（NASDAQ: REGN）于2026年6月22日宣布，FDA和欧洲药品管理局（EMA）均已受理cemdisiran用于治疗全身型重症肌无力（gMG）的监管申请。",
+    "content_fingerprint": "7d080c23f336d2f7b95a81ddfe16a84ecc9801f01493a70483c6f5d358706443",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/nda/cemdisiran_260622.html"
+    }
+  },
+  "275739535025065": {
+    "title_zh": "Achieve Life Sciences收到FDA就Cytisinicline新药申请发出的完整回复函",
+    "summary_zh": "Achieve Life Sciences（Nasdaq: ACHV）收到FDA针对cytisinicline新药申请发出的完整回复函。",
+    "content_fingerprint": "824ca987de4e1496613d2c94095733ab83aee32a8bd472f998acac227660a572",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/nda/cytisinicline_260622.html"
+    }
+  },
+  "72801956646144": {
+    "title_zh": "Teva提交Ecopipam新药申请，该药为治疗儿童Tourette综合征的同类首创在研疗法",
+    "summary_zh": "Teva Pharmaceutical Industries（NYSE和TASE: TEVA）于2026年6月18日宣布，已向FDA提交ecopipam的新药申请。该药是一种用于儿童Tourette综合征的同类首创在研疗法。",
+    "content_fingerprint": "5b688a43bdf1b212a2b457e188208a7e8484bc806f7458b0cb77f632e315da03",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490669,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/nda/ecopipam_260618.html"
+    }
   }
 }

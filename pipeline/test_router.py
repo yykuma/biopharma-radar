@@ -90,6 +90,25 @@ class RouterTests(unittest.TestCase):
 if __name__=='__main__':unittest.main()
 
 class RoutingChangesTests(unittest.TestCase):
+    @patch.dict(os.environ, {'SENSENOVA_API_KEY':'fixture','AGNES_API_KEY':'fixture'}, clear=True)
+    def test_sensenova_uses_deepseek_before_agnes_fallback(self):
+        from ai_router import candidates, load_registry, new_state, route_text, ProviderError
+        config = load_registry()
+        config['task'] = 'news_translation'
+        state = new_state({},100000)
+        choices = candidates(config,state,100000)
+        self.assertEqual([(p['id'],m['id']) for p,m,_ in choices],
+                         [('sensenova-general','deepseek-v4-flash'),('agnes','agnes-2.5-flash')])
+        calls=[]
+        def call(p,m,*_):
+            calls.append(p['id'])
+            if p['id']=='sensenova-general':
+                raise ProviderError(429,60)
+            return 'A complete response from the fallback provider.'
+        result=route_text([],state,config,100000,call)
+        self.assertEqual(result['status'],'ok')
+        self.assertEqual(calls,['sensenova-general','agnes'])
+
     @patch.dict(os.environ, {'TEST_KEY':'fixture'})
     def test_model_scoped_429_rotates_without_blocking_supplier(self):
         from ai_router import route_text, new_state, ProviderError
