@@ -4,12 +4,25 @@ export interface NewsRecord {
   id: number; title: string; url: string; source: string; source_id: string;
   markets: string[]; companies: string[]; published_at: number | null;
   first_seen_at: number; excerpt: string;
+  company_ids?: string[]; title_zh?: string; summary_zh?: string; source_kind?: string;
+  translation?: {status: string; method?: string; basis?: string};
   publisher?: string; content_type?: 'brief' | 'news';
 }
 export interface Snapshot {
   updated_at: number; last_success_at: number | null; collection_status: string;
   items: NewsRecord[]; sources: { id: string; name: string; publisher?: string; status: string; checked_at: number; matched: number }[];
   briefing: { status: string; text: string; generated_at: number | null; references?: { number:number; title:string; url:string }[] };
+}
+export interface Company {
+  id:string; name:string; name_zh?:string; aliases:string[]; category:string;
+  listings:{market:string; ticker:string; exchange:string}[];
+  news_count:number; official_source_ids:string[]; verified_at:string;
+}
+export interface CompanyCatalog {verified_at:string; companies:Company[]}
+export async function loadCompanies():Promise<CompanyCatalog> {
+  const response=await fetch(`${import.meta.env.BASE_URL}data/companies.json`);
+  if(!response.ok)throw new Error('公司名录读取失败');
+  return response.json();
 }
 const marketGroups = [
   {id:3,market:'US',name:'美股'},
@@ -58,10 +71,10 @@ export async function staticRequest<T>(endpoint:string, options:RequestInit = {}
     return candidates.find(f=>f.id===Number(q.get('feed_id')))
       ?? candidates.find(f=>f.groupId===Number(q.get('group_id'))) ?? candidates[0];
   };
-  const items:Item[]=data.items.map(a=>({id:a.id,feed_id:chooseFeed(a)?.id ?? 0,guid:a.url,title:a.title,link:a.url,
-    summary:a.excerpt,content_type:a.content_type ?? 'news',
+  const items:Item[]=data.items.map(a=>({id:a.id,feed_id:chooseFeed(a)?.id ?? 0,guid:a.url,title:a.title_zh || a.title,link:a.url,
+    summary:a.summary_zh || a.excerpt,content_type:a.content_type ?? 'news',
     pub_date:a.published_at ?? a.first_seen_at,created_at:a.first_seen_at,unread:!read.includes(a.id),
-    content:`${a.excerpt?`<p>${escape(a.excerpt)}</p>`:''}<p class="radar-note">${a.excerpt?'来源摘录':'仅标题，可查看原文'}${a.published_at?'':' · 时间为收录时间'}</p>`}));
+    content:`${(a.summary_zh || a.excerpt).split('\n').filter(Boolean).map(p=>`<p>${escape(p)}</p>`).join('')}<p class="radar-note">${a.source_kind==='company_release'?'公司公告 · ':''}${a.title_zh ? (a.translation?.method==='editorial'?'中文编译':'AI 中文编译') : a.excerpt?'来源摘录':'仅标题，可查看原文'}${a.published_at?'':' · 时间为收录时间'}</p>${a.title_zh?`<details><summary>查看原文标题与摘录</summary><p>${escape(a.title)}</p><p>${escape(a.excerpt)}</p></details>`:''}`}));
   const feeds:Feed[]=feedDefs.filter(f=>data.items.some(a=>belongs(a,f))).map(f=>{
     const entries=data.items.filter(a=>belongs(a,f));
     const checkedAt=Math.max(...f.sources.map(s=>s.checked_at));
@@ -75,7 +88,7 @@ export async function staticRequest<T>(endpoint:string, options:RequestInit = {}
   });
   let bookmarks=local<Bookmark[]>('bookmarks',[]).map(b=>{
     const item=items.find(a=>a.id===(b.item_id ?? b.id));
-    return {...b,...(item?{content:item.content,summary:item.summary,content_type:item.content_type,feed_id:item.feed_id}:{}),unread:!read.includes(b.item_id ?? b.id)};
+    return {...b,...(item?{title:item.title,content:item.content,summary:item.summary,content_type:item.content_type,feed_id:item.feed_id}:{}),unread:!read.includes(b.item_id ?? b.id)};
   });
   const paginate=<U extends {id:number}>(rows:U[])=>{
     const limit=Math.min(100,Math.max(1,Number(q.get('limit'))||50));
@@ -88,6 +101,7 @@ export async function staticRequest<T>(endpoint:string, options:RequestInit = {}
     const f=feedDefs.find(f=>f.id===feedId);
     return (!q.has('feed_id') || (f && original && belongs(original,f))) &&
       (!q.has('group_id') || original?.markets.includes(marketGroups.find(g=>g.id===Number(q.get('group_id')))?.market ?? '')) &&
+      (!q.has('company_id') || original?.company_ids?.includes(q.get('company_id')!)) &&
       (q.get('unread')!=='true'||a.unread);
   };
   let result:unknown;

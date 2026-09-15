@@ -41,6 +41,7 @@ function buildListItemsParams(
 
   if (filters.feedId) params.feed_id = filters.feedId;
   if (filters.groupId) params.group_id = filters.groupId;
+  if (filters.companyId) params.company_id = filters.companyId;
   if (filters.unread) params.unread = true;
   if (cursor) params.before = cursor;
 

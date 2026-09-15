@@ -11,6 +11,7 @@ import type { ArticleFilter } from "@/lib/article-filter";
 interface ArticleListFilters {
   feedId: number | null;
   groupId: number | null;
+  companyId?: string | null;
   articleFilter: ArticleFilter;
 }
 
@@ -23,6 +24,7 @@ export function useArticleList(filters: ArticleListFilters) {
     {
       feedId: filters.feedId,
       groupId: filters.groupId,
+      companyId: filters.companyId,
       unread: filters.articleFilter === "unread" ? true : undefined,
     },
     !isStarredMode,
@@ -33,7 +35,7 @@ export function useArticleList(filters: ArticleListFilters) {
 
   // Server-filtered, paginated starred list. Only fetched in starred mode.
   const starred = useStarredItems(
-    { feedId: filters.feedId, groupId: filters.groupId },
+    { feedId: filters.feedId, groupId: filters.groupId, companyId: filters.companyId },
     isStarredMode,
   );
 

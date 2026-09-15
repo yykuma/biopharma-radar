@@ -2,7 +2,7 @@
   "openapi": "3.0.3",
   "info": {
     "title": "BioPharma Radar",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "description": "Static GET. Download then filter. Unix-second timestamps; partial coverage."
   },
   "servers": [
@@ -142,6 +142,42 @@
           }
         }
       }
+    },
+    "/data/companies.json": {
+      "get": {
+        "operationId": "company_catalog",
+        "summary": "Reviewed US and HK company catalog, listings, source provenance and news counts",
+        "responses": {
+          "200": {
+            "description": "Company catalog"
+          }
+        }
+      }
+    },
+    "/data/companies/{company_id}.json": {
+      "get": {
+        "operationId": "company_news",
+        "summary": "Precomputed news for one catalog company, including zero-news companies",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "company_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "us-lly"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Company metadata and news items"
+          },
+          "404": {
+            "description": "Unknown company ID"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -232,6 +268,31 @@
               "source_scope"
             ],
             "description": "Evidence for market tags. An article may relate to multiple listing markets."
+          },
+          "company_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "title_zh": {
+            "type": "string",
+            "description": "Optional Chinese title; original title is retained"
+          },
+          "summary_zh": {
+            "type": "string",
+            "description": "Optional Chinese editorial or AI summary"
+          },
+          "translation": {
+            "type": "object",
+            "description": "Status, method, time and source basis; pending items retain original text"
+          },
+          "source_kind": {
+            "type": "string",
+            "enum": [
+              "media",
+              "company_release"
+            ]
           }
         }
       },

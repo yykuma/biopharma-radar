@@ -1,3 +1,4 @@
+import { CompanyFilter } from "./company-filter";
 import { RadarStatus } from "./radar-status";
 import { useCallback } from "react";
 import { useNavigate } from "@tanstack/react-router";
@@ -27,6 +28,7 @@ export function ArticleList() {
     setArticleFilter,
     selectedFeedId,
     selectedGroupId,
+    selectedCompanyId,
     selectedArticleId,
     setSelectedArticle,
   } = useUrlState();
@@ -42,6 +44,7 @@ export function ArticleList() {
   } = useArticleList({
     feedId: selectedFeedId,
     groupId: selectedGroupId,
+    companyId: selectedCompanyId,
     articleFilter,
   });
 
@@ -138,6 +141,7 @@ export function ArticleList() {
         </Button>
       </ContentHeader>
       <RadarStatus />
+      <CompanyFilter />
 
       {/* Article area with filter tabs */}
       <div className="flex min-h-0 flex-1 flex-col gap-4 overflow-hidden px-4 py-4 sm:px-6">
@@ -186,7 +190,7 @@ export function ArticleList() {
               ) : (
                 <div className="flex flex-col items-center justify-center py-12 text-center">
                   <p className="text-sm text-muted-foreground">
-                    {t("article.list.noArticles")}
+                    {selectedCompanyId ? "当前条件下暂无已收录新闻。公司已在名录中，官方来源会逐步补充。" : t("article.list.noArticles")}
                   </p>
                 </div>
               )

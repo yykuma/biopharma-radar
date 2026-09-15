@@ -1,12 +1,14 @@
 export interface ItemFilters {
   feedId?: number | null;
   groupId?: number | null;
+  companyId?: string | null;
   unread?: boolean;
 }
 
 export interface NormalizedItemFilters {
   feedId: number | null;
   groupId: number | null;
+  companyId: string | null;
   unread: boolean;
 }
 
@@ -16,6 +18,7 @@ export function normalizeItemFilters(
   return {
     feedId: filters.feedId ?? null,
     groupId: filters.groupId ?? null,
+    companyId: filters.companyId ?? null,
     unread: filters.unread ?? false,
   };
 }
@@ -23,11 +26,13 @@ export function normalizeItemFilters(
 export interface BookmarkFilters {
   feedId?: number | null;
   groupId?: number | null;
+  companyId?: string | null;
 }
 
 export interface NormalizedBookmarkFilters {
   feedId: number | null;
   groupId: number | null;
+  companyId: string | null;
 }
 
 export function normalizeBookmarkFilters(
@@ -36,6 +41,7 @@ export function normalizeBookmarkFilters(
   return {
     feedId: filters.feedId ?? null,
     groupId: filters.groupId ?? null,
+    companyId: filters.companyId ?? null,
   };
 }
 

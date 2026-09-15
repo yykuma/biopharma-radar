@@ -4,6 +4,8 @@ Public healthcare and biotech news. Static, read-only JSON. No authentication.
 Send a descriptive User-Agent header such as YourNewsReader/1.0 when using
 scripts. Cloudflare may reject generic default Python user agents with HTTP 403.
 
+- [Company catalog](data/companies.json)
+- [Company news example: Lilly](data/companies/us-lly.json)
 - [All news](data/latest.json)
 - [Hong Kong](data/markets/hk.json)
 - [US](data/markets/us.json)
@@ -18,6 +20,17 @@ time; first_seen_at is discovery time. Markets are heuristic and can overlap.
 Check last_success_at and collection_status. AI briefings are not independently
 verified. This is partial source coverage, not an exhaustive market feed.
 
-Sources: BioPharma Dive and the Fierce Biotech Biotech section. US coverage is
+Sources: BioPharma Dive, the Fierce Biotech Biotech section, and official releases
+from Lilly, Amgen, Regeneron and Vertex. US coverage is
 the priority; Hong Kong coverage is partial. GLOBAL includes unidentified
 companies and other listing markets. The A-share endpoint is retired.
+
+Company IDs are stable registry keys. Use data/companies/{company_id}.json for
+precomputed company news; zero-news companies return an empty items array.
+Catalog coverage and news coverage differ. US categories are biotechnology and
+drug manufacturing, cross-checked against Nasdaq Trader securities files. HK
+is a reviewed initial subset checked against the HKEX securities list. Catalog
+verification dates are explicit; coverage is not exhaustive or real-time.
+Prefer title_zh and summary_zh for Chinese reading; title and excerpt retain
+original source text. translation.status may be pending when free APIs fail or
+hit their shared daily limits. Never infer extra facts from a short excerpt.

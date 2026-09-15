@@ -134,6 +134,7 @@ export interface MarkItemsReadRequest {
 }
 
 export interface ListItemsParams {
+  company_id?: string;
   feed_id?: number;
   group_id?: number;
   unread?: boolean;
@@ -143,6 +144,7 @@ export interface ListItemsParams {
 }
 
 export interface ListBookmarksParams {
+  company_id?: string;
   feed_id?: number;
   group_id?: number;
   limit?: number;

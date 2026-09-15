@@ -39,6 +39,7 @@ export function ArticleDrawer() {
     setSelectedFeed,
     selectedFeedId,
     selectedGroupId,
+    selectedCompanyId,
     articleFilter,
   } = useUrlState();
   const { getFeedById } = useFeedLookup();
@@ -47,6 +48,7 @@ export function ArticleDrawer() {
     useArticleList({
       feedId: selectedFeedId,
       groupId: selectedGroupId,
+    companyId: selectedCompanyId,
       articleFilter,
     });
 

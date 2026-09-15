@@ -1,0 +1,879 @@
+[
+  {
+    "us_ticker": "LLY",
+    "name_zh": "礼来",
+    "aliases": [
+      "Lilly",
+      "Eli Lilly"
+    ]
+  },
+  {
+    "us_ticker": "AMGN",
+    "name_zh": "安进",
+    "aliases": [
+      "Amgen"
+    ]
+  },
+  {
+    "us_ticker": "REGN",
+    "name_zh": "再生元",
+    "aliases": [
+      "Regeneron"
+    ]
+  },
+  {
+    "us_ticker": "VRTX",
+    "name_zh": "Vertex",
+    "aliases": [
+      "Vertex"
+    ]
+  },
+  {
+    "us_ticker": "PFE",
+    "name_zh": "辉瑞",
+    "aliases": [
+      "Pfizer"
+    ]
+  },
+  {
+    "us_ticker": "MRK",
+    "name_zh": "默沙东",
+    "aliases": [
+      "Merck",
+      "Merck & Co"
+    ],
+    "exclude_aliases": [
+      "Merck KGaA"
+    ]
+  },
+  {
+    "us_ticker": "JNJ",
+    "name_zh": "强生",
+    "aliases": [
+      "Johnson & Johnson",
+      "J&J"
+    ]
+  },
+  {
+    "us_ticker": "ABBV",
+    "name_zh": "艾伯维",
+    "aliases": [
+      "AbbVie"
+    ]
+  },
+  {
+    "us_ticker": "GILD",
+    "name_zh": "吉利德",
+    "aliases": [
+      "Gilead"
+    ]
+  },
+  {
+    "us_ticker": "MRNA",
+    "name_zh": "莫德纳",
+    "aliases": [
+      "Moderna"
+    ]
+  },
+  {
+    "us_ticker": "GSK",
+    "name_zh": "葛兰素史克",
+    "aliases": [
+      "GSK"
+    ]
+  },
+  {
+    "us_ticker": "AZN",
+    "name_zh": "阿斯利康",
+    "aliases": [
+      "AstraZeneca"
+    ]
+  },
+  {
+    "us_ticker": "NVO",
+    "name_zh": "诺和诺德",
+    "aliases": [
+      "Novo Nordisk"
+    ]
+  },
+  {
+    "us_ticker": "NVS",
+    "name_zh": "诺华",
+    "aliases": [
+      "Novartis"
+    ]
+  },
+  {
+    "us_ticker": "SNY",
+    "name_zh": "赛诺菲",
+    "aliases": [
+      "Sanofi"
+    ]
+  },
+  {
+    "us_ticker": "BMY",
+    "name_zh": "百时美施贵宝",
+    "aliases": [
+      "Bristol Myers Squibb",
+      "Bristol Myers",
+      "Bristol-Myers Squibb"
+    ]
+  },
+  {
+    "us_ticker": "TAK",
+    "name_zh": "武田制药",
+    "aliases": [
+      "Takeda"
+    ]
+  },
+  {
+    "us_ticker": "TEVA",
+    "name_zh": "梯瓦制药",
+    "aliases": [
+      "Teva"
+    ]
+  },
+  {
+    "us_ticker": "ALNY",
+    "name_zh": "Alnylam",
+    "aliases": [
+      "Alnylam"
+    ]
+  },
+  {
+    "us_ticker": "ARGX",
+    "name_zh": "argenx",
+    "aliases": [
+      "argenx"
+    ]
+  },
+  {
+    "us_ticker": "BIIB",
+    "name_zh": "渤健",
+    "aliases": [
+      "Biogen"
+    ]
+  },
+  {
+    "us_ticker": "BNTX",
+    "name_zh": "BioNTech",
+    "aliases": [
+      "BioNTech"
+    ]
+  },
+  {
+    "us_ticker": "NBIX",
+    "name_zh": "Neurocrine",
+    "aliases": [
+      "Neurocrine"
+    ]
+  },
+  {
+    "us_ticker": "UTHR",
+    "name_zh": "联合治疗",
+    "aliases": [
+      "United Therapeutics"
+    ]
+  },
+  {
+    "us_ticker": "SMMT",
+    "name_zh": "Summit Therapeutics",
+    "aliases": [
+      "Summit Therapeutics",
+      "Summit"
+    ]
+  },
+  {
+    "us_ticker": "PCVX",
+    "name_zh": "Vaxcyte",
+    "aliases": [
+      "Vaxcyte"
+    ]
+  },
+  {
+    "hk_ticker": "00455",
+    "name": "Tianda Pharmaceuticals",
+    "name_zh": "天大药业",
+    "aliases": [
+      "Tianda Pharmaceuticals"
+    ]
+  },
+  {
+    "hk_ticker": "00460",
+    "name": "Sihuan Pharmaceutical",
+    "name_zh": "四环医药",
+    "aliases": [
+      "Sihuan Pharmaceutical"
+    ]
+  },
+  {
+    "hk_ticker": "00512",
+    "name": "Grand Pharmaceutical",
+    "name_zh": "远大医药",
+    "aliases": [
+      "Grand Pharmaceutical",
+      "Grand Pharma"
+    ]
+  },
+  {
+    "hk_ticker": "00570",
+    "name": "China Traditional Chinese Medicine",
+    "name_zh": "中国中药",
+    "aliases": [
+      "China Traditional Chinese Medicine"
+    ]
+  },
+  {
+    "hk_ticker": "00690",
+    "name": "Uni-Bio Science",
+    "name_zh": "联康生物科技",
+    "aliases": [
+      "Uni-Bio Science"
+    ]
+  },
+  {
+    "hk_ticker": "00775",
+    "name": "CK Life Sciences",
+    "name_zh": "长江生命科技",
+    "aliases": [
+      "CK Life Sciences"
+    ]
+  },
+  {
+    "hk_ticker": "00867",
+    "name": "China Medical System",
+    "name_zh": "康哲药业",
+    "aliases": [
+      "China Medical System",
+      "CMS Pharma"
+    ]
+  },
+  {
+    "hk_ticker": "00874",
+    "name": "Baiyunshan",
+    "name_zh": "白云山",
+    "aliases": [
+      "Baiyunshan"
+    ]
+  },
+  {
+    "hk_ticker": "00950",
+    "name": "Lee's Pharmaceutical",
+    "name_zh": "李氏大药厂",
+    "aliases": [
+      "Lee's Pharmaceutical",
+      "Lee's Pharma"
+    ]
+  },
+  {
+    "hk_ticker": "01061",
+    "name": "Essex Bio-Technology",
+    "name_zh": "亿胜生物科技",
+    "aliases": [
+      "Essex Bio-Technology"
+    ]
+  },
+  {
+    "hk_ticker": "01093",
+    "name": "CSPC",
+    "name_zh": "石药集团",
+    "aliases": [
+      "CSPC",
+      "CSPC Pharmaceutical"
+    ]
+  },
+  {
+    "hk_ticker": "01167",
+    "name": "Jacobio",
+    "name_zh": "加科思",
+    "aliases": [
+      "Jacobio",
+      "Jacobio Pharma"
+    ]
+  },
+  {
+    "hk_ticker": "01177",
+    "name": "Sino Biopharmaceutical",
+    "name_zh": "中国生物制药",
+    "aliases": [
+      "Sino Biopharmaceutical",
+      "SBP Group"
+    ]
+  },
+  {
+    "hk_ticker": "01244",
+    "name": "3D Medicines",
+    "name_zh": "3D Medicines",
+    "aliases": [
+      "3D Medicines",
+      "思路迪医药"
+    ]
+  },
+  {
+    "hk_ticker": "01276",
+    "name": "Hengrui",
+    "name_zh": "恒瑞医药",
+    "aliases": [
+      "Hengrui",
+      "Jiangsu Hengrui"
+    ]
+  },
+  {
+    "hk_ticker": "01477",
+    "name": "Ocumension",
+    "name_zh": "欧康维视",
+    "aliases": [
+      "Ocumension"
+    ]
+  },
+  {
+    "hk_ticker": "01513",
+    "name": "Livzon",
+    "name_zh": "丽珠医药",
+    "aliases": [
+      "Livzon"
+    ]
+  },
+  {
+    "hk_ticker": "01521",
+    "name": "Frontage",
+    "name_zh": "方达控股",
+    "aliases": [
+      "Frontage"
+    ],
+    "category": "research_services"
+  },
+  {
+    "hk_ticker": "01530",
+    "name": "3SBio",
+    "name_zh": "三生制药",
+    "aliases": [
+      "3SBio"
+    ]
+  },
+  {
+    "hk_ticker": "01548",
+    "name": "GenScript",
+    "name_zh": "金斯瑞生物科技",
+    "aliases": [
+      "GenScript",
+      "Genscript"
+    ]
+  },
+  {
+    "hk_ticker": "01652",
+    "name": "Fusen Pharmaceutical",
+    "name_zh": "福森药业",
+    "aliases": [
+      "Fusen Pharmaceutical"
+    ]
+  },
+  {
+    "hk_ticker": "01666",
+    "name": "Tong Ren Tang Technologies",
+    "name_zh": "同仁堂科技",
+    "aliases": [
+      "Tong Ren Tang Technologies"
+    ]
+  },
+  {
+    "hk_ticker": "01681",
+    "name": "Consun Pharmaceutical",
+    "name_zh": "康臣药业",
+    "aliases": [
+      "Consun Pharmaceutical"
+    ]
+  },
+  {
+    "hk_ticker": "01801",
+    "name": "Innovent",
+    "name_zh": "信达生物",
+    "aliases": [
+      "Innovent"
+    ]
+  },
+  {
+    "hk_ticker": "01873",
+    "name": "Viva Biotech",
+    "name_zh": "维亚生物",
+    "aliases": [
+      "Viva Biotech"
+    ],
+    "category": "research_services"
+  },
+  {
+    "hk_ticker": "01875",
+    "name": "Biodlink",
+    "name_zh": "东曜药业",
+    "aliases": [
+      "Biodlink",
+      "TOT Biopharm"
+    ]
+  },
+  {
+    "hk_ticker": "01877",
+    "name": "Junshi",
+    "name_zh": "君实生物",
+    "aliases": [
+      "Junshi"
+    ]
+  },
+  {
+    "hk_ticker": "01952",
+    "name": "Everest Medicines",
+    "name_zh": "云顶新耀",
+    "aliases": [
+      "Everest Medicines"
+    ]
+  },
+  {
+    "hk_ticker": "02005",
+    "name": "SSY Group",
+    "name_zh": "石四药集团",
+    "aliases": [
+      "SSY Group"
+    ]
+  },
+  {
+    "hk_ticker": "02096",
+    "name": "Simcere",
+    "name_zh": "先声药业",
+    "aliases": [
+      "Simcere"
+    ]
+  },
+  {
+    "hk_ticker": "02126",
+    "name": "JW Therapeutics",
+    "name_zh": "药明巨诺",
+    "aliases": [
+      "JW Therapeutics"
+    ]
+  },
+  {
+    "hk_ticker": "02137",
+    "name": "Brii Biosciences",
+    "name_zh": "腾盛博药",
+    "aliases": [
+      "Brii Biosciences",
+      "Brii"
+    ]
+  },
+  {
+    "hk_ticker": "02157",
+    "name": "Lepu Biopharma",
+    "name_zh": "乐普生物",
+    "aliases": [
+      "Lepu Biopharma"
+    ]
+  },
+  {
+    "hk_ticker": "02162",
+    "name": "Keymed",
+    "name_zh": "康诺亚",
+    "aliases": [
+      "Keymed",
+      "Keymed Biosciences"
+    ]
+  },
+  {
+    "hk_ticker": "02179",
+    "name": "Recbio",
+    "name_zh": "瑞科生物",
+    "aliases": [
+      "Recbio"
+    ]
+  },
+  {
+    "hk_ticker": "02181",
+    "name": "Mabpharm",
+    "name_zh": "迈博药业",
+    "aliases": [
+      "Mabpharm"
+    ]
+  },
+  {
+    "hk_ticker": "02186",
+    "name": "Luye Pharma",
+    "name_zh": "绿叶制药",
+    "aliases": [
+      "Luye Pharma"
+    ]
+  },
+  {
+    "hk_ticker": "02196",
+    "name": "Fosun Pharma",
+    "name_zh": "复星医药",
+    "aliases": [
+      "Fosun Pharma",
+      "Fosun Pharmaceutical"
+    ]
+  },
+  {
+    "hk_ticker": "02197",
+    "name": "Clover Biopharmaceuticals",
+    "name_zh": "三叶草生物",
+    "aliases": [
+      "Clover Biopharmaceuticals",
+      "Clover Biopharma"
+    ]
+  },
+  {
+    "hk_ticker": "02256",
+    "name": "Abbisko",
+    "name_zh": "和誉",
+    "aliases": [
+      "Abbisko"
+    ]
+  },
+  {
+    "hk_ticker": "02257",
+    "name": "Sirnaomics",
+    "name_zh": "圣诺医药",
+    "aliases": [
+      "Sirnaomics"
+    ]
+  },
+  {
+    "hk_ticker": "02268",
+    "name": "WuXi XDC",
+    "name_zh": "药明合联",
+    "aliases": [
+      "WuXi XDC"
+    ],
+    "category": "research_services"
+  },
+  {
+    "hk_ticker": "02269",
+    "name": "WuXi Biologics",
+    "name_zh": "药明生物",
+    "aliases": [
+      "WuXi Biologics"
+    ],
+    "category": "research_services"
+  },
+  {
+    "hk_ticker": "02315",
+    "name": "Biocytogen",
+    "name_zh": "百奥赛图",
+    "aliases": [
+      "Biocytogen"
+    ]
+  },
+  {
+    "hk_ticker": "02348",
+    "name": "Dawnrays",
+    "name_zh": "东瑞制药",
+    "aliases": [
+      "Dawnrays"
+    ]
+  },
+  {
+    "hk_ticker": "02359",
+    "name": "WuXi AppTec",
+    "name_zh": "药明康德",
+    "aliases": [
+      "WuXi AppTec"
+    ],
+    "category": "research_services"
+  },
+  {
+    "hk_ticker": "02410",
+    "name": "TYK Medicines",
+    "name_zh": "同源康医药",
+    "aliases": [
+      "TYK Medicines"
+    ]
+  },
+  {
+    "hk_ticker": "02480",
+    "name": "Luzhu Biotechnology",
+    "name_zh": "绿竹生物",
+    "aliases": [
+      "Luzhu Biotechnology",
+      "Luzhu Biotech"
+    ]
+  },
+  {
+    "hk_ticker": "02487",
+    "name": "Cutia Therapeutics",
+    "name_zh": "科笛",
+    "aliases": [
+      "Cutia Therapeutics"
+    ]
+  },
+  {
+    "hk_ticker": "02496",
+    "name": "YZY Biopharma",
+    "name_zh": "友芝友生物",
+    "aliases": [
+      "YZY Biopharma",
+      "YZYBIO"
+    ]
+  },
+  {
+    "hk_ticker": "02511",
+    "name": "HighTide Therapeutics",
+    "name_zh": "君圣泰医药",
+    "aliases": [
+      "HighTide Therapeutics"
+    ]
+  },
+  {
+    "hk_ticker": "02552",
+    "name": "Hua Medicine",
+    "name_zh": "华领医药",
+    "aliases": [
+      "Hua Medicine"
+    ]
+  },
+  {
+    "hk_ticker": "02561",
+    "name": "Visen Pharmaceuticals",
+    "name_zh": "维昇药业",
+    "aliases": [
+      "Visen Pharmaceuticals",
+      "Visen Pharma"
+    ]
+  },
+  {
+    "hk_ticker": "02607",
+    "name": "Shanghai Pharmaceuticals",
+    "name_zh": "上海医药",
+    "aliases": [
+      "Shanghai Pharmaceuticals"
+    ]
+  },
+  {
+    "hk_ticker": "02616",
+    "name": "CStone",
+    "name_zh": "基石药业",
+    "aliases": [
+      "CStone",
+      "CStone Pharmaceuticals"
+    ]
+  },
+  {
+    "hk_ticker": "02633",
+    "name": "Jacobson Pharma",
+    "name_zh": "嘉宏制药",
+    "aliases": [
+      "Jacobson Pharma"
+    ]
+  },
+  {
+    "hk_ticker": "02696",
+    "name": "Henlius",
+    "name_zh": "复宏汉霖",
+    "aliases": [
+      "Henlius"
+    ]
+  },
+  {
+    "hk_ticker": "02877",
+    "name": "Shineway Pharmaceutical",
+    "name_zh": "神威药业",
+    "aliases": [
+      "Shineway Pharmaceutical"
+    ]
+  },
+  {
+    "hk_ticker": "03347",
+    "name": "Tigermed",
+    "name_zh": "泰格医药",
+    "aliases": [
+      "Tigermed"
+    ],
+    "category": "research_services"
+  },
+  {
+    "hk_ticker": "03613",
+    "name": "Tong Ren Tang Chinese Medicine",
+    "name_zh": "同仁堂国药",
+    "aliases": [
+      "Tong Ren Tang Chinese Medicine"
+    ]
+  },
+  {
+    "hk_ticker": "03681",
+    "name": "SinoMab",
+    "name_zh": "中国抗体",
+    "aliases": [
+      "SinoMab"
+    ]
+  },
+  {
+    "hk_ticker": "03692",
+    "name": "Hansoh",
+    "name_zh": "翰森制药",
+    "aliases": [
+      "Hansoh"
+    ]
+  },
+  {
+    "hk_ticker": "03759",
+    "name": "Pharmaron",
+    "name_zh": "康龙化成",
+    "aliases": [
+      "Pharmaron"
+    ],
+    "category": "research_services"
+  },
+  {
+    "hk_ticker": "03933",
+    "name": "United Laboratories",
+    "name_zh": "联邦制药",
+    "aliases": [
+      "United Laboratories"
+    ]
+  },
+  {
+    "hk_ticker": "06160",
+    "name": "BeOne Medicines",
+    "name_zh": "百济神州",
+    "aliases": [
+      "BeOne Medicines",
+      "BeiGene"
+    ],
+    "us_ticker": "ONC"
+  },
+  {
+    "hk_ticker": "06185",
+    "name": "CanSino",
+    "name_zh": "康希诺生物",
+    "aliases": [
+      "CanSino",
+      "CanSino Biologics"
+    ]
+  },
+  {
+    "hk_ticker": "06855",
+    "name": "Ascentage",
+    "name_zh": "亚盛医药",
+    "aliases": [
+      "Ascentage"
+    ],
+    "us_ticker": "AAPG"
+  },
+  {
+    "hk_ticker": "06887",
+    "name": "HEC Pharm",
+    "name_zh": "东阳光长江药业",
+    "aliases": [
+      "HEC Pharm",
+      "Sunshine Lake Pharma",
+      "Sunshine Pharma"
+    ]
+  },
+  {
+    "hk_ticker": "06955",
+    "name": "Boan Biotech",
+    "name_zh": "博安生物",
+    "aliases": [
+      "Boan Biotech",
+      "Boan Biotechnology"
+    ]
+  },
+  {
+    "hk_ticker": "06978",
+    "name": "Immunotech Biopharm",
+    "name_zh": "永泰生物",
+    "aliases": [
+      "Immunotech Biopharm"
+    ]
+  },
+  {
+    "hk_ticker": "06990",
+    "name": "Kelun-Biotech",
+    "name_zh": "科伦博泰",
+    "aliases": [
+      "Kelun-Biotech",
+      "Kelun Biotech"
+    ]
+  },
+  {
+    "hk_ticker": "06996",
+    "name": "Antengene",
+    "name_zh": "德琪医药",
+    "aliases": [
+      "Antengene"
+    ]
+  },
+  {
+    "hk_ticker": "06998",
+    "name": "Genor Biopharma",
+    "name_zh": "嘉和生物",
+    "aliases": [
+      "Genor Biopharma",
+      "Edding Genor"
+    ]
+  },
+  {
+    "hk_ticker": "09606",
+    "name": "DualityBio",
+    "name_zh": "映恩生物",
+    "aliases": [
+      "DualityBio",
+      "Duality Biologics"
+    ]
+  },
+  {
+    "hk_ticker": "09688",
+    "name": "Zai Lab",
+    "name_zh": "再鼎医药",
+    "aliases": [
+      "Zai Lab"
+    ],
+    "us_ticker": "ZLAB"
+  },
+  {
+    "hk_ticker": "09887",
+    "name": "Leads Biolabs",
+    "name_zh": "维立志博",
+    "aliases": [
+      "Leads Biolabs"
+    ]
+  },
+  {
+    "hk_ticker": "09926",
+    "name": "Akeso",
+    "name_zh": "康方生物",
+    "aliases": [
+      "Akeso"
+    ]
+  },
+  {
+    "hk_ticker": "09939",
+    "name": "Kintor",
+    "name_zh": "开拓药业",
+    "aliases": [
+      "Kintor"
+    ]
+  },
+  {
+    "hk_ticker": "09966",
+    "name": "Alphamab",
+    "name_zh": "康宁杰瑞",
+    "aliases": [
+      "Alphamab",
+      "Alphamab Oncology"
+    ]
+  },
+  {
+    "hk_ticker": "09969",
+    "name": "InnoCare",
+    "name_zh": "诺诚健华",
+    "aliases": [
+      "InnoCare"
+    ]
+  },
+  {
+    "hk_ticker": "09995",
+    "name": "RemeGen",
+    "name_zh": "荣昌生物",
+    "aliases": [
+      "RemeGen",
+      "Remegen"
+    ]
+  }
+]

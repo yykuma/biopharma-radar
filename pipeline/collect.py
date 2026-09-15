@@ -14,32 +14,25 @@ from xml.etree.ElementTree import Element, SubElement, ElementTree
 
 from trendradar.crawler.rss import RSSFetcher, RSSFeedConfig
 from ai_router import summarize
+from company_registry import CATALOG, match_companies
+from localize import apply_cached, localize, SEED_PATH
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCES = json.loads((ROOT / 'config/sources.json').read_text())
-COMPANIES = {
-    '恒瑞': ['A','HK'], 'Hengrui':['A','HK'], 'Mindray':['A'], 'Aier':['A'], 'Pien Tze Huang':['A'], '药明康德':['A','HK'], 'WuXi AppTec':['A','HK'], 'CSPC':['HK'], 'Sino Biopharmaceutical':['HK'], 'Akeso':['HK'], 'Innovent':['HK'], 'Hansoh':['HK'], 'GSK':['US'], 'Moderna':['US'], '迈瑞': ['A'], '爱尔眼科':['A'], '片仔癀':['A'],
-    '百利天恒':['A'], '康方':['HK'], '信达生物':['HK'], '石药':['HK'],
-    '中国生物制药':['HK'], '药明生物':['HK'], '翰森':['HK'],
-    '礼来':['US'], 'Lilly':['US'], 'Pfizer':['US'], '辉瑞':['US'],
-    'AbbVie':['US'], 'Amgen':['US'], 'Gilead':['US'], 'Regeneron':['US'],
-    'Vertex':['US'], 'Merck':['US'], 'Johnson & Johnson':['US']}
 GROUPS = {'US':'美股', 'HK':'港股', 'GLOBAL':'行业动态'}
 
 
 def classify(article, source):
-    title = re.sub(r'Merck\s+KGaA', '', article['title'], flags=re.I)
-    names = [name for name in COMPANIES if name.casefold() in title.casefold()]
-    ticker_markets = set()
-    if re.search(r'\b\d{6}\.(?:SH|SS|SZ|BJ)\b', title, re.I):
-        ticker_markets.add('A')
-    if re.search(r'\b\d{4,5}\.HK\b', title, re.I):
-        ticker_markets.add('HK')
-    markets = sorted({m for name in names for m in COMPANIES[name]} | ticker_markets)
-    article.update(companies=names,
-                   markets=[m for m in markets if m in GROUPS] or [source['market'] if source['market'] in GROUPS and not source['id'].endswith('yahoo') else 'GLOBAL'],
-                   market_basis='company_alias' if names else 'ticker' if ticker_markets else 'source_scope',
+    companies = match_companies(article['title']+' '+article.get('excerpt',''),source)
+    markets = sorted({listing['market'] for c in companies for listing in c['listings']})
+    ticker_hk = bool(re.search(r'\b\d{4,5}\.HK\b',article['title'],re.I))
+    if ticker_hk and 'HK' not in markets: markets.append('HK')
+    article.update(companies=[c.get('name_zh') or c['name'] for c in companies],
+                   company_ids=[c['id'] for c in companies],
+                   markets=markets or [source['market'] if source['market'] in GROUPS and not source['id'].endswith('yahoo') else 'GLOBAL'],
+                   market_basis='company_registry' if companies else 'ticker' if ticker_hk else 'source_scope',
                    source=source['name'], publisher=source.get('publisher', source['name']),
+                   source_kind=source.get('source_kind','media'),
                    content_type=source.get('content_type', 'news'), content_type_basis='source_format')
     return article
 
@@ -80,7 +73,7 @@ def normalize(row, source, now):
 def fetch_source(source):
     now = int(time.time())
     try:
-        feed = RSSFeedConfig(id=source['id'], name=source['name'], url=source['url'], max_items=100)
+        feed = RSSFeedConfig(id=source['id'], name=source['name'], url=source['url'], max_items=source.get('max_items',100))
         items, error = RSSFetcher([feed], timeout=20).fetch_feed(feed)
         if error:
             raise ValueError(error)
@@ -116,6 +109,7 @@ def collect(out, previous_path=None, ai_enabled=False):
     previous = json.loads(previous_path.read_text()) if previous_path and previous_path.exists() else {}
     now = int(time.time())
     merged, previous_briefing = prepare_previous(previous, now)
+    seed=json.loads(SEED_PATH.read_text()) if SEED_PATH.exists() else {}
     states=[]
     with concurrent.futures.ThreadPoolExecutor(max_workers=4) as pool:
         for articles, state in pool.map(fetch_source, SOURCES):
@@ -124,14 +118,23 @@ def collect(out, previous_path=None, ai_enabled=False):
                 prior=merged.get(article['id'])
                 if prior:
                     article['first_seen_at']=prior['first_seen_at']
+                apply_cached(article,prior,seed)
                 merged[article['id']]=article
     items=sorted(merged.values(), key=lambda a: (a['published_at'] or a['first_seen_at'],a['id']),reverse=True)[:1500]
+    for item in items:
+        apply_cached(item,item,seed)
+    previous_briefing=localize(items,SOURCES,previous_briefing,ai_enabled,now)
     success=any(s['status']=='ok' for s in states)
     snapshot=dict(schema_version='1.0', updated_at=now, last_success_at=now if success else previous.get('last_success_at'),
                   collection_status='ok' if all(s['status']=='ok' for s in states) else 'partial' if success else 'failed',
-                  coverage_note='专业医药媒体报道；美股优先，港股部分覆盖。市场按已知公司匹配，未识别公司或非美港市场归入行业动态；非完整上市公司名录。',
+                  coverage_note='专业医药媒体与公司官方公告；公司名录与新闻覆盖分别维护，美港均为部分新闻覆盖。中文为来源翻译或摘要，原文保留。',
                   sources=states, items=items, total=len(items),
                   briefing=summarize(items,previous_briefing,ai_enabled))
+    catalog={**CATALOG,'companies':[{**c,'news_count':sum(c['id'] in a['company_ids'] for a in items),'official_source_ids':[s['id'] for s in SOURCES if c['id'] in s.get('company_ids',[])]} for c in CATALOG['companies']]}
+    (out/'companies.json').write_text(json.dumps(catalog,ensure_ascii=False,separators=(',',':')))
+    by_company=out/'companies';by_company.mkdir(exist_ok=True)
+    for company in catalog['companies']:
+        (by_company/(company['id']+'.json')).write_text(json.dumps({'schema_version':'1.0','updated_at':now,'company':company,'items':[a for a in items if company['id'] in a['company_ids']]},ensure_ascii=False,separators=(',',':')))
     (out/'latest.json').write_text(json.dumps(snapshot,ensure_ascii=False,separators=(',',':')))
     (out/'briefing.json').write_text(json.dumps(snapshot['briefing'],ensure_ascii=False,indent=2))
     (out/'markets'/'a.json').unlink(missing_ok=True)
@@ -143,7 +146,7 @@ def collect(out, previous_path=None, ai_enabled=False):
     for k,v in {'title':'医药动态','link':os.environ.get('SITE_URL', 'https://biopharma-radar.pages.dev').rstrip('/')+'/','description':'美股为主、港股补充的生物医药行业新闻'}.items():SubElement(channel,k).text=v
     for a in items[:100]:
         node=SubElement(channel,'item')
-        for k,v in {'title':a['title'],'link':a['url'],'guid':a['url'],'description':a['excerpt']}.items():SubElement(node,k).text=v
+        for k,v in {'title':a.get('title_zh') or a['title'],'link':a['url'],'guid':a['url'],'description':a.get('summary_zh') or a['excerpt']}.items():SubElement(node,k).text=v
         from email.utils import formatdate
         SubElement(node,'pubDate').text=formatdate(a['published_at'] or a['first_seen_at'],usegmt=True)
     ElementTree(rss).write(out/'feed.xml',encoding='utf-8',xml_declaration=True)

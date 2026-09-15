@@ -5,7 +5,11 @@
     "publisher": "BioPharma Dive",
     "market": "GLOBAL",
     "content_type": "news",
-    "url": "https://www.biopharmadive.com/feeds/news/"
+    "url": "https://www.biopharmadive.com/feeds/news/",
+    "article_hosts": [
+      "www.biopharmadive.com"
+    ],
+    "article_selector": ".article-body"
   },
   {
     "id": "fiercebiotech-biotech",
@@ -13,6 +17,78 @@
     "publisher": "Fierce Biotech",
     "market": "GLOBAL",
     "content_type": "news",
-    "url": "https://www.fiercebiotech.com/rss/biotech/xml"
+    "url": "https://www.fiercebiotech.com/rss/biotech/xml",
+    "article_hosts": [
+      "www.fiercebiotech.com"
+    ],
+    "article_selector": "#article-body-row"
+  },
+  {
+    "id": "lilly-official",
+    "name": "礼来 · 官方公告",
+    "publisher": "礼来 · 官方公告",
+    "market": "US",
+    "content_type": "news",
+    "source_kind": "company_release",
+    "company_ids": [
+      "us-lly"
+    ],
+    "url": "https://investor.lilly.com/rss/news-releases.xml",
+    "max_items": 6,
+    "article_hosts": [
+      "investor.lilly.com"
+    ],
+    "article_selector": ".field--name-field-nir-news-body, .full-release-body, .xn-content"
+  },
+  {
+    "id": "amgen-official",
+    "name": "安进 · 官方公告",
+    "publisher": "安进 · 官方公告",
+    "market": "US",
+    "content_type": "news",
+    "source_kind": "company_release",
+    "company_ids": [
+      "us-amgn"
+    ],
+    "url": "https://investors.amgen.com/rss/news-releases.xml",
+    "max_items": 6,
+    "article_hosts": [
+      "investors.amgen.com"
+    ],
+    "article_selector": ".field--name-field-nir-news-body, .full-release-body, .xn-content"
+  },
+  {
+    "id": "regeneron-official",
+    "name": "再生元 · 官方公告",
+    "publisher": "再生元 · 官方公告",
+    "market": "US",
+    "content_type": "news",
+    "source_kind": "company_release",
+    "company_ids": [
+      "us-regn"
+    ],
+    "url": "https://investor.regeneron.com/rss/news-releases.xml",
+    "max_items": 6,
+    "article_hosts": [
+      "investor.regeneron.com"
+    ],
+    "article_selector": ".field--name-field-nir-news-body, .full-release-body, .xn-content"
+  },
+  {
+    "id": "vertex-official",
+    "name": "Vertex · 官方公告",
+    "publisher": "Vertex · 官方公告",
+    "market": "US",
+    "content_type": "news",
+    "source_kind": "company_release",
+    "company_ids": [
+      "us-vrtx"
+    ],
+    "url": "https://investors.vrtx.com/rss/news-releases.xml",
+    "max_items": 6,
+    "article_hosts": [
+      "investors.vrtx.com"
+    ],
+    "article_selector": ".field--name-field-nir-news-body, .full-release-body, .xn-content"
   }
 ]

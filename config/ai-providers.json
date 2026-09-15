@@ -20,7 +20,8 @@
           "category": "text",
           "free_tier": "free",
           "tasks": [
-            "news_summary"
+            "news_summary",
+            "news_translation"
           ],
           "enabled": true,
           "tested": true
@@ -30,7 +31,8 @@
           "category": "vision",
           "free_tier": "free",
           "tasks": [
-            "news_summary"
+            "news_summary",
+            "news_translation"
           ],
           "enabled": true,
           "tested": true
@@ -40,7 +42,8 @@
           "category": "vision",
           "free_tier": "free",
           "tasks": [
-            "news_summary"
+            "news_summary",
+            "news_translation"
           ],
           "enabled": false,
           "tested": false
@@ -50,7 +53,8 @@
           "category": "vision",
           "free_tier": "limited_free",
           "tasks": [
-            "news_summary"
+            "news_summary",
+            "news_translation"
           ],
           "enabled": false,
           "tested": false
@@ -72,7 +76,8 @@
           "category": "text",
           "free_tier": "limited_free",
           "tasks": [
-            "news_summary"
+            "news_summary",
+            "news_translation"
           ],
           "enabled": true,
           "tested": true
@@ -82,7 +87,8 @@
           "category": "text",
           "free_tier": "limited_free",
           "tasks": [
-            "news_summary"
+            "news_summary",
+            "news_translation"
           ],
           "enabled": false,
           "tested": false
@@ -104,7 +110,8 @@
           "category": "text",
           "free_tier": "free",
           "tasks": [
-            "news_summary"
+            "news_summary",
+            "news_translation"
           ],
           "enabled": false,
           "tested": false
@@ -132,7 +139,8 @@
           "category": "vision",
           "free_tier": "beta_free",
           "tasks": [
-            "news_summary"
+            "news_summary",
+            "news_translation"
           ],
           "enabled": true,
           "tested": true,
@@ -147,7 +155,8 @@
           "category": "vision",
           "free_tier": "beta_free",
           "tasks": [
-            "news_summary"
+            "news_summary",
+            "news_translation"
           ],
           "enabled": false,
           "tested": false
@@ -174,7 +183,8 @@
           "category": "text",
           "free_tier": "beta_free",
           "tasks": [
-            "news_summary"
+            "news_summary",
+            "news_translation"
           ],
           "enabled": true,
           "tested": true,
@@ -189,7 +199,8 @@
           "category": "text",
           "free_tier": "beta_free",
           "tasks": [
-            "news_summary"
+            "news_summary",
+            "news_translation"
           ],
           "enabled": false,
           "tested": false
@@ -199,7 +210,8 @@
           "category": "text",
           "free_tier": "beta_free",
           "tasks": [
-            "news_summary"
+            "news_summary",
+            "news_translation"
           ],
           "enabled": false,
           "tested": false
@@ -209,7 +221,8 @@
           "category": "text",
           "free_tier": "beta_free",
           "tasks": [
-            "news_summary"
+            "news_summary",
+            "news_translation"
           ],
           "enabled": false,
           "tested": false
@@ -219,7 +232,8 @@
           "category": "image_generation",
           "free_tier": "beta_free",
           "tasks": [
-            "image_generation"
+            "image_generation",
+            "news_translation"
           ],
           "enabled": false,
           "tested": false
@@ -229,7 +243,8 @@
           "category": "image_generation",
           "free_tier": "beta_free",
           "tasks": [
-            "image_generation"
+            "image_generation",
+            "news_translation"
           ],
           "enabled": false,
           "tested": false

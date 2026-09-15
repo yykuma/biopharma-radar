@@ -7,12 +7,12 @@ const snapshot = {
     {id:'source',name:'A-share collection',publisher:'Company feed',status:'ok',checked_at:100},
     {id:'other',name:'HK collection',publisher:'Company feed',status:'ok',checked_at:100}],
   items: [1,2,3].map(id => ({id,title:`News ${id}`,source:'Company',source_id:id===3?'other':'source',markets:id===1?['HK','US']:['US'],
-    content_type:id===1?'brief':'news', companies:[],published_at:100,first_seen_at:100,url:`https://example.org/${id}`,excerpt:id===1?'':'<script>alert(1)</script>'})),
+    company_ids:id===3?['us-other']:['us-lly'],title_zh:id===2?'中文试验结果':undefined,summary_zh:id===2?'试验未达到主要终点。':undefined,content_type:id===1?'brief':'news', companies:[],published_at:100,first_seen_at:100,url:`https://example.org/${id}`,excerpt:id===1?'':'<script>alert(1)</script>'})),
 };
 globalThis.fetch = async () => ({ok:true,json:async () => snapshot});
 const storage = new Map();
 globalThis.localStorage = {getItem:key=>storage.get(key),setItem:(key,value)=>storage.set(key,value)};
-const source = (await readFile(new URL('../src/lib/api/static.ts',import.meta.url),'utf8')).replace('import.meta.env.BASE_URL',JSON.stringify('/'));
+const source = (await readFile(new URL('../src/lib/api/static.ts',import.meta.url),'utf8')).replaceAll('import.meta.env.BASE_URL',JSON.stringify('/'));
 const {staticRequest:request} = await import('data:text/javascript,'+encodeURIComponent(stripTypeScriptTypes(source)));
 
 const groups=(await request('/groups')).data;
@@ -47,4 +47,16 @@ assert.equal((await request('/bookmarks')).data.length,1);
 assert.equal((await request('/bookmarks')).data[0].content_type,'brief');
 await request('/bookmarks/1',{method:'DELETE'});
 assert.equal((await request('/bookmarks')).data.length,0);
+assert.equal((await request('/items?company_id=us-lly')).total,2);
+assert.equal((await request('/items?company_id=us-lly&group_id=2')).total,1);
+assert.equal((await request('/items?company_id=us-other&group_id=2')).total,0);
+assert.equal((await request('/items?company_id=unknown')).total,0);
+const chinese=(await request('/items/2')).data;
+assert.equal(chinese.title,'中文试验结果');
+assert.equal(chinese.summary,'试验未达到主要终点。');
+assert.ok(chinese.content.includes('查看原文标题与摘录'));
+await request('/bookmarks',{method:'POST',body:JSON.stringify({...chinese,item_id:2})});
+assert.equal((await request('/bookmarks?company_id=us-lly')).total,1);
+assert.equal((await request('/bookmarks?company_id=us-other')).total,0);
+assert.equal((await request('/bookmarks')).data[0].title,'中文试验结果');
 console.log('Static adapter: market filters, counts, pagination, escaping, read state and bookmarks passed.');

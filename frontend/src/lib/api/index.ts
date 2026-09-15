@@ -81,6 +81,7 @@ export const feedAPI = {
 export const itemAPI = {
   list: (params?: ListItemsParams) => {
     const query = new URLSearchParams();
+    if (params?.company_id) query.set("company_id", params.company_id);
     if (params?.feed_id) query.set("feed_id", params.feed_id.toString());
     if (params?.group_id) query.set("group_id", params.group_id.toString());
     if (params?.unread !== undefined)
@@ -108,6 +109,7 @@ export const itemAPI = {
 export const bookmarkAPI = {
   list: (params: ListBookmarksParams = {}) => {
     const query = new URLSearchParams();
+    if (params.company_id) query.set("company_id", params.company_id);
     if (params.feed_id) query.set("feed_id", params.feed_id.toString());
     if (params.group_id) query.set("group_id", params.group_id.toString());
     query.set("limit", (params.limit ?? 50).toString());

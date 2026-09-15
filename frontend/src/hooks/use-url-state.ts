@@ -24,6 +24,7 @@ export function useUrlState() {
 
   const routeFeedId = parsePositiveIntegerParam(params.feedId);
   const routeGroupId = parsePositiveIntegerParam(params.groupId);
+  const selectedCompanyId = typeof search.company === "string" && /^(us-[a-z0-9.-]+|hk-\d{5})$/.test(search.company) ? search.company : null;
   const selectedArticleId = parsePositiveIntegerParam(search.article);
   const routeFilter =
     typeof params.filter === "string" && isArticleFilter(params.filter)
@@ -40,19 +41,21 @@ export function useUrlState() {
       feedId,
       groupId,
       articleId,
+      companyId,
       replace,
     }: {
       filter?: ArticleFilter;
       feedId?: number | null;
       groupId?: number | null;
       articleId?: number | null;
+      companyId?: string | null;
       replace?: boolean;
     } = {}) => {
       const nextFilter = filter ?? articleFilter;
       const nextFeedId = feedId === undefined ? selectedFeedId : feedId;
       const nextGroupId = groupId === undefined ? selectedGroupId : groupId;
       const nextArticleId = articleId === undefined ? selectedArticleId : articleId;
-      const nextSearch = { article: nextArticleId ?? undefined };
+      const nextSearch = { article: nextArticleId ?? undefined, company: (companyId === undefined ? selectedCompanyId : companyId) ?? undefined };
 
       if (nextGroupId !== null) {
         navigate({
@@ -91,10 +94,15 @@ export function useUrlState() {
       articleFilter,
       navigate,
       selectedArticleId,
+      selectedCompanyId,
       selectedFeedId,
       selectedGroupId,
     ],
   );
+
+  const setSelectedCompany = useCallback((companyId: string | null) => {
+    navigateToList({ companyId, articleId: null, feedId: null, groupId: null });
+  }, [navigateToList]);
 
   const setSelectedFeed = useCallback(
     (feedId: number | null) => {
@@ -163,6 +171,8 @@ export function useUrlState() {
     selectedFeedId,
     selectedGroupId,
     selectedArticleId,
+    selectedCompanyId,
+    setSelectedCompany,
     articleFilter,
     setSelectedFeed,
     setSelectedGroup,

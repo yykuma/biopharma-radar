@@ -8,16 +8,15 @@ at `792bcc3928b1617bba09df34989fd5675c159b86`.
 
 GitHub Actions collects news every two hours, exports static JSON, and builds Fusion for
 Cloudflare Pages. No separate Fusion Go server or database is required.
-Sources are BioPharma Dive and the Fierce Biotech Biotech section.
-The former Google, Yahoo, wire feeds and single-company feed are retired; their
+Sources are BioPharma Dive, the Fierce Biotech Biotech section, and official releases from Lilly, Amgen, Regeneron and Vertex.
+The former Google, Yahoo and wire feeds are retired; their
 articles are removed from current snapshots. Source changes clear cached briefing
 text while preserving AI quota, cooldown and rotation state.
 The previous published snapshot retains up to 1,500 articles for 30 days and AI routing
 state. Bookmarks and read status are browser-local. Sources are maintained in Git.
 
 Market labels are heuristic and incomplete. Unknown companies remain global.
-The industry group includes unidentified companies and other listing markets. Content consists of
-headlines and short source excerpts, not mirrored full articles. All source links remain.
+The industry group includes unidentified companies and other listing markets. Content includes original headlines/excerpts plus Chinese editorial or AI summaries. Full articles are not mirrored. All source links remain.
 
 ## Development
 
@@ -55,11 +54,11 @@ The integration currently supports OpenAI-compatible chat completions with usage
 
 Providers/models have separate enable switches. Models are classified by `category`,
 `free_tier` and supported `tasks`. Only enabled free/limited_free/beta_free models supporting
-`news_summary` participate. These cost labels are operator declarations, not billing
+the requested task (`news_summary` or `news_translation`) participate. These cost labels are operator declarations, not billing
 verification. Keep paid billing and automatic top-ups disabled.
 
 `round_robin` advances after the last successful model; `failover` preserves order.
-Each run allows at most three requests, without SDK retries or paid fallback.
+Each task allows at most three attempts, without SDK retries or paid fallback. Translation and briefing share provider daily request caps, cooldowns and usage counters.
 429 cools the entire provider for an hour; 401/403 for 24 hours. A 404 cools the model
 for 24 hours; other failures for 15 minutes. Cooldowns and rotation position persist
 in the published briefing without credentials or raw exception messages.
@@ -99,3 +98,33 @@ to a pool or model. `expires_at` is a local review deadline, not a provider prom
 `routing_role: fallback` reserves limited APIs for primary-provider failures.
 SenseNova defaults to two attempts per pool per day and a 30-day pricing review.
 Quota descriptions are operator notes, not a hard guarantee about provider billing.
+
+## Company catalog and Chinese news
+
+`config/companies.json` is the reviewed initial catalog: 690 US listings and 81 HK
+listings, consolidated to 768 issuers. Three issuers have both markets. This is
+source-based coverage, not an assertion that every currently listed company is
+present. OTC companies, devices and hospitals are outside the US category scope.
+Each entry retains classification/listing sources and a verification date.
+`config/company-overrides.json` supplies reviewed aliases, Chinese names and HK
+coverage. `pipeline/build_companies.py INPUT_DIR --date YYYY-MM-DD` rebuilds the
+catalog from downloaded source files; review additions and removals before commit.
+Input names and URL patterns are documented in the script. The HK rows input is
+an array of spreadsheet rows from HKEX ListOfSecurities.xlsx. Industry source
+files are StockAnalysis biotechnology pages 1/2 and general/specialty drug pages;
+listing files are Nasdaq Trader nasdaqlisted.txt and otherlisted.txt.
+
+The pipeline exports `data/companies.json` and `data/companies/{company_id}.json`.
+Company filters combine with market, unread and bookmark filters. News counts
+represent retained articles, not total market news. Official source IDs indicate
+which company feeds are connected; a catalog entry does not enable collection.
+
+The first 52 articles have reviewed Chinese translations in
+`config/editorial-translations.json`. A source fingerprint prevents reuse after
+source text changes. New untranslated articles form a batch of at most four per
+collection run, with a 3,000-token output ceiling. Translation fetches only bounded
+public introductions on configured HTTPS hosts, rejects redirects, and falls back
+to RSS excerpts without bypassing access controls. Full source bodies are transient
+and are not exported. Invalid JSON, mismatched IDs and truncated responses remain
+pending for later runs. API failure does not block original news publication.
+The original title/excerpt remain available; Chinese fields are additive.
