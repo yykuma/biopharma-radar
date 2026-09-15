@@ -12,7 +12,7 @@ Sources are BioPharma Dive, the Fierce Biotech Biotech section, and official rel
 The former Google, Yahoo and wire feeds are retired; their
 articles are removed from current snapshots. Source changes clear cached briefing
 text while preserving AI quota, cooldown and rotation state.
-The previous published snapshot retains up to 1,500 articles for 30 days and AI routing
+The previous published snapshot retains up to 5,000 articles for 90 days and AI routing
 state. Bookmarks and read status are browser-local. Sources are maintained in Git.
 
 Market labels are heuristic and incomplete. Unknown companies remain global.
@@ -58,14 +58,14 @@ the requested task (`news_summary` or `news_translation`) participate. These cos
 verification. Keep paid billing and automatic top-ups disabled.
 
 `round_robin` advances after the last successful model; `failover` preserves order.
-Each task allows at most three attempts, without SDK retries or paid fallback. Translation, classification and briefing share provider daily request caps, cooldowns and usage counters.
-429 cools all pools of the supplier for an hour; 401/403 for 24 hours. A 404 cools the model
+Each task allows at most three attempts, without SDK retries or paid fallback. Translation, classification and briefing share concurrency limits, cooldowns and usage counters. No daily application request caps are configured.
+429 honors Retry-After when supplied, otherwise waits an hour. AMD cools only the affected model and rotates; other providers cool the supplier. 401/403 cool the supplier for 24 hours. A 404 cools the model
 for 24 hours; other failures for 15 minutes. Cooldowns and rotation position persist
 in the published briefing without credentials or raw exception messages.
 
 Up to 20 news records and 700 output tokens per summary; at most one successful
 summary every six hours. Identical input is reused. Failure preserves the last
-summary while news publishing continues. Untested Qwen and GLM models stay disabled.
+summary while news publishing continues. AMD Qwen models participate in rotation; GLM remains disabled. SenseNova prioritizes its native 6.8 Flash Lite model; its third-party general pool is fallback.
 
 ## Free hosting limitations
 
@@ -96,7 +96,7 @@ truncated responses. It excludes other clients and requests with unknown usage.
 `max_requests_per_day` counts every attempt, resets at UTC midnight, and is scoped
 to a pool or model. `expires_at` is a local review deadline, not a provider promise.
 `routing_role: fallback` keeps Mistral behind the preferred AMD and SenseNova routes; it may serve work while preferred suppliers are busy or unavailable.
-SenseNova allows up to 24 attempts per pool per day and a 30-day pricing review.
+No provider or model has a daily application cap. SenseNova retains a pricing review deadline.
 Quota descriptions are operator notes, not a hard guarantee about provider billing.
 
 ## Company catalog and Chinese news
@@ -147,7 +147,7 @@ seven-day window and compatible company matches. Later developments must remain
 separate. Group IDs are snapshot-local.
 
 Editorial classification processes at most two batches of 24 records per run,
-sharing translation/briefing provider budgets and cooldowns. Responses are
+sharing translation/briefing concurrency limits and cooldowns. Responses are
 validated and cached against source text. Pending/uncertain stories stay visible.
 Only high-confidence pure publicity is hidden by default, with a reader toggle.
 Company announcements, commercialization, sales and licensing are not publicity
@@ -158,16 +158,15 @@ remain unread. Saved bookmarks remain individually accessible.
 
 ## Bounded parallel AI execution
 
-Translation and editorial classification run concurrently with two workers.
-A shared routing session atomically reserves daily allowance before dispatch,
+Translation and editorial classification run concurrently when two primary suppliers are available. With one primary supplier, configured task order gives translation priority.
+A shared routing session atomically reserves supplier slots before dispatch,
 allows at most two requests globally and one per supplier, and persists token
 usage, cooldowns and each supplier's last successful model. SenseNova Flash and
 general retain separate quota counters while sharing one in-flight slot. Models
 rotate within each supplier. No duplicate speculative requests are sent.
-AMD and SenseNova are preferred; Mistral remains a fallback. Existing request
-caps, provider review deadlines and free-only model selection remain enforced.
+AMD and SenseNova are preferred; Mistral remains a fallback. Provider review deadlines and free-only model selection remain enforced.
 Briefing generation starts after both tasks finish so it uses completed labels
-and translations. The public curation.execution report records sanitized
+and translations. Briefing uses the same routing session. The public curation.execution report records sanitized
 attempts and observed concurrency; zero means no eligible request was dispatched.
 
 ## Operator tuning (one configuration file)
@@ -186,7 +185,8 @@ profile processes backlog with two total requests and one per supplier.
 | `curation.batch_size` | 24 | Articles per classification request |
 | `curation.max_batches_per_run` | 2 | Classification batches per collection |
 | `curation.max_output_tokens` | 3600 | Response ceiling per classification batch |
-| `providers[].max_requests_per_day` | SenseNova: 24 per pool | Counts every attempt; the two SenseNova pools stay separate |
+| `execution.task_order` | translation, curation | Priority when only one primary supplier is eligible |
+| `providers[].rate_limit_scope` | AMD: model; others: supplier | Scope paused after a 429; authentication failures always pause the supplier |
 | `providers[].enabled` / `models[].enabled` | Per entry | Enable/disable a provider or model |
 | `providers[].routing_role` | Mistral: fallback | Preferred routes serve first; idle fallback can accept work |
 
@@ -202,3 +202,16 @@ Validate after an edit: `python -c 'from pipeline.ai_router import load_registry
 Run `python -m unittest discover -s pipeline -p 'test_*.py'` before publishing.
 Check `data/latest.json` → `curation.translation` for completed/pending counts,
 and `curation.execution` for attempts, actual parallelism and supplier peaks.
+
+## Incremental feed checks
+
+RSS readers poll the current feed window; most publishers do not expose a
+resumable historical cursor. Each source now persists its ETag/Last-Modified
+validators. When a publisher returns HTTP 304, the pipeline skips body parsing
+and reuses retained articles. HTTP 200 responses are parsed using TrendRadar;
+canonical URL identity and source fingerprints avoid repeated AI work. Publishers
+without validators still require a small RSS download. Changing a feed URL, item
+limit or retention horizon invalidates validators and forces a fresh request.
+Source state exposes HTTP status, response bytes, and new/updated article counts.
+The previous published JSON is the restart checkpoint for articles and AI state.
+Retention is 90 days and at most 5,000 original reports.

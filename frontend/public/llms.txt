@@ -48,3 +48,7 @@ AI translation and classification can run on two different suppliers in parallel
 with at most one in-flight request per supplier. SenseNova quota pools are counted
 separately but share a supplier slot. Inspect curation.execution for actual
 concurrency and sanitized attempts; existing daily caps and cooldowns still apply.
+
+Retention is 90 days, capped at 5,000 original reports. RSS sources use conditional
+HTTP requests where supported; fetch_status=not_modified means a valid HTTP 304
+reused retained news. new_articles and updated_articles count actual changes.

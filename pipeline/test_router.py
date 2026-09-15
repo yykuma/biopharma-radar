@@ -34,7 +34,8 @@ class RouterTests(unittest.TestCase):
         result=summarize(self.items,previous,True,call,self.config,100000)
         self.assertEqual(calls,['two'])
         again=summarize(self.items,result,True,call,self.config,200000)
-        self.assertEqual(again,result)
+        self.assertEqual({k:v for k,v in again.items() if k != 'router_state'},
+                         {k:v for k,v in result.items() if k != 'router_state'})
         self.assertEqual(len(calls),1)
 
     @patch.dict(os.environ, {'A_KEY':'test','B_KEY':'test'})
@@ -82,3 +83,34 @@ class RouterTests(unittest.TestCase):
         self.assertEqual(result['provider'],'a')
 
 if __name__=='__main__':unittest.main()
+
+class RoutingChangesTests(unittest.TestCase):
+    @patch.dict(os.environ, {'TEST_KEY':'fixture'})
+    def test_model_scoped_429_rotates_without_blocking_supplier(self):
+        from ai_router import route_text, new_state, ProviderError
+        config={'strategy':'round_robin','task':'news_translation','max_attempts_per_run':3,
+                'providers':[{'id':'amd','enabled':True,'key_env':'TEST_KEY','rate_limit_scope':'model',
+                'models':[{'id':m,'enabled':True,'free_tier':'free','tasks':['news_translation']} for m in ['one','two']]}]}
+        calls=[]
+        def call(p,m,*args):
+            calls.append(m['id'])
+            if m['id']=='one':raise ProviderError(429,120)
+            return 'A complete response from the second model.'
+        state=new_state({},100000)
+        state['daily_usage']['requests']['provider:amd']=10000
+        result=route_text([],state,config,100000,call)
+        self.assertEqual(result['status'],'ok')
+        self.assertEqual(calls,['one','two'])
+        self.assertEqual(state['cooldowns'],{'amd/one':100120})
+        self.assertEqual(state['daily_usage']['requests']['provider:amd'],10002)
+
+    def test_production_registry_has_no_daily_caps(self):
+        from ai_router import load_registry
+        for p in load_registry()['providers']:
+            for entry in [p,*p['models']]:self.assertNotIn('max_requests_per_day',entry)
+
+    def test_retry_after_header(self):
+        from ai_router import retry_delay
+        self.assertEqual(retry_delay('120'),120)
+        self.assertIsNone(retry_delay('invalid'))
+        self.assertIsNone(retry_delay(None))

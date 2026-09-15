@@ -68,3 +68,40 @@ class SourceScopeTests(unittest.TestCase):
         briefing={'status':'ok','text':'Current summary','generated_at':100}
         _, retained=prepare_previous({'sources':SOURCES,'briefing':briefing}, 200)
         self.assertEqual(retained, briefing)
+
+class ConditionalFeedTests(unittest.TestCase):
+    def test_cached_feed_uses_304_without_parsing(self):
+        from unittest.mock import patch, MagicMock
+        from types import SimpleNamespace
+        from collect import fetch_source
+        source={**SOURCES[0],'max_items':100}
+        fetcher=MagicMock()
+        response=fetcher.session.get.return_value
+        response.status_code=200
+        response.content=b'<rss/>'
+        response.text='<rss/>'
+        response.headers={'ETag':'"v1"','Last-Modified':'Tue, 15 Sep 2026 10:00:00 GMT'}
+        fetcher.parser.parse.return_value=[SimpleNamespace(title='A company update',url='https://example.org/news',summary='Report',published_at=None)]
+        with patch('collect.RSSFetcher',return_value=fetcher):
+            items,state=fetch_source(source)
+            self.assertEqual(len(items),1)
+            response.status_code=304
+            fetcher.parser.parse.reset_mock()
+            items,state=fetch_source(source,state,1)
+            self.assertEqual(items,[])
+            self.assertEqual(state['fetch_status'],'not_modified')
+            self.assertEqual(state['response_bytes'],0)
+            self.assertEqual(fetcher.session.get.call_args.kwargs['headers']['If-None-Match'],'"v1"')
+            fetcher.parser.parse.assert_not_called()
+            response.status_code=200
+            fetch_source(source,state,0)
+            self.assertEqual(fetcher.session.get.call_args.kwargs['headers'],{})
+            fetch_source({**source,'url':'https://example.org/changed.xml'},state,1)
+            self.assertEqual(fetcher.session.get.call_args.kwargs['headers'],{})
+
+    def test_retains_60_day_article_but_rejects_91_days(self):
+        now=1789483120
+        row={'title':'Company update','url':'https://example.org/news','published_at':now-60*86400}
+        self.assertIsNotNone(normalize(row,SOURCES[0],now))
+        row['published_at']=now-91*86400
+        self.assertIsNone(normalize(row,SOURCES[0],now))
