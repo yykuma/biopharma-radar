@@ -122,6 +122,9 @@ which company feeds are connected; a catalog entry does not enable collection.
 Reviewed Chinese translations are stored in `config/editorial-translations.json`.
 The September 16, 2026 backlog pass adds 117 translations completed or reviewed
 by Codex Astra at low reasoning effort, with per-record model provenance.
+A follow-up pass reviewed the remaining 48 automatic translations, corrected 47
+(including removal of boilerplate), and cached all 48 with review timestamps.
+The 60 previously reviewed seed records were left unchanged.
 A source fingerprint prevents reuse after source text changes. Untranslated articles are processed in up to six sequential batches of four per
 collection run (24 articles maximum), with a 3,000-token output ceiling per batch.
 Older unattempted articles come first. Failed batches stop that run and retain an

@@ -2476,5 +2476,819 @@
       "basis": "feed_excerpt",
       "source_url": "https://www.drugs.com/nda/ecopipam_260618.html"
     }
+  },
+  "262867266161201": {
+    "title_zh": "GSK公布积极注册性数据，拟将Jideytro（zidesamtinib）拓展至一线ROS1阳性非小细胞肺癌",
+    "summary_zh": "GSK plc（LSE/NYSE: GSK）于2026年9月13日宣布，注册性1/2期ARROS-1试验取得积极结果，该试验评估Jideytro（zidesamtinib）在晚期或转移性ROS1阳性非小细胞肺癌患者中的疗效。",
+    "content_fingerprint": "6f8feba37c0cd1480bfd3e8a68f5dca52172be2c24e3b66b1f84cd63f5448585",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490926,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/clinical_trials/gsk-presents-positive-registrational-data-potentially-expand-jideytro-zidesamtinib-first-line-ros1-22588.html",
+      "reviewed_by": "gpt-6-astra",
+      "reviewed_at": 1789490926
+    }
+  },
+  "143641258770779": {
+    "title_zh": "FDA批准Omcazio（cabozantinib）胶囊剂型可不受进食影响给药",
+    "summary_zh": "Handa Pharmaceuticals（TSE: 6620）宣布，美国FDA已最终批准Omcazio（cabozantinib）胶囊剂型，可在不考虑进食的情况下给药。",
+    "content_fingerprint": "a6315f9b174dc6aa39f61c2dff17704e8511ee5e937b51bb15b33d12af169202",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490926,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/newdrugs/fda-approves-omcazio-cabozantinib-capsule-formulation-administration-without-regard-food-6880.html",
+      "reviewed_by": "gpt-6-astra",
+      "reviewed_at": 1789490926
+    }
+  },
+  "274843994708274": {
+    "title_zh": "UCB的Cimzia（certolizumab pegol）获FDA突破性疗法认定，用于抗磷脂综合征孕妇",
+    "summary_zh": "UCB宣布，美国FDA授予Cimzia®（certolizumab pegol）突破性疗法认定（BTD），用于抗磷脂综合征（APS）孕妇。",
+    "content_fingerprint": "1897669c3485e60a1fa9738d11b7b2147daa39b53b0759b4150c93405fbd08d3",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490926,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/clinical_trials/ucb-receives-u-s-fda-breakthrough-therapy-designation-cimzia-certolizumab-pegol-pregnant-women-22587.html",
+      "reviewed_by": "gpt-6-astra",
+      "reviewed_at": 1789490926
+    }
+  },
+  "222770179434003": {
+    "title_zh": "美国FDA授予拜耳Hyrnuo（sevabertinib）加速批准，作为HER2突变非小细胞肺癌一线靶向治疗",
+    "summary_zh": "拜耳宣布，在优先审评和突破性疗法认定后，美国FDA已授予Hyrnuo（sevabertinib）加速批准。该药用于HER2突变非小细胞肺癌患者的一线靶向治疗。",
+    "content_fingerprint": "457dc1b3be9aceda2737da323b2dbdf3e03d265c5835b42c2bfb0a348f8f6909",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490926,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/newdrugs/u-s-fda-grants-accelerated-approval-bayer-s-hyrnuo-sevabertinib-first-line-targeted-therapy-6878.html",
+      "reviewed_by": "gpt-6-astra",
+      "reviewed_at": 1789490926
+    }
+  },
+  "244343467827208": {
+    "title_zh": "StemRIM与Shionogi公布Redasemtide在营养不良型大疱性表皮松解症及急性缺血性卒中患者中的临床试验初步结果",
+    "summary_zh": "StemRIM与Shionogi公布了Redasemtide在营养不良型大疱性表皮松解症及急性缺血性卒中患者中的临床试验主要结果。Shionogi还宣布了一项额外2期临床试验的结果。",
+    "content_fingerprint": "3720adb1afedfefaccec5f4094762c6667470c5db8b4d3594337c63380f2b536",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490926,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/clinical_trials/stemrim-shionogi-announce-topline-results-clinical-trials-redasemtide-patients-dystrophic-22586.html",
+      "reviewed_by": "gpt-6-astra",
+      "reviewed_at": 1789490926
+    }
+  },
+  "83778094405624": {
+    "title_zh": "Tozorakimab在OBERON和TITANIA三期试验中显著降低COPD急性加重",
+    "summary_zh": "2026年9月8日公布的OBERON和TITANIA三期试验完整结果显示，tozorakimab降低COPD急性加重的疗效具有统计学显著性，且临床意义重大。",
+    "content_fingerprint": "b45f90d75e3b925d953baa4ae4b497211a0cb0e1d7606d53abbd2251754c8a20",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490926,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/clinical_trials/tozorakimab-demonstrated-statistically-significant-highly-clinically-meaningful-reduction-copd-22583.html",
+      "reviewed_by": "gpt-6-astra",
+      "reviewed_at": 1789490926
+    }
+  },
+  "251388721157566": {
+    "title_zh": "百时美施贵宝公布潜在首创GPRC5D靶向CAR-T疗法Arlocabtagene Autoleucel注册性2期QUINTESSENTIAL试验积极顶线结果",
+    "summary_zh": "Bristol Myers Squibb（NYSE: BMY）于2026年9月8日宣布，其潜在首创GPRC5D靶向CAR-T细胞疗法arlocabtagene autoleucel（arlo-cel；BMS-986393）在注册性2期QUINTESSENTIAL试验（NCT06297226）中取得积极结果。该试验面向成人患者。",
+    "content_fingerprint": "c860b1bbd44df53a37b383a59217fd1f69265be7bf5838b284958e7a7d52564c",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490926,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/clinical_trials/bristol-myers-squibb-announces-positive-topline-results-registrational-phase-2-quintessential-trial-22582.html",
+      "reviewed_by": "gpt-6-astra",
+      "reviewed_at": 1789490926
+    }
+  },
+  "166281363105619": {
+    "title_zh": "Quoin Pharmaceuticals宣布FDA授予QRX003治疗剥脱性皮肤综合征罕见儿科疾病认定",
+    "summary_zh": "Quoin Pharmaceuticals Ltd.（NASDAQ: QNRX）宣布，其候选药物QRX003获FDA罕见儿科疾病认定，用于剥脱性皮肤综合征。公司被描述为专注于罕见病和孤儿病的后期临床阶段专科制药企业。",
+    "content_fingerprint": "b1dd759f130b75f5b45b7533bb5fb90ae09fe791a8ec88783f14c1b1fc5585f7",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490926,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/clinical_trials/quoin-pharmaceuticals-announces-fda-grants-rare-pediatric-designation-qrx003-peeling-skin-syndrome-22585.html",
+      "reviewed_by": "gpt-6-astra",
+      "reviewed_at": 1789490926
+    }
+  },
+  "280250640519912": {
+    "title_zh": "Novartis公布Delpacibart Etedesiran（del-desiran）治疗1型强直性肌营养不良的III期HARBOR研究更新",
+    "summary_zh": "Novartis于2026年9月8日宣布，全球III期HARBOR研究评估del-desiran治疗1型强直性肌营养不良（DM1）患者，未显示相较安慰剂具有统计学显著改善。",
+    "content_fingerprint": "0c5388fb0773e6157ef10896a50ad210e644fc161648f11ea3c15db211e840ec",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490926,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/clinical_trials/novartis-provides-update-delpacibart-etedesiran-del-desiran-phase-iii-harbor-study-myotonic-22584.html",
+      "reviewed_by": "gpt-6-astra",
+      "reviewed_at": 1789490926
+    }
+  },
+  "89343360230828": {
+    "title_zh": "诺和诺德STEP Young III期数据：40.4%肥胖儿童经semaglutide联合生活方式干预后BMI低于肥胖阈值",
+    "summary_zh": "诺和诺德（Novo Nordisk）公布STEP Young III期试验初步结果。该研究评估每周一次semaglutide联合低热量饮食与增加体力活动在儿童中的应用。结果显示40.4%的肥胖儿童实现BMI低于肥胖阈值。",
+    "content_fingerprint": "b0f1531ba26a96bae8f44d64a52c74760d22a404a2782b9d6386427069c094c9",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490926,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/clinical_trials/novo-nordisk-step-young-phase-3-data-40-4-children-living-obesity-achieved-bmi-below-obesity-22581.html",
+      "reviewed_by": "gpt-6-astra",
+      "reviewed_at": 1789490926
+    }
+  },
+  "164158479824591": {
+    "title_zh": "FDA加速批准Etcamah（camizestrant）联合CDK4/6抑制剂治疗晚期HR阳性乳腺癌",
+    "summary_zh": "AstraZeneca的Etcamah（camizestrant）联合CDK4/6抑制剂（abemaciclib、palbociclib或ribociclib）获美国FDA加速批准，用于成人晚期HR阳性乳腺癌的治疗。",
+    "content_fingerprint": "2589f3489ad3199a1bbc42d3d5e70b5bc2246f82470edbbcd79bd58460c6c087",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490926,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/newdrugs/fda-grants-accelerated-approval-etcamah-camizestrant-combination-cdk4-6-inhibitor-advanced-hr-6877.html",
+      "reviewed_by": "gpt-6-astra",
+      "reviewed_at": 1789490926
+    }
+  },
+  "277457692542752": {
+    "title_zh": "Novartis公布Pelacarsen在Lp(a)升高且已确诊心血管病患者的Lp(a)HORIZON III期主要结果",
+    "summary_zh": "Novartis宣布，pelacarsen的III期Lp(a)HORIZON心血管结局研究未达到其主要终点，即降低心血管事件风险。该终点为复合终点。",
+    "content_fingerprint": "6b6bdf3debb5a7220428ba618dcc46e484e84866e88c73f3c050f3a023732aa3",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490926,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/clinical_trials/novartis-announces-lp-horizon-phase-iii-topline-results-pelacarsen-patients-elevated-lp-established-22578.html",
+      "reviewed_by": "gpt-6-astra",
+      "reviewed_at": 1789490926
+    }
+  },
+  "197297555281902": {
+    "title_zh": "Stoke Therapeutics与Biogen公布支持Zorevunersen疾病修饰潜力的长期临床数据，用于Dravet综合征治疗",
+    "summary_zh": "Stoke Therapeutics与Biogen公布了zorevunersen的长期临床数据，称这些数据支持其作为Dravet综合征在研药物的疾病修饰潜力。",
+    "content_fingerprint": "ab878c6d2d4a5df09b46468cdad25c7b3eaa3ccc5bc91dce582f82c0113b5257",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490926,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/clinical_trials/stoke-therapeutics-biogen-present-long-term-clinical-data-support-modifying-potential-zorevunersen-22580.html",
+      "reviewed_by": "gpt-6-astra",
+      "reviewed_at": 1789490926
+    }
+  },
+  "71020988825391": {
+    "title_zh": "FDA批准Zanvastro（zilganersen）用于治疗Alexander病",
+    "summary_zh": "Ionis Pharmaceuticals（Nasdaq: IONS）于2026年9月3日宣布，美国FDA已批准Zanvastro（zilganersen）用于治疗Alexander病（AxD）。",
+    "content_fingerprint": "ab21a60a40c8a6bc1eccf805e50a16d1c5e4dea7fe333c7a2ffc9921df8fc0ba",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490926,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/newdrugs/fda-approves-zanvastro-zilganersen-alexander-6876.html",
+      "reviewed_by": "gpt-6-astra",
+      "reviewed_at": 1789490926
+    }
+  },
+  "122139671466162": {
+    "title_zh": "AbbVie 公布 3 期 CERVINO 研究积极顶线结果：etentamig 显著改善复发/难治性多发性骨髓瘤患者的缓解率和无进展生存期",
+    "summary_zh": "AbbVie（NYSE: ABBV）公布了3期CERVINO研究的积极主要结果。研究评估在研BCMA×CD3双特异性T细胞接合剂etentamig，在复发/难治性多发性骨髓瘤患者中显著改善了缓解率和无进展生存期。",
+    "content_fingerprint": "4284ee10cdcc555c2381286a7f468c23118b54a9cd32770cb0bc99bdaf316d91",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490926,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/clinical_trials/abbvie-announces-positive-topline-results-phase-3-cervino-trial-showing-etentamig-significantly-22577.html",
+      "reviewed_by": "gpt-6-astra",
+      "reviewed_at": 1789490926
+    }
+  },
+  "254438830685173": {
+    "title_zh": "GLP-1治疗在老年动物模型中延长寿命",
+    "summary_zh": "一项由美国国立卫生研究院（NIH）资助的研究显示，GLP-1类药物semaglutide通过减轻衰老带来的不利影响，延长了健康老年小鼠的寿命。",
+    "content_fingerprint": "1154c358fb9752a24198f7b890a0626b0f5920bb71a00d64b55e8f49d89eb33d",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490926,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/clinical_trials/glp-1-late-extends-lifespan-animal-model-22579.html",
+      "reviewed_by": "gpt-6-astra",
+      "reviewed_at": 1789490926
+    }
+  },
+  "115475754854100": {
+    "title_zh": "Ultragenyx 公布 apazunersen（GTX-102）治疗 Angelman 综合征的 3 期 Aspire 研究结果",
+    "summary_zh": "Ultragenyx Pharmaceutical Inc.（NASDAQ: RARE）公布了 apazunersen（GTX-102）治疗 Angelman 综合征的 3 期 Aspire 研究结果。该研究未达到主要终点。",
+    "content_fingerprint": "99247540abcc5361c4a622db77ad38c7104c6c1aa9609299d02b8b56299ce279",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490926,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/clinical_trials/ultragenyx-announces-phase-3-aspire-results-apazunersen-gtx-102-angelman-syndrome-22571.html",
+      "reviewed_by": "gpt-6-astra",
+      "reviewed_at": 1789490926
+    }
+  },
+  "128938049023561": {
+    "title_zh": "Teva公布抗IL-15抗体TEV ’408治疗乳糜泻的2a期积极主要结果，进一步验证其拓展多个适应症的潜力",
+    "summary_zh": "Teva Pharmaceutical Industries Ltd.（NYSE和TASE：TEVA）于2026年9月2日宣布，其在研抗白细胞介素15抗体TEV ’408在仍在进行的乳糜泻2a期研究中取得积极主要结果。公司称，这进一步验证了该产品拓展多个适应症的潜力。",
+    "content_fingerprint": "cb34a408a6aab461f292ec1effbe8192110c9f3d4ece1372506e717c722c2f0d",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490926,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/clinical_trials/teva-announces-positive-topline-results-phase-2a-study-tev-408-celiac-anti-il-15-antibody-further-22576.html",
+      "reviewed_by": "gpt-6-astra",
+      "reviewed_at": 1789490926
+    }
+  },
+  "209460527185639": {
+    "title_zh": "Novartis 口服 BTK 抑制剂 Remibrutinib 在 III 期 REMODEL-1/-2 试验中显著降低复发率并显示良好安全性",
+    "summary_zh": "Novartis于2026年9月1日宣布，其III期REMODEL-1/-2试验的初步结果积极，评估remibrutinib用于复发型多发性硬化症。Remibrutinib是一种高选择性、强效的口服BTK抑制剂。",
+    "content_fingerprint": "fc6153914e7a7781babedd6f83a42111477aaeb934178d13aea012f44b05fa03",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490926,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/clinical_trials/novartis-remibrutinib-efficacy-oral-btk-inhibitor-significantly-reduces-relapse-rates-shows-22572.html",
+      "reviewed_by": "gpt-6-astra",
+      "reviewed_at": 1789490926
+    }
+  },
+  "184221517395266": {
+    "title_zh": "Juniper的JBS-003（F-MISO）项目获FDA突破性疗法认定，推进首个同类缺氧示踪剂用于HPV阳性头颈癌放疗减量",
+    "summary_zh": "Juniper Biosciences宣布，美国FDA已授予JBS-003（18F-fluoromisonidazole，FMISO）突破性疗法认定。该药物被描述为首个同类缺氧示踪剂，用于HPV阳性头颈癌，并支持放疗减量策略。",
+    "content_fingerprint": "6f6cfc91aeafa3818f8e03e0eaf161d4f8cb058c57fea0ecc5d99816f42a1e45",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490926,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/clinical_trials/juniper-s-jbs-003-f-miso-program-receives-fda-breakthrough-therapy-designation-advancing-first-22574.html",
+      "reviewed_by": "gpt-6-astra",
+      "reviewed_at": 1789490926
+    }
+  },
+  "130053131028050": {
+    "title_zh": "NIH研究人员发现可能对抗Alpha-Gal综合征的罕见抗体",
+    "summary_zh": "美国国立卫生研究院（NIH）研究人员发现了一类罕见抗体，可能为Alpha-Gal综合征（AGS）的干预措施开发提供线索。AGS是一种与蜱虫叮咬相关的新兴疾病。",
+    "content_fingerprint": "5eef8ce479584a84a850a7b1e153090e0025257b35685910dbbb8158ae1cd578",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490926,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/clinical_trials/nih-researchers-identify-rare-antibodies-potential-combat-alpha-gal-syndrome-22573.html",
+      "reviewed_by": "gpt-6-astra",
+      "reviewed_at": 1789490926
+    }
+  },
+  "182853001212488": {
+    "title_zh": "FDA批准PharmaEssentia的BESREMi（ropeginterferon alfa-2b-njft）用于成人原发性血小板增多症",
+    "summary_zh": "PharmaEssentia USA Corporation（母公司PharmaEssentia Corporation，TWSE: 6446）宣布，BESREMi（ropeginterferon alfa-2b-njft）获美国FDA批准，用于成人原发性血小板增多症的治疗。",
+    "content_fingerprint": "88e49031f4e2dbce765d3fab80478559368947f2995e2d56cff37d3a389789ae",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490926,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/newdrugs/fda-approves-pharmaessentia-s-besremi-ropeginterferon-alfa-2b-njft-adults-essential-thrombocythemia-6874.html",
+      "reviewed_by": "gpt-6-astra",
+      "reviewed_at": 1789490926
+    }
+  },
+  "261556454109533": {
+    "title_zh": "FDA批准Mimrylo（rusfertide）用于治疗真性红细胞增多症",
+    "summary_zh": "Takeda（TSE:4502/NYSE:TAK）于2026年8月28日宣布，其新药申请（NDA）获得美国食品药品监督管理局（FDA）批准，Mimrylo（rusfertide）获批用于治疗真性红细胞增多症相关的红细胞增多。",
+    "content_fingerprint": "7cfb6c7cfde49a949d4a2974963bb39dfa1aaf81d979e8608acd85e4aec4f1b5",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490926,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/newdrugs/fda-approves-mimrylo-rusfertide-polycythemia-vera-6872.html",
+      "reviewed_by": "gpt-6-astra",
+      "reviewed_at": 1789490926
+    }
+  },
+  "268043714848364": {
+    "title_zh": "FDA批准Bixlenvo（bictegravir与lenacapavir）用于病毒学抑制的成人HIV治疗",
+    "summary_zh": "Gilead Sciences宣布，美国FDA批准Bixlenvo（bictegravir 75 mg/lenacapavir 50 mg）用于病毒学抑制的成人HIV治疗。该药被描述为最小的每日一次单片复方方案（STR）。",
+    "content_fingerprint": "4cf7448cd78952286e372c3cc2bfd40b9618cefb1bdb966e8d716a08946567d4",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490926,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/newdrugs/fda-approves-bixlenvo-bictegravir-lenacapavir-hiv-adults-virologically-suppressed-6868.html",
+      "reviewed_by": "gpt-6-astra",
+      "reviewed_at": 1789490926
+    }
+  },
+  "222635280951953": {
+    "title_zh": "BioNTech 更新切除后结直肠癌 Autogene Cevumeran II 期临床试验进展",
+    "summary_zh": "BioNTech 于 2026 年 8 月 28 日宣布，决定终止评估 autogene cevumeran（BNT122/RO7198457）的 II 期临床试验（BNT122-01；NCT04486378）。该试验用于切除后结直肠癌。",
+    "content_fingerprint": "9268520a9809985d8def7095f108548de60bfa585dfcc05b6b687a0002b234b1",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490926,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/clinical_trials/biontech-provides-update-phase-2-clinical-trial-autogene-cevumeran-resected-colorectal-cancer-22569.html",
+      "reviewed_by": "gpt-6-astra",
+      "reviewed_at": 1789490926
+    }
+  },
+  "270244620232178": {
+    "title_zh": "FDA批准Lilly的Mounjaro（tirzepatide）用于降低2型糖尿病成人心血管风险",
+    "summary_zh": "Eli Lilly and Company宣布，美国FDA批准Mounjaro（tirzepatide）用于降低2型糖尿病成人的心血管风险。Mounjaro被描述为双重GIP和GLP-1激素受体激动剂。",
+    "content_fingerprint": "5d6004f2f30c5e9349aa1323d730ed4ff3521710bc6f57f481db12f594d50cf2",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490926,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/newdrugs/fda-approves-lilly-s-mounjaro-tirzepatide-reduce-cardiovascular-risk-adults-type-2-diabetes-6870.html",
+      "reviewed_by": "gpt-6-astra",
+      "reviewed_at": 1789490926
+    }
+  },
+  "182940596942111": {
+    "title_zh": "Moderna获美国FDA批准2026-2027更新版Spikevax和mNEXSPIKE COVID-19疫苗",
+    "summary_zh": "Moderna, Inc.（NASDAQ: MRNA）宣布，美国FDA已批准其2026-2027配方的Spikevax和mNEXSPIKE COVID-19疫苗补充生物制品许可申请（sBLA）。",
+    "content_fingerprint": "f61e20dec38ce18c16d3d197b5fa2513e76cedf9ca926031e7d9c7594ceb0471",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490926,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/newdrugs/moderna-receives-u-s-fda-approval-updated-2026-2027-spikevax-mnexspike-covid-19-vaccines-6871.html",
+      "reviewed_by": "gpt-6-astra",
+      "reviewed_at": 1789490926
+    }
+  },
+  "214931274483245": {
+    "title_zh": "Pfizer 与 BioNTech 的 XFG 适配版 Comirnaty COVID-19 疫苗获美国 FDA 批准",
+    "summary_zh": "Pfizer 与 BioNTech 于 2026 年 8 月 27 日宣布，美国 FDA 已批准其 XFG 适配版 Comirnaty COVID-19 疫苗。",
+    "content_fingerprint": "37b8c2a231a401b626e45bd84ed14f5d98587864434ba6e05f11442d5019d35e",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490926,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/newdrugs/pfizer-biontech-receive-u-s-fda-approval-xfg-adapted-comirnaty-covid-19-vaccine-6869.html",
+      "reviewed_by": "gpt-6-astra",
+      "reviewed_at": 1789490926
+    }
+  },
+  "97331170399579": {
+    "title_zh": "CytomX Therapeutics 宣布 Varsetatug masetecan（“Varseta-M”）获 FDA 快速通道资格，用于复发/难治性转移性结直肠癌（R/R mCRC）",
+    "summary_zh": "CytomX Therapeutics, Inc.（Nasdaq: CTMX）宣布，美国FDA已授予Varsetatug masetecan（“Varseta-M”）用于复发/难治性转移性结直肠癌（R/R mCRC）的快速通道资格。该公司专注于具有遮蔽机制、可条件性激活的生物制剂。",
+    "content_fingerprint": "0933c82d684463601b146a56599fb89e3461da8bb8d76e7b944bc08569efac26",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490926,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/clinical_trials/cytomx-therapeutics-announces-fda-fast-track-designation-varsetatug-masetecan-varseta-m-relapsed-22567.html",
+      "reviewed_by": "gpt-6-astra",
+      "reviewed_at": 1789490926
+    }
+  },
+  "93817399380906": {
+    "title_zh": "FDA批准Lisraya（brepocitinib）治疗成人皮肌炎",
+    "summary_zh": "Roivant宣布，FDA已批准Lisraya（brepocitinib）30 mg用于治疗成人皮肌炎。",
+    "content_fingerprint": "515310a3371d24b9f4864494a7da4ba7ff69e6a56c78b559a6ffab1d0d810a4e",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490926,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/newdrugs/fda-approves-lisraya-brepocitinib-adults-dermatomyositis-6867.html",
+      "reviewed_by": "gpt-6-astra",
+      "reviewed_at": 1789490926
+    }
+  },
+  "187570930471467": {
+    "title_zh": "Kowa Pharmaceuticals America宣布FDA受理K-911新药申请",
+    "summary_zh": "Kowa Pharmaceuticals America于2026年8月27日宣布，美国FDA已受理K-911（bimatoprost grenod）的新药申请（NDA）并进入审评。",
+    "content_fingerprint": "99134566e0c88694cb143f35caff34d7808a96cbe972040bd272fd63f2d2cb34",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490926,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/nda/k_911_260827.html",
+      "reviewed_by": "gpt-6-astra",
+      "reviewed_at": 1789490926
+    }
+  },
+  "201573666833302": {
+    "title_zh": "FDA批准Rasonque（daraxonrasib），首个用于转移性胰腺癌的广谱RAS靶向药物",
+    "summary_zh": "Revolution Medicines宣布，FDA已批准Rasonque（daraxonrasib），用于转移性胰腺癌。公司称其为首个广谱RAS靶向药物。",
+    "content_fingerprint": "269ac5a7864c27c4a4a065ffcb26a2b9ef7c0d8e1dce1b2190d78fe749f54c47",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490926,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/newdrugs/fda-approves-rasonque-daraxonrasib-first-broad-ras-targeted-medicine-metastatic-pancreatic-cancer-6865.html",
+      "reviewed_by": "gpt-6-astra",
+      "reviewed_at": 1789490926
+    }
+  },
+  "135845877583502": {
+    "title_zh": "JAMA Dermatology发表Brepocitinib治疗皮肌炎3期VALOR试验的皮肤特异性结果",
+    "summary_zh": "Priovant Therapeutics于2026年8月26日宣布，JAMA Dermatology已发表brepocitinib治疗皮肌炎的3期VALOR试验皮肤特异性结果。Brepocitinib是一种同类首创的口服TYK2和JAK1抑制剂。",
+    "content_fingerprint": "7207a2cec565702ea60c21d8b32b0fba5a001ba316be3513b8b35634ca84dd77",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490926,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/clinical_trials/jama-dermatology-publishes-skin-specific-outcomes-phase-3-valor-trial-brepocitinib-dermatomyositis-22566.html",
+      "reviewed_by": "gpt-6-astra",
+      "reviewed_at": 1789490926
+    }
+  },
+  "96502305900430": {
+    "title_zh": "真实世界研究显示Zepbound与55岁以上肥胖成人更低医疗成本相关",
+    "summary_zh": "礼来发布一项针对55岁以上超重或肥胖成人的真实世界研究结果。研究发现继续使用Zepbound（tirzepatide）进行体重管理的患者医疗成本较低。",
+    "content_fingerprint": "6d4180e4752bf010f2bde665a602daa851576c79894e99e6bc38ad43911ba3b9",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490926,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/clinical_trials/zepbound-linked-lower-healthcare-costs-adults-over-age-55-obesity-according-real-world-study-22568.html",
+      "reviewed_by": "gpt-6-astra",
+      "reviewed_at": 1789490926
+    }
+  },
+  "76912066287458": {
+    "title_zh": "美国FDA批准ViiV Healthcare的Tivicay PD用于体重至少2公斤的HIV儿童患者",
+    "summary_zh": "ViiV Healthcare于2026年8月26日宣布，美国FDA已批准Tivicay PD（dolutegravir）用于体重至少2公斤的HIV儿童患者治疗。ViiV Healthcare是由GSK多数持股、Shionogi为股东的全球HIV专业公司。",
+    "content_fingerprint": "c3441129c90ecdaabee03f2076e30896ff177e9d04f0a4dbc71dcb5f1548dd3c",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "sensenova-flash",
+      "model": "sensenova-6.8-flash-lite",
+      "translated_at": 1789486962,
+      "basis": "feed_excerpt",
+      "reviewed_by": "gpt-6-astra",
+      "reviewed_at": 1789490926
+    }
+  },
+  "100497655383466": {
+    "title_zh": "BeOne Medicines宣布基于Tevimbra的方案获美国FDA批准，用于一线HER2阳性胃食管腺癌（GEA）",
+    "summary_zh": "BeOne Medicines Ltd.（Nasdaq: ONC；HKEX: 06160；SSE: 688235）宣布，美国FDA已批准其基于Tevimbra的方案用于HER2阳性胃食管腺癌（GEA）的一线治疗。",
+    "content_fingerprint": "9afefe9b22c26f53134acdd0b6f8b131b6433e0437ee940085ab8e7b0b913dae",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490926,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/newdrugs/beone-medicines-announces-u-s-fda-approval-tevimbra-based-regimen-first-line-her2-gea-6864.html",
+      "reviewed_by": "gpt-6-astra",
+      "reviewed_at": 1789490926
+    }
+  },
+  "219975624477857": {
+    "title_zh": "FDA批准Ziihera联合化疗、伴或不伴Tislelizumab，用于HER2阳性晚期胃食管腺癌一线治疗",
+    "summary_zh": "Jazz Pharmaceuticals于2026年8月25日宣布，FDA批准两种含Ziihera（zanidatamab-hrii）的方案，用于成人HER2阳性晚期胃食管腺癌的一线治疗：Ziihera联合化疗，以及Ziihera联合tislelizumab和化疗。",
+    "content_fingerprint": "0a0d8ef8915e5220374403ac7fe35f0d439822d6a3f40e402c449c1509f48106",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490926,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/newdrugs/u-s-fda-approves-ziihera-zanidatamab-hrii-without-tislelizumab-plus-chemotherapy-first-line-her2-6863.html",
+      "reviewed_by": "gpt-6-astra",
+      "reviewed_at": 1789490926
+    }
+  },
+  "91936304324058": {
+    "title_zh": "Ivonescimab联合化疗全球III期HARMONi研究主要分析结果发表于《柳叶刀·肿瘤学》",
+    "summary_zh": "Summit Therapeutics宣布全球III期HARMONi试验主要分析结果发表于The Lancet Oncology。该研究评估ivonescimab联合化疗方案的疗效。",
+    "content_fingerprint": "5b2a1407d80ad60672b343b960171641d05664e678ec532ac5395fd45c4488eb",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490926,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/clinical_trials/ivonescimab-plus-chemotherapy-global-phase-iii-harmoni-primary-analysis-results-published-lancet-22565.html",
+      "reviewed_by": "gpt-6-astra",
+      "reviewed_at": 1789490926
+    }
+  },
+  "156993790614911": {
+    "title_zh": "Cellenkos的CK0803在肌萎缩侧索硬化症（ALS）中获FDA快速通道资格",
+    "summary_zh": "Cellenkos, Inc.宣布，CK0803用于肌萎缩侧索硬化症（ALS）获得FDA快速通道资格。该公司处于临床阶段，专注于开发组织定向、脐带血来源的调节性T细胞（Treg）疗法。",
+    "content_fingerprint": "1eabe41fcfa15c9d33b951e31f145caeb5e410b29a4b376f899a4dfa6ad25b62",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490926,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/clinical_trials/cellenkos-receives-fda-fast-track-designation-ck0803-amyotrophic-lateral-sclerosis-als-22570.html",
+      "reviewed_by": "gpt-6-astra",
+      "reviewed_at": 1789490926
+    }
+  },
+  "31846671297453": {
+    "title_zh": "Capricor Therapeutics宣布FDA继续审评Deramiocel BLA，PDUFA目标行动日期延期",
+    "summary_zh": "Capricor Therapeutics于2026年8月24日宣布，美国FDA继续审评其Deramiocel生物制品许可申请（BLA），PDUFA目标行动日期已延期。",
+    "content_fingerprint": "34b560eb83ba30f7dbeb7747f598c3feae70a37c6574ef23b840ad86af824827",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490926,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/nda/deramiocel_260824.html",
+      "reviewed_by": "gpt-6-astra",
+      "reviewed_at": 1789490926
+    }
+  },
+  "21059529489576": {
+    "title_zh": "United Therapeutics宣布FDA受理Ralinepag治疗肺动脉高压的新药申请",
+    "summary_zh": "United Therapeutics Corporation于2026年8月24日宣布，美国FDA已受理其用于治疗肺动脉高压的Ralinepag新药申请（NDA）。",
+    "content_fingerprint": "9503f3f6ae96c7b900b4dfd020397309d6261756e1e85d95fa6d62832a3f8e4d",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490926,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/nda/ralinepag_260824.html",
+      "reviewed_by": "gpt-6-astra",
+      "reviewed_at": 1789490926
+    }
+  },
+  "236744493189067": {
+    "title_zh": "默沙东与Moderna：Intismeran Autogene联合Keytruda®的III期INTerpath-001试验达到无复发生存期和无远处转移生存期终点",
+    "summary_zh": "Merck（NYSE: MRK，美国及加拿大以外称MSD）与Moderna（NASDAQ: MRNA）宣布，III期INTerpath-001试验取得积极主要结果。Intismeran Autogene联合Keytruda®用于完全切除的IIB–IV期黑色素瘤患者，达到了无复发生存期（RFS）和无远处转移生存期（DMFS）终点。",
+    "content_fingerprint": "360c484ea16354ec5ce8a51c00ce28ffabaac7625a72b0f0203a2fd036adec94",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490926,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/clinical_trials/merck-moderna-announce-phase-3-interpath-001-trial-intismeran-autogene-plus-keytruda-met-endpoints-22562.html",
+      "reviewed_by": "gpt-6-astra",
+      "reviewed_at": 1789490926
+    }
+  },
+  "226005628964886": {
+    "title_zh": "FDA授予Genglycos（pariglasgene brecaparvovec-opnr）基因疗法加速批准，用于治疗糖原贮积病Ia型",
+    "summary_zh": "Ultragenyx Pharmaceutical Inc.（NASDAQ: RARE）宣布，美国FDA已授予Genglycos（pariglasgene brecaparvovec-opnr）加速批准。该基因疗法用于治疗糖原贮积病Ia型。",
+    "content_fingerprint": "6965fcf9cb357aed82fee4c2ec82458a2f603df310d5a019a22de8e8b7a072d5",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490926,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/newdrugs/fda-grants-accelerated-approval-genglycos-pariglasgene-brecaparvovec-opnr-gene-therapy-glycogen-6861.html",
+      "reviewed_by": "gpt-6-astra",
+      "reviewed_at": 1789490926
+    }
+  },
+  "142435934920663": {
+    "title_zh": "FDA批准Pasatru（garetosmab-grts）用于治疗进行性骨化性纤维发育不良",
+    "summary_zh": "Regeneron Pharmaceuticals, Inc.（NASDAQ：REGN）于2026年8月19日宣布，FDA已批准Pasatru™（garetosmab-grts）治疗进行性骨化性纤维发育不良。",
+    "content_fingerprint": "b8dd9c37f841edaf0a5a829d5e993813b2039cacf86d2e55c7bf84fbfda36486",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490926,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/newdrugs/fda-approves-pasatru-garetosmab-grts-fibrodysplasia-ossificans-progressiva-6860.html",
+      "reviewed_by": "gpt-6-astra",
+      "reviewed_at": 1789490926
+    }
+  },
+  "158260545845475": {
+    "title_zh": "Amylyx公布Avexitide治疗减重术后低血糖的3期LUCIDITY试验积极顶线结果",
+    "summary_zh": "Amylyx Pharmaceuticals公布，其3期LUCIDITY试验达到与FDA商定的主要终点：avexitide使2级和3级低血糖事件复合发生率较安慰剂降低55%（p=0.000003）。该试验亦达到所有次要终点。",
+    "content_fingerprint": "1663303ddcaa7802de93a23f7bd0fd7f2188ec525a69ebb5a9eaf67881d7d73a",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490926,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/clinical_trials/amylyx-pharmaceuticals-announces-positive-topline-results-phase-3-lucidity-clinical-trial-avexitide-22561.html",
+      "reviewed_by": "gpt-6-astra",
+      "reviewed_at": 1789490926
+    }
+  },
+  "155834462086530": {
+    "title_zh": "Faeth Therapeutics获FDA授予PIKTOR联合紫杉醇在生物标志物选择的晚期子宫内膜癌中的快速通道资格",
+    "summary_zh": "Faeth Therapeutics（Nasdaq: FTH）宣布，PIKTOR联合紫杉醇用于经生物标志物筛选的晚期子宫内膜癌患者，获得FDA快速通道资格。该公司正在开发面向癌症患者的多节点疗法，PIKTOR为其核心项目。",
+    "content_fingerprint": "cf4dc600a42debf5d95340686020a5cfd74148c74d098605565945b4516e8fe5",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490926,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/clinical_trials/faeth-therapeutics-announces-fda-grant-fast-track-designation-piktor-plus-paclitaxel-biomarker-22557.html",
+      "reviewed_by": "gpt-6-astra",
+      "reviewed_at": 1789490926
+    }
+  },
+  "186293661136540": {
+    "title_zh": "Volrustomig联合化疗治疗转移性非小细胞肺癌的eVOLVE-Lung02 III期试验更新",
+    "summary_zh": "AstraZeneca宣布终止eVOLVE-Lung02 III期试验。该试验评估volrustomig联合化疗作为一线治疗，与pembrolizumab联合化疗相比，用于转移性非小细胞肺癌患者。",
+    "content_fingerprint": "67f53be92cade2677ccfce8a843fb5dc21217cf82b6b39af213502cd8c9143b0",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490926,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/clinical_trials/update-evolve-lung02-phase-iii-trial-volrustomig-plus-chemotherapy-metastatic-non-small-cell-lung-22559.html",
+      "reviewed_by": "gpt-6-astra",
+      "reviewed_at": 1789490926
+    }
+  },
+  "74189875320176": {
+    "title_zh": "EyePoint公布Duravyu™ 2.7mg治疗湿性AMD的LUGANO三期关键试验顶线数据",
+    "summary_zh": "EyePoint, Inc.（Nasdaq: EYPT）于2026年8月17日宣布，Duravyu™ 2.7mg治疗湿性AMD的LUGANO试验公布顶线数据。LUGANO是两项三期关键试验中的第一项。",
+    "content_fingerprint": "bf70dfdd04c150fd51cae7d722e5669bdb4409f660a8cc79ef0884c285572bdf",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789490926,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.drugs.com/clinical_trials/eyepoint-announces-topline-data-lugano-first-two-pivotal-phase-3-clinical-trials-duravyu-2-7mg-wet-22558.html",
+      "reviewed_by": "gpt-6-astra",
+      "reviewed_at": 1789490926
+    }
   }
 }
