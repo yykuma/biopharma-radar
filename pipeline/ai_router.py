@@ -18,6 +18,18 @@ def load_registry(path=CONFIG_PATH):
     config = json.loads(path.read_text())
     if config.get('strategy') not in ('round_robin', 'failover'):
         raise ValueError('Unsupported routing strategy')
+    execution = config.get('execution', {})
+    limits = [('execution.max_parallel_requests', execution.get('max_parallel_requests', 2), 1, 4)]
+    limits += [('execution.supplier_concurrency.' + name, value, 1, 2)
+               for name, value in execution.get('supplier_concurrency', {}).items()]
+    for task, defaults in [('translation', (4, 1, 3000)), ('curation', (24, 2, 3600))]:
+        settings = config.get(task, {})
+        limits += [(task + '.batch_size', settings.get('batch_size', defaults[0]), 1, 8 if task == 'translation' else 48),
+                   (task + '.max_batches_per_run', settings.get('max_batches_per_run', defaults[1]), 1, 12 if task == 'translation' else 8),
+                   (task + '.max_output_tokens', settings.get('max_output_tokens', defaults[2]), 500, 10000)]
+    for name, value, minimum, maximum in limits:
+        if type(value) is not int or not minimum <= value <= maximum:
+            raise ValueError(f'{name} must be an integer between {minimum} and {maximum}')
     seen = set()
     for p in config['providers']:
         if p['id'] in seen or p['protocol'] != 'openai_compatible':
@@ -131,12 +143,23 @@ def new_state(state, now):
 class RoutingSession:
     """Atomically reserve quota and one in-flight request per supplier."""
 
-    def __init__(self, state):
+    def __init__(self, state, execution=None):
+        execution = execution or {}
+        self.max_requests = execution.get("max_parallel_requests", 2)
+        self.supplier_limits = execution.get("supplier_concurrency", {})
+        self.observed_by_supplier = {}
         self.state = state
         self.condition = threading.Condition()
-        self.busy = set()
+        self.busy = {}
         self.max_parallel = 0
         self.attempts = []
+
+    def release(self, supplier):
+        with self.condition:
+            self.busy[supplier] -= 1
+            if not self.busy[supplier]:
+                del self.busy[supplier]
+            self.condition.notify_all()
 
     def available(self, config, now):
         with self.condition:
@@ -149,10 +172,11 @@ class RoutingSession:
                 choices = [choice for choice in candidates(config, self.state, now) if choice[2] not in tried]
                 for provider, model, key in choices:
                     supplier = provider.get('supplier', provider['id'])
-                    if supplier in self.busy or len(self.busy) >= 2:
+                    if self.busy.get(supplier, 0) >= self.supplier_limits.get(supplier, 1) or sum(self.busy.values()) >= self.max_requests:
                         continue
-                    self.busy.add(supplier)
-                    self.max_parallel = max(self.max_parallel, len(self.busy))
+                    self.busy[supplier] = self.busy.get(supplier, 0) + 1
+                    self.observed_by_supplier[supplier] = max(self.observed_by_supplier.get(supplier, 0), self.busy[supplier])
+                    self.max_parallel = max(self.max_parallel, sum(self.busy.values()))
                     for scope in ['provider:' + provider['id'], key]:
                         counts = self.state['daily_usage']['requests']
                         counts[scope] = counts.get(scope, 0) + 1
@@ -164,7 +188,7 @@ class RoutingSession:
 
 
 def route_text(messages, state, config, now, call=invoke, max_tokens=1200, validate=None, session=None):
-    session = session or RoutingSession(state)
+    session = session or RoutingSession(state, config.get('execution'))
     state = session.state
     attempts=[];tried=set()
     while len(attempts) < min(5, config['max_attempts_per_run']):
@@ -208,9 +232,7 @@ def route_text(messages, state, config, now, call=invoke, max_tokens=1200, valid
                 else:
                     state['cooldowns'][key]=now+(86400 if status==404 else 900)
         finally:
-            with session.condition:
-                session.busy.remove(supplier)
-                session.condition.notify_all()
+            session.release(supplier)
     return dict(status='unavailable',router_state=state,attempts=attempts,last_attempt_at=now)
 
 

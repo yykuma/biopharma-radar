@@ -1,11 +1,13 @@
 import json
 import os
 import threading
+import tempfile
 import unittest
+from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor, TimeoutError
 from unittest.mock import patch
 
-from ai_router import Completion, ProviderError, RoutingSession, candidates, new_state, route_text
+from ai_router import Completion, ProviderError, RoutingSession, candidates, load_registry, new_state, route_text
 from editorial import enrich
 
 
@@ -59,9 +61,7 @@ class ParallelTests(unittest.TestCase):
             self.assertTrue(entered.wait(timeout=1))
             with self.assertRaises(TimeoutError):
                 future.result(timeout=0.05)
-            with session.condition:
-                session.busy.remove(first[3])
-                session.condition.notify_all()
+            session.release(first[3])
             second = future.result(timeout=1)
         self.assertEqual(first[0]['id'], 'flash')
         self.assertEqual(second[0]['id'], 'general')
@@ -110,6 +110,39 @@ class ParallelTests(unittest.TestCase):
         state = new_state({'last_model': 'amd/one', 'last_models': {'sensenova': 'flash/one'}}, 100000)
         choices = candidates(config, state, 100000)
         self.assertEqual([p['id'] for p, _, _ in choices if p.get('supplier') == 'sensenova'], ['general', 'flash'])
+
+    def test_operator_settings_are_validated_before_loading(self):
+        current = load_registry()
+        self.assertEqual(current['execution']['max_parallel_requests'], 2)
+        self.assertEqual(current['execution']['supplier_concurrency']['sensenova'], 1)
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / 'settings.json'
+            for value in [0, 5, True]:
+                changed = {**current, 'execution': {'max_parallel_requests': value}}
+                path.write_text(json.dumps(changed))
+                with self.assertRaises(ValueError):
+                    load_registry(path)
+            path.write_text(json.dumps({**current, 'translation': {'batch_size': 100}}))
+            with self.assertRaises(ValueError):
+                load_registry(path)
+
+    def test_total_concurrency_setting_serializes_different_suppliers(self):
+        config = self.config()
+        session = RoutingSession(new_state({}, 100000), {'max_parallel_requests': 1})
+        first = session.reserve(config, 100000, set())
+        entered = threading.Event()
+        def reserve_other():
+            entered.set()
+            return session.reserve(config, 100000, {first[2]})
+        with ThreadPoolExecutor(max_workers=1) as pool:
+            future = pool.submit(reserve_other)
+            self.assertTrue(entered.wait(timeout=1))
+            with self.assertRaises(TimeoutError):
+                future.result(timeout=0.05)
+            session.release(first[3])
+            second = future.result(timeout=1)
+        self.assertNotEqual(first[0]['id'], second[0]['id'])
+        self.assertEqual(session.max_parallel, 1)
 
     @patch('localize.fetch_text', return_value=('', None))
     def test_translation_and_curation_integrate_without_losing_fields_or_counters(self, _fetch):

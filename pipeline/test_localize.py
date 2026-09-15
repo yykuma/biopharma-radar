@@ -65,3 +65,34 @@ class LocalizationTests(unittest.TestCase):
     def test_disabled_bootstrap_has_complete_briefing_shape(self):
         previous=localize([self.item],self.sources,None,False,100000,config=self.config)
         self.assertEqual(summarize([self.item],previous,False,config=self.config)['status'],'disabled')
+
+    @patch.dict(os.environ,{'TEST_KEY':'fixture'})
+    def test_configured_batches_process_older_backlog_first(self):
+        config={**self.config,'translation':{'batch_size':2,'max_batches_per_run':2,'max_output_tokens':3000}}
+        config['providers'][0]['max_requests_per_day']=10
+        items=[{**self.item,'id':i,'first_seen_at':i*100} for i in [5,3,1,4,2]]
+        calls=[]
+        def call(_provider,_model,messages,_limit):
+            inputs=json.loads(messages[-1]['content']);calls.append([a['id'] for a in inputs])
+            return Completion(json.dumps([{'id':a['id'],'title_zh':'试验结果','summary_zh':'试验未达到主要终点。'} for a in inputs]),100,'stop')
+        result=localize(items,self.sources,None,True,100000,call,config)
+        self.assertEqual(calls,[['1','2'],['3','4']])
+        self.assertEqual(result['translation_run']['translated_this_run'],4)
+        self.assertEqual(result['translation_run']['pending'],1)
+
+    @patch.dict(os.environ,{'TEST_KEY':'fixture'})
+    def test_failed_batch_does_not_starve_other_pending_articles(self):
+        config={**self.config,'translation':{'batch_size':1,'max_batches_per_run':1}}
+        config['providers'][0]['max_requests_per_day']=10
+        failed={**self.item,'first_seen_at':1}
+        previous=localize([failed],self.sources,None,True,100000,
+                          lambda *args:Completion('Malformed response that is not JSON.',20,'stop'),config)
+        fetched=dict(self.item);apply_cached(fetched,failed,{})
+        self.assertEqual(fetched['translation']['last_attempt_at'],100000)
+        waiting={**self.item,'id':2,'first_seen_at':2}
+        def call(_provider,_model,messages,_limit):
+            self.assertEqual(json.loads(messages[-1]['content'])[0]['id'],'2')
+            return Completion(json.dumps([{'id':'2','title_zh':'试验结果','summary_zh':'试验未达到主要终点。'}]),20,'stop')
+        localize([fetched,waiting],self.sources,previous,True,101000,call,config)
+        self.assertIn('title_zh',waiting)
+        self.assertNotIn('title_zh',fetched)

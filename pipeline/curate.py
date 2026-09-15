@@ -93,11 +93,14 @@ def curate(items, previous_briefing, enabled, now, call=invoke, config=None, ses
     pending = [a for a in items if a.get('editorial', {}).get('fingerprint') != digest(a)
                or a.get('editorial', {}).get('version') != VERSION]
     attempts = []
-    # Two bounded batches share the existing provider budgets and cooldowns.
-    for offset in range(0, min(len(pending), 48), 24):
+    settings=config.get('curation',{})
+    batch_size=min(48,max(1,settings.get('batch_size',24)))
+    max_batches=min(8,max(1,settings.get('max_batches_per_run',2)))
+    # Bounded batches share the existing provider budgets and cooldowns.
+    for offset in range(0, min(len(pending), batch_size*max_batches), batch_size):
         if not enabled or not (session.available(config,now) if session else candidates(config, state, now)):
             break
-        batch = pending[offset:offset + 24]
+        batch = pending[offset:offset + batch_size]
         ids = {str(a['id']) for a in batch}
         tokens = lambda a: set(re.findall(r'[a-z0-9]{4,}', a['title'].lower()))
         references = {}
@@ -120,7 +123,7 @@ def curate(items, previous_briefing, enabled, now, call=invoke, config=None, ses
             {'role': 'user', 'content': json.dumps({'articles': [record(a) for a in batch],
                                                    'references': [record(a) for a in references.values()]}, ensure_ascii=False)}]
         available = ids | set(references)
-        outcome = route_text(messages, state, config, now, call, max_tokens=3600, session=session,
+        outcome = route_text(messages, state, config, now, call, max_tokens=min(10000,settings.get('max_output_tokens',3600)), session=session,
                              validate=lambda text: parse_labels(text, ids, available))
         attempts.extend(outcome.get('attempts', []))
         if outcome['status'] != 'ok':

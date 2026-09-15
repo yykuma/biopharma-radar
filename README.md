@@ -96,7 +96,7 @@ truncated responses. It excludes other clients and requests with unknown usage.
 `max_requests_per_day` counts every attempt, resets at UTC midnight, and is scoped
 to a pool or model. `expires_at` is a local review deadline, not a provider promise.
 `routing_role: fallback` keeps Mistral behind the preferred AMD and SenseNova routes; it may serve work while preferred suppliers are busy or unavailable.
-SenseNova defaults to two attempts per pool per day and a 30-day pricing review.
+SenseNova allows up to 24 attempts per pool per day and a 30-day pricing review.
 Quota descriptions are operator notes, not a hard guarantee about provider billing.
 
 ## Company catalog and Chinese news
@@ -121,8 +121,10 @@ which company feeds are connected; a catalog entry does not enable collection.
 
 The first 52 articles have reviewed Chinese translations in
 `config/editorial-translations.json`. A source fingerprint prevents reuse after
-source text changes. New untranslated articles form a batch of at most four per
-collection run, with a 3,000-token output ceiling. Translation fetches only bounded
+source text changes. Untranslated articles are processed in up to six sequential batches of four per
+collection run (24 articles maximum), with a 3,000-token output ceiling per batch.
+Older unattempted articles come first. Failed batches stop that run and retain an
+attempt timestamp so they do not indefinitely block other pending articles. Translation fetches only bounded
 public introductions on configured HTTPS hosts, rejects redirects, and falls back
 to RSS excerpts without bypassing access controls. Full source bodies are transient
 and are not exported. Invalid JSON, mismatched IDs and truncated responses remain
@@ -167,3 +169,36 @@ caps, provider review deadlines and free-only model selection remain enforced.
 Briefing generation starts after both tasks finish so it uses completed labels
 and translations. The public curation.execution report records sanitized
 attempts and observed concurrency; zero means no eligible request was dispatched.
+
+## Operator tuning (one configuration file)
+
+Edit `config/ai-providers.json`; credentials remain in GitHub Actions Secrets.
+Changes take effect on the next collection run after deployment. The current
+profile processes backlog with two total requests and one per supplier.
+
+| Setting | Current value | Meaning |
+| --- | --- | --- |
+| `execution.max_parallel_requests` | 2 | Total in-flight ceiling; currently two independent editorial workers |
+| `execution.supplier_concurrency` | AMD/SenseNova/Mistral: 1 each | Shared supplier slot limit, including models and quota pools |
+| `translation.batch_size` | 4 | Articles per translation request |
+| `translation.max_batches_per_run` | 6 | Sequential batches per collection, at most 24 articles |
+| `translation.max_output_tokens` | 3000 | Response ceiling per translation batch |
+| `curation.batch_size` | 24 | Articles per classification request |
+| `curation.max_batches_per_run` | 2 | Classification batches per collection |
+| `curation.max_output_tokens` | 3600 | Response ceiling per classification batch |
+| `providers[].max_requests_per_day` | SenseNova: 24 per pool | Counts every attempt; the two SenseNova pools stay separate |
+| `providers[].enabled` / `models[].enabled` | Per entry | Enable/disable a provider or model |
+| `providers[].routing_role` | Mistral: fallback | Preferred routes serve first; idle fallback can accept work |
+
+These are application ceilings, not purchased or guaranteed provider allowances.
+Increasing the workload does not reset provider cooldowns or usage counters.
+Keep each supplier at one request unless a later explicit change is intended.
+Translation stops after an unsuccessful batch; other pending articles get a
+chance on a later run. Successful text is never regenerated without a source
+change. Raise output tokens alongside batch size if needed, and keep batches
+within the job's 15-minute execution window.
+
+Validate after an edit: `python -c 'from pipeline.ai_router import load_registry; load_registry(); print("AI settings valid")'`.
+Run `python -m unittest discover -s pipeline -p 'test_*.py'` before publishing.
+Check `data/latest.json` → `curation.translation` for completed/pending counts,
+and `curation.execution` for attempts, actual parallelism and supplier peaks.
