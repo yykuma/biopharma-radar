@@ -1145,16 +1145,18 @@
   "35506658482440": {
     "title_zh": "FDA启动试点项目，加快美国早期药物研究",
     "summary_zh": "该项目6月首次预告，并于周二作为“Operation Trialblazer”的一部分正式公布，将促成药企与研究机构合作，更快地让药物进入人体试验。",
-    "content_fingerprint": "3880675911fe44b563ae6e18099b8751b18c0c192fd5c8aaeb166ae8ed36c929",
+    "content_fingerprint": "3964cf20eeb86ba77c978c534cf544742b9dd879232f95cb28c3003f38f425e7",
     "translation": {
       "status": "translated",
       "method": "ai",
       "provider": "codex",
       "model": "gpt-6-astra",
       "reasoning_effort": "low",
-      "translated_at": 1789490669,
+      "translated_at": 1789491040,
       "basis": "feed_excerpt",
-      "source_url": "https://www.biopharmadive.com/news/fda-operation-trialblazer-ind-pilot-program-drug-trials/830372/"
+      "source_url": "https://www.biopharmadive.com/news/fda-operation-trialblazer-ind-pilot-program-drug-trials/830372/",
+      "reviewed_by": "gpt-6-astra",
+      "reviewed_at": 1789491040
     }
   },
   "271262508034501": {
@@ -3289,6 +3291,23 @@
       "source_url": "https://www.drugs.com/clinical_trials/eyepoint-announces-topline-data-lugano-first-two-pivotal-phase-3-clinical-trials-duravyu-2-7mg-wet-22558.html",
       "reviewed_by": "gpt-6-astra",
       "reviewed_at": 1789490926
+    }
+  },
+  "73602359873171": {
+    "title_zh": "2026年WCLC：新的“ADC时代”、中国研究数据争议与备受关注的阿斯利康",
+    "summary_zh": "今年规模最大的肺癌研究会议公布的数据提示，一种侵袭性肿瘤可能迎来新的治疗标准。会上也就中国开展的研究结果是否可靠展开了讨论。",
+    "content_fingerprint": "04f8879be75db5d5b56251e92c6ce9e08dc75c88f8303e129fb2b547af86851e",
+    "translation": {
+      "status": "translated",
+      "method": "ai",
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "low",
+      "translated_at": 1789491040,
+      "basis": "feed_excerpt",
+      "source_url": "https://www.biopharmadive.com/news/wclc-2026-adc-b7h3-china-study-results-astrazeneca/830247/",
+      "reviewed_by": "gpt-6-astra",
+      "reviewed_at": 1789491040
     }
   }
 }
