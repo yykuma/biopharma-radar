@@ -32,6 +32,16 @@ class NormalizeTests(unittest.TestCase):
         self.row['title'] = 'Drug market featuring Merck KGaA and Merck & Co.'
         self.assertEqual(normalize(self.row, self.source, 1789470783)['markets'], ['US'])
 
+    def test_exchange_codes_classify_financial_wire_items(self):
+        source = {'id':'gelonghui', 'name':'Gelonghui', 'market':'GLOBAL', 'content_type':'brief'}
+        for title, market in [('康为世纪(688426.SH)：公司公告','A'),
+                              ('东北制药(000597.SZ)：公司公告','A'),
+                              ('康宁杰瑞制药-B(09966.HK)：公司公告','HK'),
+                              ('医药行业动态','GLOBAL')]:
+            with self.subTest(title=title):
+                article=normalize({**self.row, 'title':title}, source, 1789470783)
+                self.assertEqual(article['markets'], [market])
+
     def test_content_type_follows_source_format_and_updates_cached_articles(self):
         source = {**self.source, 'publisher':'Publisher', 'content_type':'brief'}
         article = {'title':'Drug market featuring Merck KGaA', 'markets':['US']}

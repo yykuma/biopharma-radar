@@ -32,10 +32,15 @@ GROUPS = {'A':'A 股', 'HK':'港股', 'US':'美股', 'GLOBAL':'全球医药'}
 def classify(article, source):
     title = re.sub(r'Merck\s+KGaA', '', article['title'], flags=re.I)
     names = [name for name in COMPANIES if name.casefold() in title.casefold()]
-    markets = sorted({m for name in names for m in COMPANIES[name]})
+    ticker_markets = set()
+    if re.search(r'\b\d{6}\.(?:SH|SS|SZ|BJ)\b', title, re.I):
+        ticker_markets.add('A')
+    if re.search(r'\b\d{4,5}\.HK\b', title, re.I):
+        ticker_markets.add('HK')
+    markets = sorted({m for name in names for m in COMPANIES[name]} | ticker_markets)
     article.update(companies=names,
                    markets=markets or ['GLOBAL' if source['id'].endswith('yahoo') else source['market']],
-                   market_basis='company_alias' if names else 'source_scope',
+                   market_basis='company_alias' if names else 'ticker' if ticker_markets else 'source_scope',
                    source=source['name'], publisher=source.get('publisher', source['name']),
                    content_type=source.get('content_type', 'news'), content_type_basis='source_format')
     return article

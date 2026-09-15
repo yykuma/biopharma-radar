@@ -256,6 +256,15 @@
             "enum": [
               "source_format"
             ]
+          },
+          "market_basis": {
+            "type": "string",
+            "enum": [
+              "company_alias",
+              "ticker",
+              "source_scope"
+            ],
+            "description": "Evidence for market tags. An article may relate to multiple listing markets."
           }
         }
       },
