@@ -87,7 +87,7 @@ def group_events(items):
 
 def curate(items, previous_briefing, enabled, now, call=invoke, config=None, session=None):
     config = dict(config or load_registry())
-    config['task'] = 'news_translation'
+    config['task'] = 'news_curation'
     config['operation'] = 'curation'
     state = session.state if session else new_state((previous_briefing or {}).get('router_state', {}), now)
     pending = [a for a in items if a.get('editorial', {}).get('fingerprint') != digest(a)

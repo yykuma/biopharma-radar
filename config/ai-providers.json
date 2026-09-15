@@ -5,7 +5,8 @@
       "amd": 1,
       "sensenova": 1,
       "mistral": 1,
-      "agnes": 1
+      "agnes": 1,
+      "openrouter": 1
     },
     "task_order": [
       "translation",
@@ -44,7 +45,8 @@
           "free_tier": "free",
           "tasks": [
             "news_summary",
-            "news_translation"
+            "news_translation",
+            "news_curation"
           ],
           "enabled": true,
           "tested": true
@@ -55,7 +57,8 @@
           "free_tier": "free",
           "tasks": [
             "news_summary",
-            "news_translation"
+            "news_translation",
+            "news_curation"
           ],
           "enabled": true,
           "tested": true
@@ -66,7 +69,8 @@
           "free_tier": "free",
           "tasks": [
             "news_summary",
-            "news_translation"
+            "news_translation",
+            "news_curation"
           ],
           "enabled": true,
           "tested": false
@@ -77,7 +81,8 @@
           "free_tier": "limited_free",
           "tasks": [
             "news_summary",
-            "news_translation"
+            "news_translation",
+            "news_curation"
           ],
           "enabled": true,
           "tested": false
@@ -104,7 +109,8 @@
           "free_tier": "beta_free",
           "tasks": [
             "news_summary",
-            "news_translation"
+            "news_translation",
+            "news_curation"
           ],
           "enabled": true,
           "tested": true,
@@ -120,7 +126,8 @@
           "free_tier": "beta_free",
           "tasks": [
             "news_summary",
-            "news_translation"
+            "news_translation",
+            "news_curation"
           ],
           "enabled": false,
           "tested": false
@@ -146,7 +153,8 @@
           "free_tier": "beta_free",
           "tasks": [
             "news_summary",
-            "news_translation"
+            "news_translation",
+            "news_curation"
           ],
           "enabled": true,
           "tested": true,
@@ -162,7 +170,8 @@
           "free_tier": "beta_free",
           "tasks": [
             "news_summary",
-            "news_translation"
+            "news_translation",
+            "news_curation"
           ],
           "enabled": false,
           "tested": false
@@ -173,7 +182,8 @@
           "free_tier": "beta_free",
           "tasks": [
             "news_summary",
-            "news_translation"
+            "news_translation",
+            "news_curation"
           ],
           "enabled": false,
           "tested": false
@@ -184,7 +194,8 @@
           "free_tier": "beta_free",
           "tasks": [
             "news_summary",
-            "news_translation"
+            "news_translation",
+            "news_curation"
           ],
           "enabled": false,
           "tested": false
@@ -229,7 +240,8 @@
           "free_tier": "limited_free",
           "tasks": [
             "news_summary",
-            "news_translation"
+            "news_translation",
+            "news_curation"
           ],
           "enabled": true,
           "tested": true
@@ -240,7 +252,8 @@
           "free_tier": "limited_free",
           "tasks": [
             "news_summary",
-            "news_translation"
+            "news_translation",
+            "news_curation"
           ],
           "enabled": false,
           "tested": false
@@ -263,7 +276,8 @@
           "free_tier": "free",
           "tasks": [
             "news_summary",
-            "news_translation"
+            "news_translation",
+            "news_curation"
           ],
           "enabled": false,
           "tested": false
@@ -288,10 +302,41 @@
           "free_tier": "limited_free",
           "tasks": [
             "news_summary",
-            "news_translation"
+            "news_translation",
+            "news_curation"
           ],
           "enabled": true,
           "tested": true
+        }
+      ]
+    },
+    {
+      "id": "openrouter",
+      "name": "OpenRouter free models",
+      "protocol": "openai_compatible",
+      "base_url": "https://openrouter.ai/api/v1",
+      "key_env": "OPENROUTER_API_KEY",
+      "enabled": true,
+      "quota_scope": "provider",
+      "quota_store": "github",
+      "max_requests_per_day": 50,
+      "pricing_source": "https://openrouter.ai/docs/api-reference/limits",
+      "models": [
+        {
+          "id": "inclusionai/ling-3.0-flash-vl:free",
+          "category": "vision",
+          "free_tier": "free",
+          "tasks": [
+            "news_summary",
+            "news_curation"
+          ],
+          "enabled": true,
+          "tested": true,
+          "extra_body": {
+            "reasoning": {
+              "enabled": false
+            }
+          }
         }
       ]
     }

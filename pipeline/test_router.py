@@ -104,10 +104,26 @@ class RoutingChangesTests(unittest.TestCase):
         self.assertEqual(state['cooldowns'],{'amd/one':100120})
         self.assertEqual(state['daily_usage']['requests']['provider:amd'],10002)
 
-    def test_production_registry_has_no_daily_caps(self):
+    def test_production_registry_caps_only_openrouter(self):
         from ai_router import load_registry
         for p in load_registry()['providers']:
-            for entry in [p,*p['models']]:self.assertNotIn('max_requests_per_day',entry)
+            if p['id']=='openrouter':
+                self.assertEqual(p['max_requests_per_day'],50)
+                self.assertEqual(p['quota_store'],'github')
+            else:
+                for entry in [p,*p['models']]:self.assertNotIn('max_requests_per_day',entry)
+
+    @patch.dict(os.environ, {'OPENROUTER_API_KEY':'fixture'}, clear=True)
+    def test_openrouter_handles_editorial_tasks_without_translation_calls(self):
+        from ai_router import candidates, load_registry, new_state, route_text
+        config = load_registry()
+        config['providers'] = [p for p in config['providers'] if p['id']=='openrouter']
+        state = new_state({},100000)
+        for task in ('news_curation','news_summary'):
+            self.assertTrue(candidates({**config,'task':task},state,100000))
+        result = route_text([],state,{**config,'task':'news_translation'},100000,
+                            lambda *_:self.fail('Editorial-only model received a translation'))
+        self.assertEqual(result['status'],'unavailable')
 
     def test_retry_after_header(self):
         from ai_router import retry_delay

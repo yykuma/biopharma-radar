@@ -49,16 +49,16 @@ not turn news into briefs. These fields also apply to retained articles on refre
 
 Edit `config/ai-providers.json`. Credentials must never be stored in this file.
 Add a GitHub Actions secret and map it into the workflow environment. Existing names:
-`AMD_API_KEY`, `MISTRAL_API_KEY`, `GLM_API_KEY`, `SENSENOVA_API_KEY`, `AGNES_API_KEY`. Individual models may override `key_env`.
+`AMD_API_KEY`, `MISTRAL_API_KEY`, `GLM_API_KEY`, `SENSENOVA_API_KEY`, `AGNES_API_KEY`, `OPENROUTER_API_KEY`. Individual models may override `key_env`.
 The integration currently supports OpenAI-compatible chat completions with usage and completion-status tracking.
 
 Providers/models have separate enable switches. Models are classified by `category`,
 `free_tier` and supported `tasks`. Only enabled free/limited_free/beta_free models supporting
-the requested task (`news_summary` or `news_translation`) participate. These cost labels are operator declarations, not billing
+the requested task (`news_summary`, `news_curation` or `news_translation`) participate. These cost labels are operator declarations, not billing
 verification. Keep paid billing and automatic top-ups disabled.
 
 `round_robin` advances after the last successful model; `failover` preserves order.
-Each task allows at most three attempts, without SDK retries or paid fallback. Translation, classification and briefing share concurrency limits, cooldowns and usage counters. No daily application request caps are configured.
+Each task allows at most three attempts, without SDK retries or paid fallback. Translation, classification and briefing share concurrency limits, cooldowns and usage counters. Only OpenRouter has an application cap: 50 reserved requests per UTC day.
 429 honors Retry-After when supplied, otherwise waits an hour. AMD cools only the affected model and rotates; other providers cool the supplier. 401/403 cool the supplier for 24 hours. A 404 cools the model
 for 24 hours; other failures for 15 minutes. Cooldowns and rotation position persist
 in the published briefing without credentials or raw exception messages.
@@ -96,7 +96,7 @@ truncated responses. It excludes other clients and requests with unknown usage.
 `max_requests_per_day` counts every attempt, resets at UTC midnight, and is scoped
 to a pool or model. `expires_at` is a local review deadline, not a provider promise.
 `routing_role: fallback` keeps Mistral behind the preferred AMD and SenseNova routes; it may serve work while preferred suppliers are busy or unavailable.
-No provider or model has a daily application cap. SenseNova retains a pricing review deadline.
+OpenRouter has a 50-request daily cap; all other providers and models have no daily application cap. SenseNova retains a pricing review deadline.
 Quota descriptions are operator notes, not a hard guarantee about provider billing.
 
 ## Company catalog and Chinese news
@@ -219,3 +219,19 @@ Retention is 90 days and at most 5,000 original reports.
 ## Agnes AI integration
 
 `agnes-2.5-flash` uses the official OpenAI-compatible base URL `https://apihub.agnes-ai.com/v1`. Its current input, cached-input and output prices were verified as zero on 2026-09-15 at https://www.agnes-ai.com/en/docs/pricing. The promotion has no published fixed end date; the registry expiry is a local review deadline. Only this model is enabled for Agnes. Credentials use the `AGNES_API_KEY` Actions secret. Agnes shares the global concurrency ceiling, keeps one in-flight request, and has no daily application cap. Translation, classification and briefing use the same router.
+
+## OpenRouter free routing and durable counter
+
+`inclusionai/ling-3.0-flash-vl:free` is enabled for `news_curation` and `news_summary`, with one in-flight request. It is excluded from `news_translation`. Classification of eight articles and a Chinese briefing passed live tests on 2026-09-15. The provider remains subject to its own free-tier limits: https://openrouter.ai/docs/api-reference/limits.
+
+Every inference attempt reserves one request before sending, including attempts that fail or are cancelled. The 50-request cap is shared across all OpenRouter models and tasks in this application. UTC midnight resets the counter (08:00 Asia/Singapore). No paid model is configured as fallback.
+
+The ledger is `state/openrouter-quota.json` on the `codex/ai-state` branch. Create that branch from `main` before the first call. GitHub Actions supplies its automatic `GITHUB_TOKEN` as `QUOTA_GITHUB_TOKEN`, with `contents: write` permission. Compare-and-swap writes prevent concurrent runs from exceeding the cap; a failed ledger read/write blocks OpenRouter and permits other suppliers. Counts survive failed publishing, cancellation and redeployment. The state branch does not trigger the main publishing workflow. The ledger contains counts and dates, never API keys. External clients using the same OpenRouter account are outside this application's counter.
+
+`curation.execution.quota_counters.openrouter` publishes the last observed count and reset time, also shown in the briefing dialog. This is a collection-time snapshot, not a live account balance.
+
+## Dedicated translation direction
+
+Pure translation of existing titles and excerpts should use a dedicated translation API with batching and source-fingerprint caching. Summarization from longer source text, editorial classification and event matching remain LLM tasks. Task capabilities are separate so providers can be enabled for editorial work without receiving translation requests. Existing LLM localization remains active until a dedicated service is configured and verified; no replacement translation credentials have been installed yet.
+
+Tencent Cloud text translation currently advertises 5 million free characters per month and defaults postpaid billing to off: https://cloud.tencent.cn/document/product/551/35017. Keep postpaid off for stop-at-quota behavior. No Tencent service is enabled by this repository change.

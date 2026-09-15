@@ -14,6 +14,7 @@ export interface Snapshot {
   updated_at: number; last_success_at: number | null; collection_status: string;
   items: NewsRecord[]; sources: { id: string; name: string; publisher?: string; status: string; checked_at: number; matched: number }[];
   briefing: { status: string; text: string; generated_at: number | null; references?: { number:number; title:string; url:string }[] };
+  curation?: {execution?: {quota_counters?: Record<string, {date:string; used:number; limit:number; reset_at:number}>}};
 }
 export interface Company {
   id:string; name:string; name_zh?:string; aliases:string[]; category:string;

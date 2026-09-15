@@ -9,7 +9,8 @@ from localize import localize
 def enrich(items, sources, previous, enabled, now, call=invoke, config=None, session=None):
     config = config or load_registry()
     session = session or RoutingSession(new_state((previous or {}).get('router_state', {}), now), config.get('execution'))
-    choices = candidates({**config, 'task':'news_translation'}, session.state, now)
+    choices = [choice for task in ('news_translation', 'news_curation')
+               for choice in candidates({**config, 'task':task}, session.state, now)]
     preferred = {p.get('supplier',p['id']) for p, _, _ in choices if p.get('routing_role') != 'fallback'}
     workers = min(2, session.max_requests, max(1,len(preferred)))
     jobs = {'translation': lambda: localize(items,sources,previous,enabled,now,call,config,session),

@@ -13,6 +13,8 @@ from urllib.error import HTTPError
 from urllib.error import URLError
 from email.utils import parsedate_to_datetime
 
+from quota_ledger import reserve_daily
+
 CONFIG_PATH = Path(__file__).resolve().parents[1] / 'config/ai-providers.json'
 
 
@@ -41,6 +43,10 @@ def load_registry(path=CONFIG_PATH):
         seen.add(p['id'])
         if p.get('rate_limit_scope', 'supplier') not in ('model', 'provider', 'supplier'):
             raise ValueError('Invalid rate_limit_scope')
+        if p.get('quota_store') not in (None, 'github'):
+            raise ValueError('Unsupported quota store')
+        if p.get('quota_store') and not p.get('max_requests_per_day'):
+            raise ValueError('Persistent quotas require a positive daily limit')
         parsed = urlsplit(p['base_url'])
         if parsed.scheme != 'https' or not parsed.hostname or parsed.username or parsed.password or parsed.query:
             raise ValueError('Provider base URLs must use HTTPS and cannot contain credentials')
@@ -140,7 +146,7 @@ def retry_delay(value):
 def invoke(provider, model, messages, max_tokens):
     # Preserve usage and finish status, which TrendRadar's text-only AIClient discards.
     payload = {'model':model['id'], 'messages':messages, 'max_tokens':max_tokens, 'temperature':0.2, 'stream':False}
-    for name in ('thinking', 'enable_thinking', 'chat_template_kwargs', 'reasoning_effort'):
+    for name in ('thinking', 'enable_thinking', 'chat_template_kwargs', 'reasoning_effort', 'reasoning'):
         if name in model.get('extra_body', {}):
             payload[name] = model['extra_body'][name]
     request = Request(provider['base_url'].rstrip('/')+'/chat/completions',
@@ -164,6 +170,7 @@ def new_state(state, now):
     usage = state.get('daily_usage', {})
     state={'last_model':state.get('last_model'), 'cooldowns':{k:v for k,v in state.get('cooldowns',{}).items() if v>now},
            'token_usage':dict(state.get('token_usage', {})), 'last_models':dict(state.get('last_models', {})),
+           'quota_counters':dict(state.get('quota_counters',{})),
            'daily_usage':{'date':day,'requests':dict(usage.get('requests', {})) if usage.get('date') == day else {}}}
     return state
 
@@ -181,6 +188,7 @@ class RoutingSession:
         self.busy = {}
         self.max_parallel = 0
         self.attempts = []
+        self.started_at = time.monotonic()
 
     def release(self, supplier):
         with self.condition:
@@ -197,7 +205,8 @@ class RoutingSession:
         return {'concurrency_limit': self.max_requests, 'supplier_limits': self.supplier_limits,
                 'default_supplier_limit': 1, 'max_observed_per_supplier': dict(self.observed_by_supplier),
                 'max_observed_parallel': self.max_parallel, 'attempts': list(self.attempts),
-                'cooldowns': dict(self.state['cooldowns'])}
+                'cooldowns': dict(self.state['cooldowns']),
+                'quota_counters':dict(self.state.get('quota_counters',{}))}
 
     def reserve(self, config, now, tried):
         deadline = time.monotonic() + 180
@@ -212,15 +221,32 @@ class RoutingSession:
                     supplier = provider.get('supplier', provider['id'])
                     if self.busy.get(supplier, 0) >= self.supplier_limits.get(supplier, 1) or sum(self.busy.values()) >= self.max_requests:
                         continue
+                    quota = None
+                    if provider.get('quota_store') == 'github':
+                        try:
+                            quota_now = now + int(time.monotonic() - self.started_at)
+                            quota = reserve_daily(provider['id'],provider['max_requests_per_day'],quota_now)
+                            self.state.setdefault('quota_counters',{})[provider['id']] = {k:v for k,v in quota.items() if k!='reserved'}
+                            if self.state['daily_usage']['date'] != quota['date']:
+                                self.state['daily_usage'] = {'date':quota['date'],'requests':{}}
+                            self.state['daily_usage']['requests']['provider:'+provider['id']] = quota['used']
+                            if not quota['reserved']:
+                                continue
+                        except Exception:
+                            self.state['cooldowns']['provider:'+provider['id']] = now+900
+                            self.attempts.append({'task':config.get('operation',config['task']),
+                                                  'provider':provider['id'],'model':model['id'],'status':'quota_store_unavailable'})
+                            continue
                     self.busy[supplier] = self.busy.get(supplier, 0) + 1
                     self.observed_by_supplier[supplier] = max(self.observed_by_supplier.get(supplier, 0), self.busy[supplier])
                     self.max_parallel = max(self.max_parallel, sum(self.busy.values()))
                     for scope in ['provider:' + provider['id'], key]:
                         counts = self.state['daily_usage']['requests']
-                        counts[scope] = counts.get(scope, 0) + 1
+                        if not (quota and scope == 'provider:'+provider['id']):
+                            counts[scope] = counts.get(scope, 0) + 1
                     return provider, model, key, supplier
                 remaining = deadline - time.monotonic()
-                if not choices or remaining <= 0:
+                if not self.busy or not choices or remaining <= 0:
                     return None
                 self.condition.wait(timeout=remaining)
 

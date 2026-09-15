@@ -17,7 +17,7 @@ class ParallelTests(unittest.TestCase):
         return {'strategy': 'round_robin', 'task': 'news_translation', 'max_attempts_per_run': 3,
                 'providers': [{'id': name, 'enabled': True, 'key_env': 'TEST_KEY', 'max_requests_per_day': 10,
                     'models': [{'id': 'one', 'enabled': True, 'free_tier': 'free',
-                                'tasks': ['news_translation', 'news_summary']}]} for name in providers]}
+                                'tasks': ['news_translation', 'news_curation', 'news_summary']}]} for name in providers]}
 
     def test_different_suppliers_actually_overlap_and_preserve_usage(self):
         config = self.config()

@@ -56,7 +56,7 @@ class CurationTests(unittest.TestCase):
     def test_uncertain_marketing_stays_visible_and_budget_is_shared(self):
         config = {'strategy': 'round_robin', 'max_attempts_per_run': 1, 'providers': [{'id': 'test', 'enabled': True,
             'key_env': 'TEST_KEY', 'max_requests_per_day': 1, 'models': [{'id': 'model', 'enabled': True,
-                'free_tier': 'free', 'tasks': ['news_translation']}]}]}
+                'free_tier': 'free', 'tasks': ['news_curation']}]}]}
         a = self.article(1)
         def call(*args):
             return Completion(json.dumps([{'id': '1', 'category': 'marketing', 'confidence': 'uncertain', 'same_event_as': None}]), 100, 'stop')
