@@ -9,6 +9,22 @@ from article_text import extract, fetch_text
 
 
 class LocalizationTests(unittest.TestCase):
+    @patch.dict(os.environ, {'TEST_KEY': 'fixture'})
+    @patch('localize.fetch_text', return_value=('', None))
+    def test_short_batch_ids_map_reordered_results_to_long_article_ids(self, _fetch):
+        items = [{**self.item, 'id': ident, 'first_seen_at': index}
+                 for index, ident in enumerate((77685379568987, 264368023980426))]
+        def call(_provider, _model, messages, _limit):
+            inputs = json.loads(messages[-1]['content'])
+            self.assertEqual([a['id'] for a in inputs], ['1', '2'])
+            return Completion(json.dumps([
+                {'id': '2', 'title_zh': '第二篇译文', 'summary_zh': '第二篇摘要。'},
+                {'id': '1', 'title_zh': '第一篇译文', 'summary_zh': '第一篇摘要。'}]), 50, 'stop')
+        result = localize(items, self.sources, None, True, 100000, call, self.config)
+        self.assertEqual(result['translation_run']['translated_this_run'], 2)
+        self.assertEqual([(a['id'], a['title_zh']) for a in items],
+                         [(77685379568987, '第一篇译文'), (264368023980426, '第二篇译文')])
+
     def setUp(self):
         self.item={'id':1,'title':'Company reports trial results','excerpt':'Trial did not meet its primary endpoint.',
             'source_id':'source','source':'Company','url':'https://example.org/news','language':'en'}
@@ -70,13 +86,13 @@ class LocalizationTests(unittest.TestCase):
     def test_configured_batches_process_older_backlog_first(self):
         config={**self.config,'translation':{'batch_size':2,'max_batches_per_run':2,'max_output_tokens':3000}}
         config['providers'][0]['max_requests_per_day']=10
-        items=[{**self.item,'id':i,'first_seen_at':i*100} for i in [5,3,1,4,2]]
+        items=[{**self.item,'id':i,'title':f'Company report {i}','first_seen_at':i*100} for i in [5,3,1,4,2]]
         calls=[]
         def call(_provider,_model,messages,_limit):
-            inputs=json.loads(messages[-1]['content']);calls.append([a['id'] for a in inputs])
+            inputs=json.loads(messages[-1]['content']);calls.append([a['title'] for a in inputs])
             return Completion(json.dumps([{'id':a['id'],'title_zh':'试验结果','summary_zh':'试验未达到主要终点。'} for a in inputs]),100,'stop')
         result=localize(items,self.sources,None,True,100000,call,config)
-        self.assertEqual(calls,[['1','2'],['3','4']])
+        self.assertEqual(calls,[['Company report 1','Company report 2'],['Company report 3','Company report 4']])
         self.assertEqual(result['translation_run']['translated_this_run'],4)
         self.assertEqual(result['translation_run']['pending'],1)
 
@@ -89,10 +105,11 @@ class LocalizationTests(unittest.TestCase):
                           lambda *args:Completion('Malformed response that is not JSON.',20,'stop'),config)
         fetched=dict(self.item);apply_cached(fetched,failed,{})
         self.assertEqual(fetched['translation']['last_attempt_at'],100000)
-        waiting={**self.item,'id':2,'first_seen_at':2}
+        waiting={**self.item,'id':2,'title':'Second company report','first_seen_at':2}
         def call(_provider,_model,messages,_limit):
-            self.assertEqual(json.loads(messages[-1]['content'])[0]['id'],'2')
-            return Completion(json.dumps([{'id':'2','title_zh':'试验结果','summary_zh':'试验未达到主要终点。'}]),20,'stop')
+            self.assertEqual(json.loads(messages[-1]['content'])[0]['id'],'1')
+            self.assertEqual(json.loads(messages[-1]['content'])[0]['title'],'Second company report')
+            return Completion(json.dumps([{'id':'1','title_zh':'试验结果','summary_zh':'试验未达到主要终点。'}]),20,'stop')
         localize([fetched,waiting],self.sources,previous,True,101000,call,config)
         self.assertIn('title_zh',waiting)
         self.assertNotIn('title_zh',fetched)

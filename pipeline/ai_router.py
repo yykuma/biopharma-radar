@@ -94,6 +94,9 @@ def candidates(config, state, now):
                 and within_limit(m, key, state, now)
                 and config['task'] in m.get('tasks', []) and cooldowns.get(key,0) <= now):
                 choices.append((p,m,key))
+    if config['strategy'] == 'failover':
+        # Ordered failover never rotates or interleaves configured suppliers.
+        return choices
     fallback = [choice for choice in choices if choice[0].get('routing_role') == 'fallback']
     choices = [choice for choice in choices if choice[0].get('routing_role') != 'fallback']
     last = state.get('last_model')
@@ -225,16 +228,22 @@ class RoutingSession:
                 tried_suppliers = {p.get('supplier', p['id']) for p in config['providers']
                                    if any(key.startswith(p['id'] + '/') for key in tried)}
                 # Try another supplier before a failed supplier consumes the remaining attempts.
-                choices.sort(key=lambda choice: (choice[0].get('supplier', choice[0]['id']) in tried_suppliers,
-                             choice[0].get('routing_role') == 'fallback'))
+                ordered = config['strategy'] == 'failover'
+                if not ordered:
+                    choices.sort(key=lambda choice: (choice[0].get('supplier', choice[0]['id']) in tried_suppliers,
+                                 choice[0].get('routing_role') == 'fallback'))
                 next_ready = None
                 for provider, model, key in choices:
                     supplier = provider.get('supplier', provider['id'])
                     if self.busy.get(supplier, 0) >= self.supplier_limits.get(supplier, 1) or sum(self.busy.values()) >= self.max_requests:
+                        if ordered:
+                            break
                         continue
                     delay = self.next_request_at.get(supplier, 0) - time.monotonic()
                     if delay > 0:
                         next_ready = delay if next_ready is None else min(next_ready, delay)
+                        if ordered:
+                            break
                         continue
                     quota = None
                     if provider.get('quota_store') == 'github':

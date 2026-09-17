@@ -57,16 +57,16 @@ Providers/models have separate enable switches. Models are classified by `catego
 the requested task (`news_summary`, `news_curation` or `news_translation`) participate. These cost labels are operator declarations, not billing
 verification. Keep paid billing and automatic top-ups disabled.
 
-`round_robin` advances after the last successful model; `failover` preserves order.
-Task requests have no fixed attempt-count limit in the production registry. Each eligible model is tried at most once per request, without SDK retries or paid fallback; failures set persistent cooldowns. A failed attempt gives untried suppliers priority over another model from the same supplier; preferred suppliers are tried before fallback suppliers within each pass. All eligible AMD models remain available for rotation after other suppliers have had a turn. Translation, classification and briefing share concurrency limits, cooldowns and usage counters. Only OpenRouter has an application cap: 50 reserved requests per UTC day.
-SenseNova request starts are spaced by at least 30 seconds across tasks in the shared session, configured through `execution.supplier_min_interval_seconds.sensenova`; other suppliers may serve requests while it waits.
+Production uses ordered `failover`: AMD `DeepSeek-V4-Flash-0731` → `Qwen3.8-Flash-Next` → `GLM-5.3-Flash` → SenseNova `deepseek-v4-flash`. Each request starts at the first eligible model. Earlier successes do not reorder this chain. Busy or paced AMD requests wait for their slot instead of letting another supplier bypass them. Models in persistent cooldown are temporarily ineligible.
+Task requests have no fixed attempt-count limit. Each eligible model is tried at most once per request, without SDK retries or paid fallback; later requests can retry after cooldown. Translation, classification and briefing share concurrency limits, cooldowns and usage counters. Secondary suppliers are disabled but retain their connection settings. Only OpenRouter has a configured application cap: 50 reserved requests per UTC day, retained for any future re-enablement.
+AMD and SenseNova each have at least 30 seconds between request starts across tasks in the shared session, controlled by `execution.supplier_min_interval_seconds`. Requests do not overlap within a supplier. A slow request can make the actual interval longer than 30 seconds.
 429 honors Retry-After when supplied, otherwise waits an hour. AMD cools only the affected model and rotates; other providers cool the supplier. 401/403 cool the supplier for 24 hours. A 404 cools the model
 for 24 hours; other failures for 15 minutes. Cooldowns and rotation position persist
 in the published briefing without credentials or raw exception messages.
 
 Up to 20 news records and 700 output tokens per summary; at most one successful
 summary every six hours. Identical input is reused. Failure preserves the last
-summary while news publishing continues. AMD Qwen models participate in rotation; GLM remains disabled. SenseNova uses only `deepseek-v4-flash` in its general pool as a preferred route; native SenseNova models are disabled. Agnes is a fallback.
+summary while news publishing continues. AMD GLM-5.3-Flash is enabled, but its initial inference probe timed out; catalog availability is not proof of inference reliability. SenseNova uses only `deepseek-v4-flash` in its general pool; native SenseNova models are disabled.
 
 ## Free hosting limitations
 
@@ -96,7 +96,7 @@ credits upstream; local token counters cannot reveal account credit balances.
 truncated responses. It excludes other clients and requests with unknown usage.
 `max_requests_per_day` counts every attempt, resets at UTC midnight, and is scoped
 to a pool or model. `expires_at` is a local review deadline, not a provider promise.
-`routing_role: fallback` keeps Mistral and Agnes behind the preferred AMD and SenseNova DeepSeek routes; it may serve work while preferred suppliers are busy or unavailable.
+`routing_role: fallback` applies to the optional round-robin strategy. Production ordered failover follows registry order; Mistral, Agnes and OpenRouter are currently disabled.
 OpenRouter has a 50-request daily cap; all other providers and models have no daily application cap. SenseNova retains a pricing review deadline.
 Quota descriptions are operator notes, not a hard guarantee about provider billing.
 
@@ -163,13 +163,9 @@ remain unread. Saved bookmarks remain individually accessible.
 
 ## Bounded parallel AI execution
 
-Translation and editorial classification run concurrently when two primary suppliers are available. With one primary supplier, configured task order gives translation priority.
-A shared routing session atomically reserves supplier slots before dispatch,
-allows at most two requests globally and one per supplier, and persists token
-usage, cooldowns and each supplier's last successful model. SenseNova Flash and
-general retain separate quota counters while sharing one in-flight slot. Models
-rotate within each supplier. No duplicate speculative requests are sent.
-AMD, SenseNova DeepSeek and task-compatible OpenRouter models are preferred; Mistral and Agnes are fallbacks. Provider review deadlines and free-only model selection remain enforced.
+Ordered failover runs translation before classification in one editorial worker. The optional round-robin strategy can run both tasks concurrently when two primary suppliers are available.
+A shared routing session atomically reserves supplier slots before dispatch, enforces a global ceiling of two requests and one per supplier, and persists token usage and cooldowns. Ordered failover waits for the preferred model instead of bypassing it when busy or paced. No duplicate speculative requests are sent.
+Only AMD and SenseNova DeepSeek are enabled. Provider review deadlines and free-only model selection remain enforced.
 Briefing generation starts after both tasks finish so it uses completed labels
 and translations. Briefing uses the same routing session. The public curation.execution report records sanitized
 attempts and observed concurrency; zero means no eligible request was dispatched.
@@ -178,22 +174,23 @@ attempts and observed concurrency; zero means no eligible request was dispatched
 
 Edit `config/ai-providers.json`; credentials remain in GitHub Actions Secrets.
 Changes take effect on the next collection run after deployment. The current
-profile processes backlog with two total requests and one per supplier.
+profile uses one editorial worker with ordered failover and one request per supplier.
 
 | Setting | Current value | Meaning |
 | --- | --- | --- |
-| `execution.max_parallel_requests` | 2 | Total in-flight ceiling; currently two independent editorial workers |
-| `execution.supplier_concurrency` | AMD/SenseNova/Mistral: 1 each | Shared supplier slot limit, including models and quota pools |
+| `execution.max_parallel_requests` | 2 | Total in-flight ceiling; ordered failover currently uses one editorial worker |
+| `execution.supplier_concurrency` | 1 per supplier | Shared supplier slot limit, including models and quota pools |
+| `execution.supplier_min_interval_seconds` | AMD/SenseNova: 30 each | Minimum interval between request starts per supplier |
 | `translation.batch_size` | 4 | Articles per translation request |
 | `translation.max_batches_per_run` | 6 | Sequential batches per collection, at most 24 articles |
 | `translation.max_output_tokens` | 3000 | Response ceiling per translation batch |
 | `curation.batch_size` | 24 | Articles per classification request |
 | `curation.max_batches_per_run` | 2 | Classification batches per collection |
 | `curation.max_output_tokens` | 3600 | Response ceiling per classification batch |
-| `execution.task_order` | translation, curation | Priority when only one primary supplier is eligible |
+| `execution.task_order` | translation, curation | Task order in ordered failover mode |
 | `providers[].rate_limit_scope` | AMD: model; others: supplier | Scope paused after a 429; authentication failures always pause the supplier |
 | `providers[].enabled` / `models[].enabled` | Per entry | Enable/disable a provider or model |
-| `providers[].routing_role` | Mistral/Agnes: fallback | Preferred routes serve first; idle fallback can accept work |
+| `providers[].routing_role` | Mistral/Agnes: fallback | Used only by round-robin strategy; both providers currently disabled |
 
 These are application ceilings, not purchased or guaranteed provider allowances.
 Increasing the workload does not reset provider cooldowns or usage counters.
@@ -223,7 +220,7 @@ Retention is 90 days and at most 5,000 original reports.
 
 ## Agnes AI integration
 
-`agnes-2.5-flash` uses the official OpenAI-compatible base URL `https://apihub.agnes-ai.com/v1`. Its current input, cached-input and output prices were verified as zero on 2026-09-15 at https://www.agnes-ai.com/en/docs/pricing. The promotion has no published fixed end date; the registry expiry is a local review deadline. Only this model is enabled for Agnes, as a fallback route. Credentials use the `AGNES_API_KEY` Actions secret. Agnes shares the global concurrency ceiling, keeps one in-flight request, and has no daily application cap. Translation, classification and briefing use the same router.
+`agnes-2.5-flash` uses the official OpenAI-compatible base URL `https://apihub.agnes-ai.com/v1`. Its current input, cached-input and output prices were verified as zero on 2026-09-15 at https://www.agnes-ai.com/en/docs/pricing. The promotion has no published fixed end date; the registry expiry is a local review deadline. Only this model is configured for Agnes; the supplier is currently disabled after unreliable structured translation results. Credentials use the `AGNES_API_KEY` Actions secret. Agnes shares the global concurrency ceiling, keeps one in-flight request, and has no daily application cap. Translation, classification and briefing use the same router.
 
 ## OpenRouter free routing and durable counter
 

@@ -13,6 +13,8 @@ def enrich(items, sources, previous, enabled, now, call=invoke, config=None, ses
                for choice in candidates({**config, 'task':task}, session.state, now)]
     preferred = {p.get('supplier',p['id']) for p, _, _ in choices if p.get('routing_role') != 'fallback'}
     workers = min(2, session.max_requests, max(1,len(preferred)))
+    if config['strategy'] == 'failover':
+        workers = 1
     jobs = {'translation': lambda: localize(items,sources,previous,enabled,now,call,config,session),
             'curation': lambda: curate(items,previous,enabled,now,call,config,session)}
     order = config.get('execution',{}).get('task_order',['translation','curation'])

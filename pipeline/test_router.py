@@ -117,6 +117,7 @@ class RoutingChangesTests(unittest.TestCase):
         config = load_registry()
         self.assertIsNone(config.get('max_attempts_per_run'))
         config['task'] = 'news_translation'
+        config['execution']['supplier_min_interval_seconds'] = {}
         state = new_state({}, 100000)
         expected = {key for _, _, key in candidates(config, state, 100000)}
         calls = []
@@ -129,26 +130,36 @@ class RoutingChangesTests(unittest.TestCase):
         self.assertEqual(result['status'], 'unavailable')
         self.assertEqual(set(calls), expected)
         self.assertEqual(len(calls), len(expected))
-        self.assertEqual(sum(key.startswith('amd/') for key in calls), 4)
-        self.assertGreater(len(calls), 5)
+        self.assertEqual(sum(key.startswith('amd/') for key in calls), 3)
+        self.assertEqual(len(calls), 4)
 
     @patch.dict(os.environ, {key: 'fixture' for key in
                             ('AMD_API_KEY', 'SENSENOVA_API_KEY', 'MISTRAL_API_KEY', 'AGNES_API_KEY')}, clear=True)
-    def test_primary_failures_reach_both_fallback_suppliers(self):
-        from ai_router import load_registry, new_state, route_text, ProviderError
+    def test_ordered_amd_models_are_spaced_before_sensenova(self):
+        from ai_router import load_registry, new_state, route_text, RoutingSession
         config = load_registry()
         config['task'] = 'news_translation'
+        state = new_state({'last_model': 'amd/Qwen3.8-Flash-Next',
+                           'last_models': {'amd': 'amd/Qwen3.8-Flash-Next'}}, 100000)
+        session = RoutingSession(state, config['execution'])
+        clock = [100.0]
         calls = []
         def call(provider, model, *_):
-            calls.append(provider['id'])
+            calls.append((provider['id'], model['id'], clock[0]))
             if provider['id'] == 'amd':
                 raise TimeoutError()
-            if provider['id'] in ('sensenova-general', 'mistral'):
-                raise ProviderError(429, 60)
-            return 'A complete translation from the remaining fallback supplier.'
-        result = route_text([], new_state({}, 100000), config, 100000, call)
+            return 'A complete translation from the SenseNova DeepSeek model.'
+        def advance(timeout):
+            clock[0] += timeout
+        with patch('ai_router.time.monotonic', side_effect=lambda: clock[0]), \
+             patch.object(session.condition, 'wait', side_effect=advance):
+            result = route_text([], state, config, 100000, call, session=session)
         self.assertEqual(result['status'], 'ok')
-        self.assertEqual(calls, ['amd', 'sensenova-general', 'mistral', 'agnes'])
+        self.assertEqual(calls, [
+            ('amd', 'DeepSeek-V4-Flash-0731', 100.0),
+            ('amd', 'Qwen3.8-Flash-Next', 130.0),
+            ('amd', 'GLM-5.3-Flash', 160.0),
+            ('sensenova-general', 'deepseek-v4-flash', 160.0)])
 
     @patch.dict(os.environ, {'TEST_KEY': 'fixture'}, clear=True)
     def test_model_rotation_resumes_after_all_suppliers_have_a_turn(self):
@@ -170,23 +181,21 @@ class RoutingChangesTests(unittest.TestCase):
         self.assertEqual(calls, ['one', 'three', 'two'])
 
     @patch.dict(os.environ, {'SENSENOVA_API_KEY':'fixture','AGNES_API_KEY':'fixture'}, clear=True)
-    def test_sensenova_uses_deepseek_before_agnes_fallback(self):
+    def test_disabled_secondary_models_do_not_handle_failed_tasks(self):
         from ai_router import candidates, load_registry, new_state, route_text, ProviderError
         config = load_registry()
         config['task'] = 'news_translation'
         state = new_state({},100000)
         choices = candidates(config,state,100000)
         self.assertEqual([(p['id'],m['id']) for p,m,_ in choices],
-                         [('sensenova-general','deepseek-v4-flash'),('agnes','agnes-2.5-flash')])
+                         [('sensenova-general','deepseek-v4-flash')])
         calls=[]
         def call(p,m,*_):
             calls.append(p['id'])
-            if p['id']=='sensenova-general':
-                raise ProviderError(429,60)
-            return 'A complete response from the fallback provider.'
+            raise ProviderError(429,60)
         result=route_text([],state,config,100000,call)
-        self.assertEqual(result['status'],'ok')
-        self.assertEqual(calls,['sensenova-general','agnes'])
+        self.assertEqual(result['status'],'unavailable')
+        self.assertEqual(calls,['sensenova-general'])
 
     @patch.dict(os.environ, {'TEST_KEY':'fixture'})
     def test_model_scoped_429_rotates_without_blocking_supplier(self):
@@ -221,6 +230,7 @@ class RoutingChangesTests(unittest.TestCase):
         from ai_router import candidates, load_registry, new_state, route_text
         config = load_registry()
         config['providers'] = [p for p in config['providers'] if p['id']=='openrouter']
+        config['providers'][0]['enabled'] = True
         state = new_state({},100000)
         for task in ('news_curation','news_summary'):
             self.assertTrue(candidates({**config,'task':task},state,100000))

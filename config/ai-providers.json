@@ -9,7 +9,8 @@
       "openrouter": 1
     },
     "supplier_min_interval_seconds": {
-      "sensenova": 30
+      "sensenova": 30,
+      "amd": 30
     },
     "task_order": [
       "translation",
@@ -26,7 +27,7 @@
     "max_batches_per_run": 2,
     "max_output_tokens": 3600
   },
-  "strategy": "round_robin",
+  "strategy": "failover",
   "task": "news_summary",
   "summary_interval_hours": 6,
   "max_input_articles": 20,
@@ -42,7 +43,7 @@
       "quota_scope": "provider",
       "models": [
         {
-          "id": "DeepSeek-V4-Flash",
+          "id": "DeepSeek-V4-Flash-0731",
           "category": "text",
           "free_tier": "free",
           "tasks": [
@@ -51,19 +52,7 @@
             "news_curation"
           ],
           "enabled": true,
-          "tested": true
-        },
-        {
-          "id": "DeepSeek-V4-Flash-Vision-Exp",
-          "category": "vision",
-          "free_tier": "free",
-          "tasks": [
-            "news_summary",
-            "news_translation",
-            "news_curation"
-          ],
-          "enabled": true,
-          "tested": true
+          "tested": false
         },
         {
           "id": "Qwen3.8-Flash-Next",
@@ -78,9 +67,9 @@
           "tested": false
         },
         {
-          "id": "Qwen3.8-27B",
-          "category": "vision",
-          "free_tier": "limited_free",
+          "id": "GLM-5.3-Flash",
+          "category": "text",
+          "free_tier": "free",
           "tasks": [
             "news_summary",
             "news_translation",
@@ -232,7 +221,7 @@
       "protocol": "openai_compatible",
       "base_url": "https://api.mistral.ai/v1",
       "key_env": "MISTRAL_API_KEY",
-      "enabled": true,
+      "enabled": false,
       "quota_scope": "provider",
       "models": [
         {
@@ -291,7 +280,7 @@
       "protocol": "openai_compatible",
       "base_url": "https://apihub.agnes-ai.com/v1",
       "key_env": "AGNES_API_KEY",
-      "enabled": true,
+      "enabled": false,
       "quota_scope": "provider",
       "expires_at": "2026-10-15T00:00:00Z",
       "quota_note": "Limited-time free promotion verified 2026-09-15. Expiry is a local pricing review date; the provider has not announced a fixed promotion end date.",
@@ -318,7 +307,7 @@
       "protocol": "openai_compatible",
       "base_url": "https://openrouter.ai/api/v1",
       "key_env": "OPENROUTER_API_KEY",
-      "enabled": true,
+      "enabled": false,
       "quota_scope": "provider",
       "quota_store": "github",
       "max_requests_per_day": 50,

@@ -69,6 +69,27 @@ class ParallelTests(unittest.TestCase):
         self.assertEqual(session.state['daily_usage']['requests']['provider:flash'], 1)
         self.assertEqual(session.state['daily_usage']['requests']['provider:general'], 1)
 
+    def test_ordered_failover_waits_for_busy_primary_instead_of_bypassing_it(self):
+        config = self.config()
+        config['strategy'] = 'failover'
+        session = RoutingSession(new_state({}, 100000))
+        first = session.reserve(config, 100000, set())
+        entered = threading.Event()
+        def reserve_second():
+            entered.set()
+            return session.reserve(config, 100000, set())
+        with ThreadPoolExecutor(max_workers=1) as pool:
+            future = pool.submit(reserve_second)
+            self.assertTrue(entered.wait(timeout=1))
+            try:
+                with self.assertRaises(TimeoutError):
+                    future.result(timeout=0.05)
+            finally:
+                session.release(first[3])
+            second = future.result(timeout=1)
+        self.assertEqual(second[0]['id'], 'amd')
+        session.release(second[3])
+
     def test_concurrent_reservations_never_exceed_daily_cap(self):
         config = self.config(('amd',))
         config['providers'][0]['max_requests_per_day'] = 3
