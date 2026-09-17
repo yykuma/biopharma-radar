@@ -37,6 +37,9 @@ def load_registry(path=CONFIG_PATH):
     for name, value, minimum, maximum in limits:
         if type(value) is not int or not minimum <= value <= maximum:
             raise ValueError(f'{name} must be an integer between {minimum} and {maximum}')
+    attempt_limit = config.get('max_attempts_per_run')
+    if attempt_limit is not None and (type(attempt_limit) is not int or attempt_limit < 1):
+        raise ValueError('max_attempts_per_run must be a positive integer or null')
     seen = set()
     for p in config['providers']:
         if p['id'] in seen or p['protocol'] != 'openai_compatible':
@@ -216,8 +219,9 @@ class RoutingSession:
                 choices = [choice for choice in candidates(config, self.state, now) if choice[2] not in tried]
                 tried_suppliers = {p.get('supplier', p['id']) for p in config['providers']
                                    if any(key.startswith(p['id'] + '/') for key in tried)}
-                choices.sort(key=lambda choice: (choice[0].get('routing_role') == 'fallback',
-                             choice[0].get('supplier', choice[0]['id']) in tried_suppliers))
+                # Try another supplier before a failed supplier consumes the remaining attempts.
+                choices.sort(key=lambda choice: (choice[0].get('supplier', choice[0]['id']) in tried_suppliers,
+                             choice[0].get('routing_role') == 'fallback'))
                 for provider, model, key in choices:
                     supplier = provider.get('supplier', provider['id'])
                     if self.busy.get(supplier, 0) >= self.supplier_limits.get(supplier, 1) or sum(self.busy.values()) >= self.max_requests:
@@ -256,7 +260,9 @@ def route_text(messages, state, config, now, call=invoke, max_tokens=1200, valid
     session = session or RoutingSession(state, config.get('execution'))
     state = session.state
     attempts=[];tried=set()
-    while len(attempts) < min(5, config['max_attempts_per_run']):
+    attempt_limit = config.get('max_attempts_per_run')
+    # Each model is tried once per request; cooldowns govern retries in later requests.
+    while attempt_limit is None or len(attempts) < attempt_limit:
         choice = session.reserve(config, now, tried)
         if choice is None:
             break

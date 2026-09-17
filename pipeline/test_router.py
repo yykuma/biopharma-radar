@@ -90,6 +90,65 @@ class RouterTests(unittest.TestCase):
 if __name__=='__main__':unittest.main()
 
 class RoutingChangesTests(unittest.TestCase):
+    @patch.dict(os.environ, {key: 'fixture' for key in
+                            ('AMD_API_KEY', 'SENSENOVA_API_KEY', 'MISTRAL_API_KEY', 'AGNES_API_KEY')}, clear=True)
+    def test_production_has_no_attempt_cap_and_exhausts_models_without_looping(self):
+        from ai_router import load_registry, new_state, route_text, candidates, ProviderError
+        config = load_registry()
+        self.assertIsNone(config.get('max_attempts_per_run'))
+        config['task'] = 'news_translation'
+        state = new_state({}, 100000)
+        expected = {key for _, _, key in candidates(config, state, 100000)}
+        calls = []
+        def call(provider, model, *_):
+            calls.append(provider['id'] + '/' + model['id'])
+            if provider['id'] == 'amd':
+                raise ProviderError(429, 120)
+            raise TimeoutError()
+        result = route_text([], state, config, 100000, call)
+        self.assertEqual(result['status'], 'unavailable')
+        self.assertEqual(set(calls), expected)
+        self.assertEqual(len(calls), len(expected))
+        self.assertEqual(sum(key.startswith('amd/') for key in calls), 4)
+        self.assertGreater(len(calls), 5)
+
+    @patch.dict(os.environ, {key: 'fixture' for key in
+                            ('AMD_API_KEY', 'SENSENOVA_API_KEY', 'MISTRAL_API_KEY', 'AGNES_API_KEY')}, clear=True)
+    def test_primary_failures_reach_both_fallback_suppliers(self):
+        from ai_router import load_registry, new_state, route_text, ProviderError
+        config = load_registry()
+        config['task'] = 'news_translation'
+        calls = []
+        def call(provider, model, *_):
+            calls.append(provider['id'])
+            if provider['id'] == 'amd':
+                raise TimeoutError()
+            if provider['id'] in ('sensenova-general', 'mistral'):
+                raise ProviderError(429, 60)
+            return 'A complete translation from the remaining fallback supplier.'
+        result = route_text([], new_state({}, 100000), config, 100000, call)
+        self.assertEqual(result['status'], 'ok')
+        self.assertEqual(calls, ['amd', 'sensenova-general', 'mistral', 'agnes'])
+
+    @patch.dict(os.environ, {'TEST_KEY': 'fixture'}, clear=True)
+    def test_model_rotation_resumes_after_all_suppliers_have_a_turn(self):
+        from ai_router import route_text, new_state
+        config = {'strategy': 'round_robin', 'task': 'news_translation', 'max_attempts_per_run': 5,
+                  'providers': [{'id': p, 'enabled': True, 'key_env': 'TEST_KEY',
+                                 'routing_role': 'fallback' if p == 'backup' else 'primary',
+                                 'models': [{'id': m, 'enabled': True, 'free_tier': 'free',
+                                             'tasks': ['news_translation']} for m in models]}
+                                for p, models in [('amd', ['one', 'two']), ('backup', ['three'])]]}
+        calls = []
+        def call(provider, model, *_):
+            calls.append(model['id'])
+            if model['id'] != 'two':
+                raise TimeoutError()
+            return 'A complete translation from the next AMD model.'
+        result = route_text([], new_state({}, 100000), config, 100000, call)
+        self.assertEqual(result['status'], 'ok')
+        self.assertEqual(calls, ['one', 'three', 'two'])
+
     @patch.dict(os.environ, {'SENSENOVA_API_KEY':'fixture','AGNES_API_KEY':'fixture'}, clear=True)
     def test_sensenova_uses_deepseek_before_agnes_fallback(self):
         from ai_router import candidates, load_registry, new_state, route_text, ProviderError

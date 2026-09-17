@@ -25,7 +25,6 @@
   },
   "strategy": "round_robin",
   "task": "news_summary",
-  "max_attempts_per_run": 3,
   "summary_interval_hours": 6,
   "max_input_articles": 20,
   "max_output_tokens": 700,

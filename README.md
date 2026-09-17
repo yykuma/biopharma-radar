@@ -58,7 +58,7 @@ the requested task (`news_summary`, `news_curation` or `news_translation`) parti
 verification. Keep paid billing and automatic top-ups disabled.
 
 `round_robin` advances after the last successful model; `failover` preserves order.
-Each task allows at most three attempts, without SDK retries or paid fallback. Translation, classification and briefing share concurrency limits, cooldowns and usage counters. Only OpenRouter has an application cap: 50 reserved requests per UTC day.
+Task requests have no fixed attempt-count limit in the production registry. Each eligible model is tried at most once per request, without SDK retries or paid fallback; failures set persistent cooldowns. A failed attempt gives untried suppliers priority over another model from the same supplier; preferred suppliers are tried before fallback suppliers within each pass. All eligible AMD models remain available for rotation after other suppliers have had a turn. Translation, classification and briefing share concurrency limits, cooldowns and usage counters. Only OpenRouter has an application cap: 50 reserved requests per UTC day.
 429 honors Retry-After when supplied, otherwise waits an hour. AMD cools only the affected model and rotates; other providers cool the supplier. 401/403 cool the supplier for 24 hours. A 404 cools the model
 for 24 hours; other failures for 15 minutes. Cooldowns and rotation position persist
 in the published briefing without credentials or raw exception messages.
