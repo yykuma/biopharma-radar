@@ -29,6 +29,8 @@ def load_registry(path=CONFIG_PATH):
     limits = [('execution.max_parallel_requests', execution.get('max_parallel_requests', 2), 1, 4)]
     limits += [('execution.supplier_concurrency.' + name, value, 1, 2)
                for name, value in execution.get('supplier_concurrency', {}).items()]
+    limits += [('execution.supplier_min_interval_seconds.' + name, value, 0, 120)
+               for name, value in execution.get('supplier_min_interval_seconds', {}).items()]
     for task, defaults in [('translation', (4, 1, 3000)), ('curation', (24, 2, 3600))]:
         settings = config.get(task, {})
         limits += [(task + '.batch_size', settings.get('batch_size', defaults[0]), 1, 8 if task == 'translation' else 48),
@@ -186,6 +188,8 @@ class RoutingSession:
         execution = execution or {}
         self.max_requests = execution.get("max_parallel_requests", 2)
         self.supplier_limits = execution.get("supplier_concurrency", {})
+        self.supplier_intervals = execution.get('supplier_min_interval_seconds', {})
+        self.next_request_at = {}
         self.observed_by_supplier = {}
         self.state = state
         self.condition = threading.Condition()
@@ -207,6 +211,7 @@ class RoutingSession:
 
     def report(self):
         return {'concurrency_limit': self.max_requests, 'supplier_limits': self.supplier_limits,
+                'supplier_min_interval_seconds': dict(self.supplier_intervals),
                 'default_supplier_limit': 1, 'max_observed_per_supplier': dict(self.observed_by_supplier),
                 'max_observed_parallel': self.max_parallel, 'attempts': list(self.attempts),
                 'cooldowns': dict(self.state['cooldowns']),
@@ -222,9 +227,14 @@ class RoutingSession:
                 # Try another supplier before a failed supplier consumes the remaining attempts.
                 choices.sort(key=lambda choice: (choice[0].get('supplier', choice[0]['id']) in tried_suppliers,
                              choice[0].get('routing_role') == 'fallback'))
+                next_ready = None
                 for provider, model, key in choices:
                     supplier = provider.get('supplier', provider['id'])
                     if self.busy.get(supplier, 0) >= self.supplier_limits.get(supplier, 1) or sum(self.busy.values()) >= self.max_requests:
+                        continue
+                    delay = self.next_request_at.get(supplier, 0) - time.monotonic()
+                    if delay > 0:
+                        next_ready = delay if next_ready is None else min(next_ready, delay)
                         continue
                     quota = None
                     if provider.get('quota_store') == 'github':
@@ -243,6 +253,7 @@ class RoutingSession:
                                                   'provider':provider['id'],'model':model['id'],'status':'quota_store_unavailable'})
                             continue
                     self.busy[supplier] = self.busy.get(supplier, 0) + 1
+                    self.next_request_at[supplier] = time.monotonic() + self.supplier_intervals.get(supplier, 0)
                     self.observed_by_supplier[supplier] = max(self.observed_by_supplier.get(supplier, 0), self.busy[supplier])
                     self.max_parallel = max(self.max_parallel, sum(self.busy.values()))
                     for scope in ['provider:' + provider['id'], key]:
@@ -251,9 +262,9 @@ class RoutingSession:
                             counts[scope] = counts.get(scope, 0) + 1
                     return provider, model, key, supplier
                 remaining = deadline - time.monotonic()
-                if not self.busy or not choices or remaining <= 0:
+                if not choices or remaining <= 0 or (not self.busy and next_ready is None):
                     return None
-                self.condition.wait(timeout=remaining)
+                self.condition.wait(timeout=min(remaining, next_ready) if next_ready is not None else remaining)
 
 
 def route_text(messages, state, config, now, call=invoke, max_tokens=1200, validate=None, session=None):

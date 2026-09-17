@@ -90,6 +90,26 @@ class RouterTests(unittest.TestCase):
 if __name__=='__main__':unittest.main()
 
 class RoutingChangesTests(unittest.TestCase):
+    @patch.dict(os.environ, {'SENSENOVA_API_KEY': 'fixture'}, clear=True)
+    def test_sensenova_requests_are_spaced_across_tasks(self):
+        from ai_router import load_registry, new_state, route_text, RoutingSession
+        config = load_registry()
+        session = RoutingSession(new_state({}, 100000), config['execution'])
+        clock = [100.0]
+        starts = []
+        def call(*_):
+            starts.append(clock[0])
+            return 'A complete response from the shared SenseNova supplier.'
+        def advance(timeout):
+            clock[0] += timeout
+        with patch('ai_router.time.monotonic', side_effect=lambda: clock[0]), \
+             patch.object(session.condition, 'wait', side_effect=advance):
+            for task in ('news_translation', 'news_curation'):
+                result = route_text([], session.state, {**config, 'task': task}, 100000, call, session=session)
+                self.assertEqual(result['status'], 'ok')
+        self.assertEqual(starts, [100.0, 130.0])
+        self.assertEqual(session.max_parallel, 1)
+
     @patch.dict(os.environ, {key: 'fixture' for key in
                             ('AMD_API_KEY', 'SENSENOVA_API_KEY', 'MISTRAL_API_KEY', 'AGNES_API_KEY')}, clear=True)
     def test_production_has_no_attempt_cap_and_exhausts_models_without_looping(self):

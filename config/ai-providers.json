@@ -8,6 +8,9 @@
       "agnes": 1,
       "openrouter": 1
     },
+    "supplier_min_interval_seconds": {
+      "sensenova": 30
+    },
     "task_order": [
       "translation",
       "curation"
