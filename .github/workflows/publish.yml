@@ -6,6 +6,10 @@ on:
         description: 'First deployment only: no published snapshot exists'
         type: boolean
         default: false
+      ai_only:
+        description: 'Resume queued AI tasks without fetching RSS'
+        type: boolean
+        default: false
   push:
     branches: [main]
   schedule:
@@ -13,11 +17,13 @@ on:
 permissions:
   contents: write
   deployments: write
-concurrency:
-  group: news-publish
-  cancel-in-progress: false
 jobs:
   publish:
+    concurrency:
+      group: news-publish
+      cancel-in-progress: false
+    outputs:
+      retry_at: ${{ steps.ai_result.outputs.retry_at }}
     if: ${{ vars.SITE_URL != '' }}
     runs-on: ubuntu-latest
     env:
@@ -34,7 +40,11 @@ jobs:
       - name: Load previous snapshot
         if: ${{ !inputs.bootstrap }}
         run: python pipeline/fetch_previous.py
-      - name: Collect through TrendRadar and rotate AI providers
+      - name: Restore AI cooldowns
+        env:
+          QUOTA_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python pipeline/ai_retry.py restore
+      - name: Collect news or resume AI work
         env:
           AMD_API_KEY: ${{ secrets.AMD_API_KEY }}
           AGNES_API_KEY: ${{ secrets.AGNES_API_KEY }}
@@ -43,27 +53,81 @@ jobs:
           MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
           SENSENOVA_API_KEY: ${{ secrets.SENSENOVA_API_KEY }}
           GLM_API_KEY: ${{ secrets.GLM_API_KEY }}
-        run: python pipeline/collect.py --previous previous.json --ai
+          AI_ONLY: ${{ inputs.ai_only || false }}
+        run: |
+          args=()
+          if [[ "$AI_ONLY" == "true" ]]; then args+=(--ai-only); fi
+          python pipeline/collect.py --previous previous.json --ai "${args[@]}"
+      - name: Checkpoint AI state and decide whether to publish
+        id: ai_result
+        env:
+          QUOTA_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          AMD_API_KEY: ${{ secrets.AMD_API_KEY }}
+          AGNES_API_KEY: ${{ secrets.AGNES_API_KEY }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+          SENSENOVA_API_KEY: ${{ secrets.SENSENOVA_API_KEY }}
+          GLM_API_KEY: ${{ secrets.GLM_API_KEY }}
+          AI_ONLY: ${{ inputs.ai_only || false }}
+        run: |
+          args=()
+          if [[ "$AI_ONLY" == "true" ]]; then args+=(--ai-only); fi
+          python pipeline/ai_retry.py finish "${args[@]}"
       - uses: pnpm/action-setup@v4
+        if: steps.ai_result.outputs.publish == 'true'
         with:
           version: 11.19.0
       - uses: actions/setup-node@v4
+        if: steps.ai_result.outputs.publish == 'true'
         with:
           node-version: '24'
           cache: pnpm
           cache-dependency-path: frontend/pnpm-lock.yaml
       - run: pnpm install --frozen-lockfile
+        if: steps.ai_result.outputs.publish == 'true'
         working-directory: frontend
       - run: node scripts/test-static.mjs
+        if: steps.ai_result.outputs.publish == 'true'
         working-directory: frontend
       - run: pnpm build
+        if: steps.ai_result.outputs.publish == 'true'
         working-directory: frontend
         env:
           SITE_BASE: /
       - name: Deploy to Cloudflare Pages
+        if: steps.ai_result.outputs.publish == 'true'
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: pages deploy frontend/dist --project-name=${{ vars.CLOUDFLARE_PROJECT_NAME }} --branch=main
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+
+  retry_wakeup:
+    needs: publish
+    if: needs.publish.outputs.retry_at != ''
+    concurrency:
+      group: ai-retry-wakeup
+      cancel-in-progress: true
+    runs-on: ubuntu-latest
+    timeout-minutes: 70
+    permissions:
+      contents: read
+      actions: write
+    steps:
+      - name: Wait for queued AI work to become eligible
+        env:
+          RETRY_AT: ${{ needs.publish.outputs.retry_at }}
+        run: |
+          python - <<'PY'
+          import os, time
+          wake_at = min(int(os.environ['RETRY_AT']), int(time.time()) + 3600)
+          print(f'AI retry wake-up at {wake_at}; RSS publication is not locked.', flush=True)
+          while time.time() < wake_at:
+              time.sleep(min(60, max(0, wake_at - time.time())))
+          PY
+      - name: Resume AI queue without waiting for cron
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: gh workflow run publish.yml --ref main -f ai_only=true

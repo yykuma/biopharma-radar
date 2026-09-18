@@ -239,3 +239,23 @@ Pure translation of existing titles and excerpts should use a dedicated translat
 Tencent Cloud text translation currently advertises 5 million free characters per month and defaults postpaid billing to off: https://cloud.tencent.cn/document/product/551/35017. Keep postpaid off for stop-at-quota behavior. No Tencent service is enabled by this repository change.
 
 Briefings request structured text/source-number pairs. The renderer adds citations from those source numbers and publishes only the cited links, so changing summary order does not renumber the underlying news. Unknown source numbers and unstructured output fail validation. Format version changes trigger regeneration of older cached briefings. Semantic faithfulness still depends on model output and requires source checks.
+
+## Independent AI retries
+
+The publication workflow accepts `ai_only=true`. This mode reads the latest
+published snapshot, resumes translation/classification/briefing, and preserves
+RSS check times without fetching feeds again. Pending articles remain the queue.
+A separate wake-up job waits until the earliest eligible model cooldown expires
+and dispatches the next AI-only run using the repository's `GITHUB_TOKEN` with
+`actions: write`. It does not depend on the RSS cron and does not hold the
+publication concurrency lock. Each wake-up waits at most one hour before
+rechecking; healthy backlog continues after a two-minute minimum delay. A newer
+wake-up replaces an older one, and the chain stops when no work remains or no
+configured model can serve it. GitHub runner queues can still add latency.
+
+Cooldowns and pending translation attempt times are checkpointed without secrets
+in `state/ai-router.json` on `codex/ai-state`. AI-only runs deploy only when reader
+content changes; failed requests do not consume Pages deployments. This uses
+standard GitHub-hosted runners in the public repository; private repositories
+would have a different Actions minute allowance. Regular collection remains a
+fallback if a workflow is cancelled or fails before scheduling its successor.

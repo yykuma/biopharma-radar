@@ -140,15 +140,17 @@ def prepare_previous(previous, now):
     return merged, briefing
 
 
-def collect(out, previous_path=None, ai_enabled=False):
+def collect(out, previous_path=None, ai_enabled=False, ai_only=False):
     out.mkdir(parents=True, exist_ok=True)
     previous = json.loads(previous_path.read_text()) if previous_path and previous_path.exists() else {}
+    if ai_only and not previous.get('items'):
+        raise ValueError('AI retry requires a published snapshot')
     now = int(time.time())
     merged, previous_briefing = prepare_previous(previous, now)
     seed=json.loads(SEED_PATH.read_text()) if SEED_PATH.exists() else {}
-    states=[]
+    states=list(previous.get('sources', [])) if ai_only else []
     previous_states={s['id']:s for s in previous.get('sources',[])}
-    jobs=[(source,previous_states.get(source['id']),sum(a['source_id']==source['id'] for a in merged.values())) for source in SOURCES]
+    jobs=[(source,previous_states.get(source['id']),sum(a['source_id']==source['id'] for a in merged.values())) for source in ([] if ai_only else SOURCES)]
     with concurrent.futures.ThreadPoolExecutor(max_workers=4) as pool:
         for articles, state in pool.map(lambda job: fetch_source(*job), jobs):
             states.append(state)
@@ -176,7 +178,7 @@ def collect(out, previous_path=None, ai_enabled=False):
             visible.append(item)
             events.add(item["event_id"])
     success=any(s['status']=='ok' for s in states)
-    snapshot=dict(schema_version='1.0', updated_at=now, last_success_at=now if success else previous.get('last_success_at'),
+    snapshot=dict(schema_version='1.0', updated_at=now, last_success_at=previous.get('last_success_at') if ai_only else now if success else previous.get('last_success_at'),
                   retention={'days':RETENTION_DAYS,'max_items':MAX_ITEMS},
                   collection_status='ok' if all(s['status']=='ok' for s in states) else 'partial' if success else 'failed',
                   coverage_note='专业医药媒体与公司官方公告；公司名录与新闻覆盖分别维护，美港均为部分新闻覆盖。中文为来源翻译或摘要，原文保留。',
@@ -210,5 +212,5 @@ def collect(out, previous_path=None, ai_enabled=False):
 
 
 if __name__=='__main__':
-    p=argparse.ArgumentParser();p.add_argument('--output',type=Path,default=ROOT/'frontend/public/data');p.add_argument('--previous',type=Path);p.add_argument('--ai',action='store_true');args=p.parse_args()
-    collect(args.output,args.previous,args.ai)
+    p=argparse.ArgumentParser();p.add_argument('--output',type=Path,default=ROOT/'frontend/public/data');p.add_argument('--previous',type=Path);p.add_argument('--ai',action='store_true');p.add_argument('--ai-only',action='store_true');args=p.parse_args()
+    collect(args.output,args.previous,args.ai,args.ai_only)
