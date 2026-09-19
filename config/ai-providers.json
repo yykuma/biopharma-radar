@@ -6,7 +6,8 @@
       "sensenova": 1,
       "mistral": 1,
       "agnes": 1,
-      "openrouter": 1
+      "openrouter": 1,
+      "typesafe": 1
     },
     "supplier_min_interval_seconds": {
       "sensenova": 30,
@@ -33,6 +34,30 @@
   "max_input_articles": 20,
   "max_output_tokens": 700,
   "providers": [
+    {
+      "id": "typesafe",
+      "name": "TypeSafe Jev",
+      "protocol": "typesafe_systemone",
+      "base_url": "https://api.typesafe.ai/v1",
+      "key_env": "TYPESAFE_API_KEY",
+      "enabled": true,
+      "rate_limit_scope": "supplier",
+      "quota_note": "Operator confirmed current account access is free on 2026-09-19. Public list pricing differs; this is an account access declaration. Disable this provider if free access ends.",
+      "models": [
+        {
+          "id": "jev-1.13.0",
+          "category": "decision",
+          "free_tier": "limited_free",
+          "tasks": [
+            "news_curation"
+          ],
+          "enabled": true,
+          "tested": true,
+          "classification_threshold": 0.9,
+          "event_threshold": 0.95
+        }
+      ]
+    },
     {
       "id": "amd",
       "name": "AMD Radeon Cloud",

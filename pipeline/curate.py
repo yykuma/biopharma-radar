@@ -135,6 +135,9 @@ def curate(items, previous_briefing, enabled, now, call=invoke, config=None, ses
                 'category': row['category'] if row['confidence'] == 'high' else 'unknown',
                 'confidence': row['confidence'], 'same_event_as': row.get('same_event_as') if row['confidence'] == 'high' else None,
                 'method': 'ai', 'model': outcome['model'], 'provider': outcome['provider'], 'classified_at': now}
+            for field in ('category_confidence', 'event_confidence'):
+                if field in row:
+                    article['editorial'][field] = row[field]
     group_events(items)
     report = {'classified': sum('editorial' in a for a in items), 'pending': sum('editorial' not in a for a in items),
               'marketing': sum(a.get('editorial', {}).get('category') == 'marketing' for a in items),

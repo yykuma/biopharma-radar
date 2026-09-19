@@ -49,15 +49,15 @@ not turn news into briefs. These fields also apply to retained articles on refre
 
 Edit `config/ai-providers.json`. Credentials must never be stored in this file.
 Add a GitHub Actions secret and map it into the workflow environment. Existing names:
-`AMD_API_KEY`, `MISTRAL_API_KEY`, `GLM_API_KEY`, `SENSENOVA_API_KEY`, `AGNES_API_KEY`, `OPENROUTER_API_KEY`. Individual models may override `key_env`.
-The integration currently supports OpenAI-compatible chat completions with usage and completion-status tracking.
+`TYPESAFE_API_KEY`, `AMD_API_KEY`, `MISTRAL_API_KEY`, `GLM_API_KEY`, `SENSENOVA_API_KEY`, `AGNES_API_KEY`, `OPENROUTER_API_KEY`. Individual models may override `key_env`.
+The integration supports OpenAI-compatible chat completions and TypeSafe System One editorial decisions, both through the shared routing session.
 
 Providers/models have separate enable switches. Models are classified by `category`,
 `free_tier` and supported `tasks`. Only enabled free/limited_free/beta_free models supporting
 the requested task (`news_summary`, `news_curation` or `news_translation`) participate. These cost labels are operator declarations, not billing
 verification. Keep paid billing and automatic top-ups disabled.
 
-Production uses ordered `failover`: AMD `DeepSeek-V4-Flash-0731` → `Qwen3.8-Flash-Next` → `GLM-5.3-Flash` → SenseNova `deepseek-v4-flash`. Each request starts at the first eligible model. Earlier successes do not reorder this chain. Busy or paced AMD requests wait for their slot instead of letting another supplier bypass them. Models in persistent cooldown are temporarily ineligible.
+Translation and briefing use ordered `failover`: AMD `DeepSeek-V4-Flash-0731` → `Qwen3.8-Flash-Next` → `GLM-5.3-Flash` → SenseNova `deepseek-v4-flash`. Each request starts at the first eligible model. Earlier successes do not reorder this chain. Busy or paced AMD requests wait for their slot instead of letting another supplier bypass them. Models in persistent cooldown are temporarily ineligible.
 Task requests have no fixed attempt-count limit. Each eligible model is tried at most once per request, without SDK retries or paid fallback; later requests can retry after cooldown. Translation, classification and briefing share concurrency limits, cooldowns and usage counters. Secondary suppliers are disabled but retain their connection settings. Only OpenRouter has a configured application cap: 50 reserved requests per UTC day, retained for any future re-enablement.
 AMD and SenseNova each have at least 30 seconds between request starts across tasks in the shared session, controlled by `execution.supplier_min_interval_seconds`. Requests do not overlap within a supplier. A slow request can make the actual interval longer than 30 seconds.
 429 honors Retry-After when supplied, otherwise waits an hour. AMD cools only the affected model and rotates; other providers cool the supplier. 401/403 cool the supplier for 24 hours. A 404 cools the model
@@ -165,7 +165,7 @@ remain unread. Saved bookmarks remain individually accessible.
 
 Ordered failover runs translation before classification in one editorial worker. The optional round-robin strategy can run both tasks concurrently when two primary suppliers are available.
 A shared routing session atomically reserves supplier slots before dispatch, enforces a global ceiling of two requests and one per supplier, and persists token usage and cooldowns. Ordered failover waits for the preferred model instead of bypassing it when busy or paced. No duplicate speculative requests are sent.
-Only AMD and SenseNova DeepSeek are enabled. Provider review deadlines and free-only model selection remain enforced.
+Editorial decisions prefer TypeSafe Jev, then AMD and SenseNova DeepSeek; translation and briefing use AMD and SenseNova only. Provider review deadlines and free-only model selection remain enforced.
 Briefing generation starts after both tasks finish so it uses completed labels
 and translations. Briefing uses the same routing session. The public curation.execution report records sanitized
 attempts and observed concurrency; zero means no eligible request was dispatched.
@@ -259,3 +259,21 @@ content changes; failed requests do not consume Pages deployments. This uses
 standard GitHub-hosted runners in the public repository; private repositories
 would have a different Actions minute allowance. Regular collection remains a
 fallback if a workflow is cancelled or fails before scheduling its successor.
+
+## TypeSafe editorial decisions
+
+Jev `jev-1.13.0` is the first route for `news_curation` only: category selection
+(including marketing) and same-event matching. It uses `/v1/systemone`, with
+typed questions and deterministic mapping back to article IDs. Classification
+requires confidence and selected-option probability of at least 0.90; event
+matching requires 0.95. Both thresholds live in the model registry. Uncertain
+classifications remain visible, and uncertain event matches remain separate.
+Existing company/date grouping checks still apply.
+
+Errors, timeouts, malformed responses, or a removed model use the existing
+cooldowns and fall back to the ordered AMD models, then SenseNova DeepSeek.
+Translation and text summaries never use Jev. Its provider enable switch and
+`TYPESAFE_API_KEY` Actions secret are independent. Free access is the operator's
+account-specific declaration on 2026-09-19, not the vendor's public list price.
+No daily application cap is added. Existing editorial results stay cached; newly
+arriving or changed articles use this route.

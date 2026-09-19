@@ -46,6 +46,7 @@ jobs:
         run: python pipeline/ai_retry.py restore
       - name: Collect news or resume AI work
         env:
+          TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
           AMD_API_KEY: ${{ secrets.AMD_API_KEY }}
           AGNES_API_KEY: ${{ secrets.AGNES_API_KEY }}
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
@@ -62,6 +63,7 @@ jobs:
         id: ai_result
         env:
           QUOTA_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
           AMD_API_KEY: ${{ secrets.AMD_API_KEY }}
           AGNES_API_KEY: ${{ secrets.AGNES_API_KEY }}
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}

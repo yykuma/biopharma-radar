@@ -44,7 +44,7 @@ def load_registry(path=CONFIG_PATH):
         raise ValueError('max_attempts_per_run must be a positive integer or null')
     seen = set()
     for p in config['providers']:
-        if p['id'] in seen or p['protocol'] != 'openai_compatible':
+        if p['id'] in seen or p['protocol'] not in ('openai_compatible', 'typesafe_systemone'):
             raise ValueError('Duplicate provider ID or unsupported protocol')
         seen.add(p['id'])
         if p.get('rate_limit_scope', 'supplier') not in ('model', 'provider', 'supplier'):
@@ -153,6 +153,12 @@ def retry_delay(value):
 
 
 def invoke(provider, model, messages, max_tokens):
+    if provider.get('protocol') == 'typesafe_systemone':
+        from typesafe_adapter import invoke_typesafe
+        try:
+            return invoke_typesafe(provider, model, messages)
+        except HTTPError as exc:
+            raise ProviderError(exc.code, retry_delay(exc.headers.get('Retry-After'))) from None
     # Preserve usage and finish status, which TrendRadar's text-only AIClient discards.
     payload = {'model':model['id'], 'messages':messages, 'max_tokens':max_tokens, 'temperature':0.2, 'stream':False}
     for name in ('thinking', 'enable_thinking', 'chat_template_kwargs', 'reasoning_effort', 'reasoning'):
